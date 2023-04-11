@@ -1,0 +1,106 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace WeeeTrackerAPI.Models
+{
+    public partial class InformeCicloVida
+    {
+        public int PidInformeCicloVida { get; set; }
+        public DateTime? FechaInforme { get; set; }
+        public string Raee { get; set; }
+        public int? RaeeSidFraccion { get; set; }
+        public string RaeeFraccion { get; set; }
+        public int? RaeeSidResiduoEspecifico { get; set; }
+        public string RaeeResiduoEspecifico { get; set; }
+        public int? RaeeSidResiduo { get; set; }
+        public string RaeeResiduo { get; set; }
+        public float? RaeePesoEstimado { get; set; }
+        public float? RaeePesoReal { get; set; }
+        public int? RaeeSidEstadoRaee { get; set; }
+        public string RaeeEstadoRaee { get; set; }
+        public int? RaeeSidGestorActual { get; set; }
+        public string RaeeGestorActual { get; set; }
+        public int? RaeeSidDireccionGestorActual { get; set; }
+        public string RaeeDireccionGestorActual { get; set; }
+        public string PcNcer { get; set; }
+        public string PcNcerGvr { get; set; }
+        public int? PcSidTerOrigen { get; set; }
+        public string PcTerOrigen { get; set; }
+        public int? PcSidDirOrigen { get; set; }
+        public string PcDirOrigen { get; set; }
+        public string PcCcaaOrigen { get; set; }
+        public string PcProvOrigen { get; set; }
+        public string PcMunicipioOrigen { get; set; }
+        public string UcNcer { get; set; }
+        public string UcNcerGvr { get; set; }
+        public int? UcSidTerEmisor { get; set; }
+        public string UcTerEmisor { get; set; }
+        public int? UcSidDirEmisor { get; set; }
+        public string UcDirEmisor { get; set; }
+        public string UcCcaaEmisor { get; set; }
+        public string UcProvEmisor { get; set; }
+        public string UcMunicipioEmisor { get; set; }
+        public string Pcident { get; set; }
+        public int? PcidentSidEmisor { get; set; }
+        public string PcidentEmisor { get; set; }
+        public int? PcidentSidDirEmisor { get; set; }
+        public string PcidentDirEmisor { get; set; }
+        public string PcidentNcerGvr { get; set; }
+        public DateTime? PcidentFecha { get; set; }
+        public string PcidentCcaaEmisor { get; set; }
+        public string PcidentProvEmisor { get; set; }
+        public string PcidentMunicipioEmisor { get; set; }
+        public string PcrcRda { get; set; }
+        public int? PcrcRdaSidEmisor { get; set; }
+        public string PcrcRdaEmisor { get; set; }
+        public int? PcrcRdaSidDirEmisor { get; set; }
+        public string PcrcRdaDirEmisor { get; set; }
+        public string PcrcRdaNcerGvr { get; set; }
+        public DateTime? PcrcRdaFecha { get; set; }
+        public string PcrcRdaCcaaEmisor { get; set; }
+        public string PcrcRdaProvEmisor { get; set; }
+        public string PcrcRdaMunicipioEmisor { get; set; }
+        public string PcrcRdaCcaaOrigen { get; set; }
+        public string PcrcRdaProvOrigen { get; set; }
+        public string PcrcRdaMunicipioOrigen { get; set; }
+        public string UcrcRda { get; set; }
+        public int? UcrcRdaSidEmisor { get; set; }
+        public string UcrcRdaEmisor { get; set; }
+        public int? UcrcRdaSidDirEmisor { get; set; }
+        public string UcrcRdaDirEmisor { get; set; }
+        public string UcrcRdaNcerGvr { get; set; }
+        public DateTime? UcrcRdaFecha { get; set; }
+        public string UcrcRdaCcaaEmisor { get; set; }
+        public string UcrcRdaProvEmisor { get; set; }
+        public string UcrcRdaMunicipioEmisor { get; set; }
+        public int? CerTrat { get; set; }
+        public int? CerTratSidGestor { get; set; }
+        public string CerTratGestor { get; set; }
+        public int? CerTratSidDireccionGestor { get; set; }
+        public string CerTratDireccionGestor { get; set; }
+        public DateTime? CerTratFecha { get; set; }
+        public int? CerTratSidTipoLectura { get; set; }
+        public string CerTratTipo { get; set; }
+        public int? CerTratVideo { get; set; }
+        public string CerTratCcaaTratamiento { get; set; }
+        public string CerTratProvTratamiento { get; set; }
+        public string CerTratMunicipioTratamiento { get; set; }
+        public int? DiasIdentificacionTorecogRecept { get; set; }
+        public int? DiasRecogReceptTotratamiento { get; set; }
+        public int? NcerIdent { get; set; }
+        public int? NcerRecog { get; set; }
+        public int? NcerEntre { get; set; }
+        public int? NcerRecep { get; set; }
+        public int? NcerTrata { get; set; }
+        public int? PcrcRdaSidTerOrigen { get; set; }
+        public string PcrcRdaTerOrigen { get; set; }
+        public int? PcrcRdaSidDirOrigen { get; set; }
+        public string PcrcRdaDirOrigen { get; set; }
+        public string RaeeMarca { get; set; }
+        public string RaeeDestino { get; set; }
+        public string RaeeSerie { get; set; }
+        public string RaeeEcotrazo { get; set; }
+        public string PcrcRdaAlbaranOrigen { get; set; }
+        public int? CerTratYear { get; set; }
+    }
+}

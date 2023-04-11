@@ -1,0 +1,1317 @@
+2019-07-15T09:31:51.1408435+02:00 0HLO8UQ0B5GEU:00000001 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/users/login application/json 43 (ca22a1cb)
+2019-07-15T09:31:51.5670526+02:00 0HLO8UQ0B5GEU:00000001 [INF] Route matched with "{action = \"Authenticate\", controller = \"Users\"}". Executing action "WeeeTrackerAPI.Controllers.UsersController.Authenticate (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T09:31:51.9686321+02:00 0HLO8UQ0B5GEU:00000001 [INF] Executing action method "WeeeTrackerAPI.Controllers.UsersController.Authenticate (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.User"]) - Validation state: Valid (4e3479ed)
+2019-07-15T09:31:53.3422633+02:00 0HLO8UQ0B5GEU:00000001 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-15T09:31:53.3893839+02:00 0HLO8UQ0B5GEU:00000001 [WRN] The Include operation for navigation '"new WtkUsuario() {Id = [u].Id, Usuario = [u].Usuario, Password = [u].Password, SidTercero = [u].SidTercero, SidTipoTercero = [u].SidTipoTercero, Estado = [u].Estado, WtkUsuarioPerfiles = [u].WtkUsuarioPerfiles}.WtkUsuarioPerfiles"' is unnecessary and was ignored because the navigation is not reachable in the final query results. See https://go.microsoft.com/fwlink/?linkid=850303 for more information. (10efaee6)
+2019-07-15T09:31:53.6072474+02:00 0HLO8UQ0B5GEU:00000001 [INF] Executed DbCommand ("4"ms) [Parameters=["@__username_0='?' (Size = 50) (DbType = AnsiString), @__password_1='?' (Size = 50) (DbType = AnsiString)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [u].[Id], [u].[Usuario], [u].[Password], [u].[sidTercero], [u].[sidTipoTercero], [u].[Estado]
+FROM [WTK_USUARIO] AS [u]
+WHERE ([u].[Usuario] = @__username_0) AND ([u].[Password] = @__password_1)
+ORDER BY [u].[Id]" (0723d8ff)
+2019-07-15T09:31:53.6278595+02:00 0HLO8UQ0B5GEU:00000001 [INF] Executed DbCommand ("5"ms) [Parameters=["@__username_0='?' (Size = 50) (DbType = AnsiString), @__password_1='?' (Size = 50) (DbType = AnsiString)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [u.WtkUsuarioPerfiles].[sidUsuario], [u.WtkUsuarioPerfiles].[sidPerfil], [t].[Id]
+FROM [WTK_USUARIO_PERFILES] AS [u.WtkUsuarioPerfiles]
+INNER JOIN (
+    SELECT TOP(1) [u0].[Id]
+    FROM [WTK_USUARIO] AS [u0]
+    WHERE ([u0].[Usuario] = @__username_0) AND ([u0].[Password] = @__password_1)
+    ORDER BY [u0].[Id]
+) AS [t] ON [u.WtkUsuarioPerfiles].[sidUsuario] = [t].[Id]
+ORDER BY [t].[Id]" (0723d8ff)
+2019-07-15T09:31:53.6677221+02:00 0HLO8UQ0B5GEU:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__usuario_SidTercero_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [t.WtkTextoLopd].[Id], [t.WtkTextoLopd].[sidTercero], [t.WtkTextoLopd].[Texto], [t].[pidTercero], [t].[nombre]
+FROM [Terceros] AS [t]
+LEFT JOIN [WTK_TEXTO_LOPD] AS [t.WtkTextoLopd] ON [t].[pidTercero] = [t.WtkTextoLopd].[sidTercero]
+WHERE [t].[pidTercero] = @__usuario_SidTercero_0" (0723d8ff)
+2019-07-15T09:31:53.7068555+02:00 0HLO8UQ0B5GEU:00000001 [INF] Executed DbCommand ("3"ms) [Parameters=["@__usuario_Id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [d].[pidDireccionTercero], [d].[nombre]
+FROM [DireccionesTercero] AS [d]
+WHERE EXISTS (
+    SELECT 1
+    FROM [WTK_USUARIO_DIRECCIONES] AS [u]
+    WHERE ([u].[sidUsuario] = @__usuario_Id_0) AND ([d].[pidDireccionTercero] = [u].[sidDireccion]))
+ORDER BY [d].[nombre]" (0723d8ff)
+2019-07-15T09:31:53.7191207+02:00 0HLO8UQ0B5GEU:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [item].[Id], [item].[Nombre], [item].[Orden]
+FROM [WTK_RESIDUOESPECIFICO] AS [item]
+ORDER BY [item].[Orden]" (0723d8ff)
+2019-07-15T09:31:53.7302988+02:00 0HLO8UQ0B5GEU:00000001 [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [item].[pidMarca], [item].[nombre]
+FROM [Marcas] AS [item]
+ORDER BY [item].[nombre]" (0723d8ff)
+2019-07-15T09:31:53.7600147+02:00 0HLO8UQ0B5GEU:00000001 [INF] Executed action method "WeeeTrackerAPI.Controllers.UsersController.Authenticate (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1788.1342ms. (50a9e262)
+2019-07-15T09:31:53.7659563+02:00 0HLO8UQ0B5GEU:00000001 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType6`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T09:31:53.7751921+02:00 0HLO8UQ0B5GEU:00000001 [INF] Executed action "WeeeTrackerAPI.Controllers.UsersController.Authenticate (WeeeTrackerAPI)" in 2204.2085ms (afa2e885)
+2019-07-15T09:31:53.7793325+02:00 0HLO8UQ0B5GEU:00000001 [INF] Request finished in 2642.895ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-15T09:32:04.4084803+02:00 0HLO8UQ0B5GEU:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T09:32:04.5026799+02:00 0HLO8UQ0B5GEU:00000002 [INF] Failed to validate the token. (616bef97)
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '07/12/2019 13:05:44', Current time: '07/15/2019 07:32:04'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2019-07-15T09:32:04.5028301+02:00 0HLO8UQ0B5GEU:00000002 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '07/12/2019 13:05:44', Current time: '07/15/2019 07:32:04'." (48071232)
+2019-07-15T09:32:04.5080201+02:00 0HLO8UQ0B5GEU:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T09:32:04.5109845+02:00 0HLO8UQ0B5GEU:00000002 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '07/12/2019 13:05:44', Current time: '07/15/2019 07:32:04'." (48071232)
+2019-07-15T09:32:04.5154315+02:00 0HLO8UQ0B5GEU:00000002 [INF] Authorization failed. (b15dd539)
+2019-07-15T09:32:04.5156312+02:00 0HLO8UQ0B5GEU:00000002 [INF] Authorization failed for the request at filter '"Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter"'. (8b6446cb)
+2019-07-15T09:32:04.5173527+02:00 0HLO8UQ0B5GEU:00000002 [INF] Executing ChallengeResult with authentication schemes (["Bearer"]). (f3dca807)
+2019-07-15T09:32:04.5218458+02:00 0HLO8UQ0B5GEU:00000002 [INF] AuthenticationScheme: "Bearer" was challenged. (d45f1f38)
+2019-07-15T09:32:04.5219203+02:00 0HLO8UQ0B5GEU:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 13.8399ms (afa2e885)
+2019-07-15T09:32:04.5227913+02:00 0HLO8UQ0B5GEU:00000002 [INF] Request finished in 115.0607ms 401  (791a596a)
+2019-07-15T09:32:04.5238944+02:00  [INF] Connection id ""0HLO8UQ0B5GEU"", Request id ""0HLO8UQ0B5GEU:00000002"": the application completed without reading the entire request body. (54ac9468)
+2019-07-15T09:32:11.8558595+02:00 0HLO8UQ0B5GEU:00000003 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T09:32:11.8570302+02:00 0HLO8UQ0B5GEU:00000003 [INF] Successfully validated the token. (60169667)
+2019-07-15T09:32:11.8597758+02:00 0HLO8UQ0B5GEU:00000003 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T09:32:11.8604238+02:00 0HLO8UQ0B5GEU:00000003 [INF] Authorization was successful. (0d575a54)
+2019-07-15T09:32:12.0325964+02:00 0HLO8UQ0B5GEU:00000003 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudConsulta"]) - Validation state: Valid (4e3479ed)
+2019-07-15T09:32:13.1307708+02:00 0HLO8UQ0B5GEU:00000003 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1098.0617ms. (50a9e262)
+2019-07-15T09:32:13.1333586+02:00 0HLO8UQ0B5GEU:00000003 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType5`1[[ServiceEcoapp.XMLObtenerSolicitudesOrigenResponse, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-07-15T09:32:13.1414989+02:00 0HLO8UQ0B5GEU:00000003 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 1281.5877ms (afa2e885)
+2019-07-15T09:32:13.1463646+02:00 0HLO8UQ0B5GEU:00000003 [INF] Request finished in 1290.5107ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-15T09:52:48.4383556+02:00 0HLO8UQ0B5GEV:00000001 [INF] Request starting HTTP/1.1 POST http://127.0.0.1:4688/WEEETRACKERAPI/iisintegration  0 (ca22a1cb)
+2019-07-15T09:52:48.4386434+02:00 0HLO8UQ0B5GEV:00000001 [INF] Request finished in 0.3834ms 202  (791a596a)
+2019-07-15T10:01:50.1141484+02:00 0HLO8VAOFJAN0:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T10:01:50.1875397+02:00 0HLO8VAOFJAN0:00000001 [INF] Request finished in 76.3221ms 200  (791a596a)
+2019-07-15T10:01:59.9544366+02:00 0HLO8VAOFJAN0:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T10:02:00.1132045+02:00 0HLO8VAOFJAN0:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T10:02:00.3658034+02:00 0HLO8VAOFJAN0:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T10:02:00.3799233+02:00 0HLO8VAOFJAN0:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T10:02:00.8117854+02:00 0HLO8VAOFJAN0:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudConsulta"]) - Validation state: Valid (4e3479ed)
+2019-07-15T10:02:22.3865799+02:00 0HLO8VAOFJAN0:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 21567.2913ms. (50a9e262)
+2019-07-15T10:02:22.4010228+02:00 0HLO8VAOFJAN0:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType5`1[[ServiceEcoapp.XMLObtenerSolicitudesOrigenResponse, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-07-15T10:02:22.4235503+02:00 0HLO8VAOFJAN0:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 22049.8147ms (afa2e885)
+2019-07-15T10:02:22.4386707+02:00 0HLO8VAOFJAN0:00000002 [INF] Request finished in 22484.4161ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-15T10:29:33.8933641+02:00 0HLO8VQ8APTDI:00000001 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T10:29:33.9750504+02:00 0HLO8VQ8APTDI:00000001 [INF] Successfully validated the token. (60169667)
+2019-07-15T10:29:34.0779886+02:00 0HLO8VQ8APTDI:00000001 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T10:29:34.0865390+02:00 0HLO8VQ8APTDI:00000001 [INF] Authorization was successful. (0d575a54)
+2019-07-15T10:29:34.3454435+02:00 0HLO8VQ8APTDI:00000001 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T10:29:35.4905039+02:00 0HLO8VQ8APTDI:00000001 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1141.3707ms. (50a9e262)
+2019-07-15T10:29:35.4985708+02:00 0HLO8VQ8APTDI:00000001 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType5`1[[ServiceEcoapp.XMLObtenerSolicitudesOrigenResponse, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-07-15T10:29:35.5147005+02:00 0HLO8VQ8APTDI:00000001 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 1433.7502ms (afa2e885)
+2019-07-15T10:29:35.5238728+02:00 0HLO8VQ8APTDI:00000001 [INF] Request finished in 1636.2692ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-15T10:55:39.7772288+02:00 0HLO908QVSURI:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T10:55:39.8241599+02:00 0HLO908QVSURI:00000001 [INF] Request finished in 50.217ms 200  (791a596a)
+2019-07-15T10:55:45.1158818+02:00 0HLO908QVSURI:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T10:55:45.2582150+02:00 0HLO908QVSURI:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T10:55:45.4997535+02:00 0HLO908QVSURI:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T10:55:45.5169517+02:00 0HLO908QVSURI:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T10:55:45.9289135+02:00 0HLO908QVSURI:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T10:56:18.3583032+02:00 0HLO908QVSURI:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 32421.2773ms. (50a9e262)
+2019-07-15T10:56:18.3740073+02:00 0HLO908QVSURI:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType5`1[[System.Collections.Generic.List`1[[WeeeTrackerAPI.Entities.SolicitudConsulta, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T10:56:18.4020849+02:00 0HLO908QVSURI:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 32892.5584ms (afa2e885)
+2019-07-15T10:56:18.4135509+02:00 0HLO908QVSURI:00000002 [INF] Request finished in 33295.2331ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-15T10:56:45.2228853+02:00 0HLO909EG9U4Q:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T10:56:45.2656038+02:00 0HLO909EG9U4Q:00000001 [INF] Request finished in 45.8911ms 200  (791a596a)
+2019-07-15T10:56:56.0055036+02:00 0HLO909EG9U4Q:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T10:56:56.1317669+02:00 0HLO909EG9U4Q:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T10:56:56.3542231+02:00 0HLO909EG9U4Q:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T10:56:56.3720350+02:00 0HLO909EG9U4Q:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T10:56:56.7961551+02:00 0HLO909EG9U4Q:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T10:57:08.2363999+02:00 0HLO909EG9U4Q:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 11431.3103ms. (50a9e262)
+2019-07-15T10:57:08.2564054+02:00 0HLO909EG9U4Q:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType5`1[[System.Collections.Generic.List`1[[WeeeTrackerAPI.Entities.SolicitudConsulta, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T10:57:08.2790285+02:00 0HLO909EG9U4Q:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 11911.1901ms (afa2e885)
+2019-07-15T10:57:08.2910957+02:00 0HLO909EG9U4Q:00000002 [INF] Request finished in 12281.9034ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-15T10:57:46.8284169+02:00 0HLO909EG9U4Q:00000003 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T10:57:46.8360007+02:00 0HLO909EG9U4Q:00000003 [INF] Successfully validated the token. (60169667)
+2019-07-15T10:57:46.8417863+02:00 0HLO909EG9U4Q:00000003 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T10:57:46.8476988+02:00 0HLO909EG9U4Q:00000003 [INF] Authorization was successful. (0d575a54)
+2019-07-15T10:57:46.8889313+02:00 0HLO909EG9U4Q:00000003 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T10:58:09.7450069+02:00 0HLO909EG9U4Q:00000003 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 22846.1563ms. (50a9e262)
+2019-07-15T10:58:09.7487262+02:00 0HLO909EG9U4Q:00000003 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType5`1[[System.Collections.Generic.List`1[[WeeeTrackerAPI.Entities.SolicitudConsulta, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T10:58:09.7536176+02:00 0HLO909EG9U4Q:00000003 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 22907.3091ms (afa2e885)
+2019-07-15T10:58:09.7599026+02:00 0HLO909EG9U4Q:00000003 [INF] Request finished in 22930.501ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-15T11:00:15.0852613+02:00 0HLO90BD1IE8S:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T11:00:15.1277141+02:00 0HLO90BD1IE8S:00000001 [INF] Request finished in 45.651ms 200  (791a596a)
+2019-07-15T11:00:19.6164589+02:00 0HLO90BD1IE8S:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T11:00:19.7410656+02:00 0HLO90BD1IE8S:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T11:00:19.9576742+02:00 0HLO90BD1IE8S:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T11:00:19.9739643+02:00 0HLO90BD1IE8S:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T11:00:20.4369635+02:00 0HLO90BD1IE8S:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T11:00:53.7097101+02:00 0HLO90BD1IE8S:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 33265.1337ms. (50a9e262)
+2019-07-15T11:00:53.7239152+02:00 0HLO90BD1IE8S:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType5`1[[System.Collections.Generic.List`1[[WeeeTrackerAPI.Entities.SolicitudConsulta, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T11:00:53.7430454+02:00 0HLO90BD1IE8S:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 33776.4406ms (afa2e885)
+2019-07-15T11:00:53.7566339+02:00 0HLO90BD1IE8S:00000002 [INF] Request finished in 34137.616ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-15T11:09:26.5758266+02:00 0HLO90GHD3GAS:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T11:09:26.6178823+02:00 0HLO90GHD3GAS:00000001 [INF] Request finished in 45.0509ms 200  (791a596a)
+2019-07-15T11:09:32.9649907+02:00 0HLO90GHD3GAS:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T11:09:33.1007471+02:00 0HLO90GHD3GAS:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T11:09:33.3359834+02:00 0HLO90GHD3GAS:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T11:09:33.3586604+02:00 0HLO90GHD3GAS:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T11:09:33.7682335+02:00 0HLO90GHD3GAS:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T11:09:58.0642801+02:00 0HLO90GHD3GAS:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 24287.7692ms. (50a9e262)
+2019-07-15T11:09:58.0802614+02:00 0HLO90GHD3GAS:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T11:09:58.1068609+02:00 0HLO90GHD3GAS:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 24762.4511ms (afa2e885)
+2019-07-15T11:09:58.1246523+02:00 0HLO90GHD3GAS:00000002 [INF] Request finished in 25155.7027ms 404 application/json; charset=utf-8 (791a596a)
+2019-07-15T11:10:55.9451109+02:00 0HLO90HC14IO7:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T11:10:55.9876484+02:00 0HLO90HC14IO7:00000001 [INF] Request finished in 46.0806ms 200  (791a596a)
+2019-07-15T11:11:00.5720594+02:00 0HLO90HC14IO7:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T11:11:00.7112143+02:00 0HLO90HC14IO7:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T11:11:00.9493337+02:00 0HLO90HC14IO7:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T11:11:00.9639627+02:00 0HLO90HC14IO7:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T11:11:01.3896535+02:00 0HLO90HC14IO7:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T11:11:12.4215051+02:00 0HLO90HC14IO7:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 11024.2045ms. (50a9e262)
+2019-07-15T11:11:12.4358661+02:00 0HLO90HC14IO7:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T11:11:12.4539096+02:00 0HLO90HC14IO7:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 11496.3292ms (afa2e885)
+2019-07-15T11:11:12.4679958+02:00 0HLO90HC14IO7:00000002 [INF] Request finished in 11896.5281ms 404 application/json; charset=utf-8 (791a596a)
+2019-07-15T11:15:56.6427808+02:00 0HLO90K5KVRTO:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T11:15:56.7131372+02:00 0HLO90K5KVRTO:00000001 [INF] Request finished in 46.8668ms 200  (791a596a)
+2019-07-15T11:16:01.7593503+02:00 0HLO90K5KVRTO:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T11:16:01.9013501+02:00 0HLO90K5KVRTO:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T11:16:02.1281203+02:00 0HLO90K5KVRTO:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T11:16:02.1418129+02:00 0HLO90K5KVRTO:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T11:16:02.5541343+02:00 0HLO90K5KVRTO:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T11:23:12.3657567+02:00 0HLO90O7GB7BH:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T11:23:12.4054806+02:00 0HLO90O7GB7BH:00000001 [INF] Request finished in 42.8163ms 200  (791a596a)
+2019-07-15T11:23:20.7637853+02:00 0HLO90O7GB7BH:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T11:23:20.8995093+02:00 0HLO90O7GB7BH:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T11:23:21.1256860+02:00 0HLO90O7GB7BH:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T11:23:21.1445993+02:00 0HLO90O7GB7BH:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T11:23:21.5765917+02:00 0HLO90O7GB7BH:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T11:23:51.7502009+02:00 0HLO90O7GB7BH:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 30166.0104ms. (50a9e262)
+2019-07-15T11:23:51.7668130+02:00 0HLO90O7GB7BH:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T11:23:51.7912496+02:00 0HLO90O7GB7BH:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 30650.876ms (afa2e885)
+2019-07-15T11:23:51.8098830+02:00 0HLO90O7GB7BH:00000002 [INF] Request finished in 31042.1529ms 404 application/json; charset=utf-8 (791a596a)
+2019-07-15T11:24:20.0479427+02:00 0HLO90ORLTH21:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T11:24:20.0977268+02:00 0HLO90ORLTH21:00000001 [INF] Request finished in 44.66ms 200  (791a596a)
+2019-07-15T11:24:22.9886018+02:00 0HLO90ORLTH21:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T11:24:23.1221652+02:00 0HLO90ORLTH21:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T11:24:23.3359851+02:00 0HLO90ORLTH21:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T11:24:23.3493267+02:00 0HLO90ORLTH21:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T11:24:23.7893353+02:00 0HLO90ORLTH21:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T11:25:12.3256688+02:00 0HLO90ORLTH21:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 48528.3594ms. (50a9e262)
+2019-07-15T11:25:12.3404861+02:00 0HLO90ORLTH21:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T11:25:12.3594364+02:00 0HLO90ORLTH21:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 49013.8439ms (afa2e885)
+2019-07-15T11:25:12.3820042+02:00 0HLO90ORLTH21:00000002 [INF] Request finished in 49392.3317ms 404 application/json; charset=utf-8 (791a596a)
+2019-07-15T11:25:32.7126091+02:00 0HLO90PHAOF7T:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T11:25:32.7574183+02:00 0HLO90PHAOF7T:00000001 [INF] Request finished in 47.8111ms 200  (791a596a)
+2019-07-15T11:25:33.9691561+02:00 0HLO90PHAOF7T:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T11:25:34.1024298+02:00 0HLO90PHAOF7T:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T11:25:34.3482270+02:00 0HLO90PHAOF7T:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T11:25:34.3615510+02:00 0HLO90PHAOF7T:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T11:25:34.7953985+02:00 0HLO90PHAOF7T:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T11:26:20.3857754+02:00 0HLO90PHAOF7T:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 45582.2827ms. (50a9e262)
+2019-07-15T11:26:20.4010837+02:00 0HLO90PHAOF7T:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T11:26:20.4268504+02:00 0HLO90PHAOF7T:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 46070.8614ms (afa2e885)
+2019-07-15T11:26:20.4501469+02:00 0HLO90PHAOF7T:00000002 [INF] Request finished in 46481.0403ms 404 application/json; charset=utf-8 (791a596a)
+2019-07-15T11:27:48.9599452+02:00 0HLO90QPU73TK:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T11:27:49.0160752+02:00 0HLO90QPU73TK:00000001 [INF] Request finished in 58.0796ms 200  (791a596a)
+2019-07-15T11:27:51.4437856+02:00 0HLO90QPU73TK:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T11:27:51.5871350+02:00 0HLO90QPU73TK:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T11:27:51.8178355+02:00 0HLO90QPU73TK:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T11:27:51.8322523+02:00 0HLO90QPU73TK:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T11:27:52.2760054+02:00 0HLO90QPU73TK:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T11:30:44.5901808+02:00 0HLO90QPU73TK:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 172306.6245ms. (50a9e262)
+2019-07-15T11:30:44.6042727+02:00 0HLO90QPU73TK:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T11:30:44.6215436+02:00 0HLO90QPU73TK:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 172794.5063ms (afa2e885)
+2019-07-15T11:30:44.6347857+02:00 0HLO90QPU73TK:00000002 [INF] Request finished in 173265.5939ms 404 application/json; charset=utf-8 (791a596a)
+2019-07-15T11:36:00.3035316+02:00 0HLO90VCBTSBG:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T11:36:00.3601577+02:00 0HLO90VCBTSBG:00000001 [INF] Request finished in 49.2988ms 200  (791a596a)
+2019-07-15T11:36:27.7721235+02:00 0HLO90VCBTSBG:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T11:36:27.9073224+02:00 0HLO90VCBTSBG:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T11:36:28.1573276+02:00 0HLO90VCBTSBG:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T11:36:28.1718286+02:00 0HLO90VCBTSBG:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T11:36:28.5853578+02:00 0HLO90VCBTSBG:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T11:36:49.1738460+02:00 0HLO90VCBTSBG:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 20580.9612ms. (50a9e262)
+2019-07-15T11:36:49.1883981+02:00 0HLO90VCBTSBG:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T11:36:49.2066748+02:00 0HLO90VCBTSBG:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 21039.3961ms (afa2e885)
+2019-07-15T11:36:49.2195084+02:00 0HLO90VCBTSBG:00000002 [INF] Request finished in 21446.4859ms 404 application/json; charset=utf-8 (791a596a)
+2019-07-15T11:36:52.2939987+02:00 0HLO90VCBTSBG:00000003 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T11:36:52.2992064+02:00 0HLO90VCBTSBG:00000003 [INF] Successfully validated the token. (60169667)
+2019-07-15T11:36:52.3065115+02:00 0HLO90VCBTSBG:00000003 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T11:36:52.3120223+02:00 0HLO90VCBTSBG:00000003 [INF] Authorization was successful. (0d575a54)
+2019-07-15T11:36:52.3583527+02:00 0HLO90VCBTSBG:00000003 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T11:37:34.1449475+02:00 0HLO90VCBTSBG:00000003 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 41781.5601ms. (50a9e262)
+2019-07-15T11:37:34.1495890+02:00 0HLO90VCBTSBG:00000003 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T11:37:34.1545401+02:00 0HLO90VCBTSBG:00000003 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 41843.3375ms (afa2e885)
+2019-07-15T11:37:34.1611034+02:00 0HLO90VCBTSBG:00000003 [INF] Request finished in 41865.2693ms 404 application/json; charset=utf-8 (791a596a)
+2019-07-15T11:37:39.2425421+02:00 0HLO90VCBTSBG:00000004 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T11:37:39.2486919+02:00 0HLO90VCBTSBG:00000004 [INF] Successfully validated the token. (60169667)
+2019-07-15T11:37:39.2545879+02:00 0HLO90VCBTSBG:00000004 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T11:37:39.2640616+02:00 0HLO90VCBTSBG:00000004 [INF] Authorization was successful. (0d575a54)
+2019-07-15T11:37:39.3016162+02:00 0HLO90VCBTSBG:00000004 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T11:41:48.4472092+02:00 0HLO90VCBTSBG:00000004 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 249141.0134ms. (50a9e262)
+2019-07-15T11:41:48.4517802+02:00 0HLO90VCBTSBG:00000004 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T11:41:48.4590057+02:00 0HLO90VCBTSBG:00000004 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 249197.3454ms (afa2e885)
+2019-07-15T11:41:48.4646183+02:00 0HLO90VCBTSBG:00000004 [INF] Request finished in 249223.2742ms 404 application/json; charset=utf-8 (791a596a)
+2019-07-15T11:43:17.7706251+02:00 0HLO913EO173I:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T11:43:17.8162665+02:00 0HLO913EO173I:00000001 [INF] Request finished in 48.8055ms 200  (791a596a)
+2019-07-15T11:43:25.9992749+02:00 0HLO913EO173I:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T11:43:26.1425308+02:00 0HLO913EO173I:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T11:43:26.3763039+02:00 0HLO913EO173I:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T11:43:26.3961946+02:00 0HLO913EO173I:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T11:43:26.8293686+02:00 0HLO913EO173I:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T11:43:28.7176268+02:00 0HLO913EO173I:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 1881.1163ms. (50a9e262)
+2019-07-15T11:43:28.7330375+02:00 0HLO913EO173I:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T11:43:28.7526300+02:00 0HLO913EO173I:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 2367.9758ms (afa2e885)
+2019-07-15T11:43:28.7653014+02:00 0HLO913EO173I:00000002 [INF] Request finished in 2765.9139ms 404 application/json; charset=utf-8 (791a596a)
+2019-07-15T11:43:39.5493635+02:00 0HLO913EO173I:00000003 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T11:43:39.5599665+02:00 0HLO913EO173I:00000003 [INF] Successfully validated the token. (60169667)
+2019-07-15T11:43:39.5675453+02:00 0HLO913EO173I:00000003 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T11:43:39.5753584+02:00 0HLO913EO173I:00000003 [INF] Authorization was successful. (0d575a54)
+2019-07-15T11:43:39.6134842+02:00 0HLO913EO173I:00000003 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T11:43:39.8488110+02:00 0HLO913EO173I:00000003 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 231.0049ms. (50a9e262)
+2019-07-15T11:43:39.8536937+02:00 0HLO913EO173I:00000003 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T11:43:39.8600801+02:00 0HLO913EO173I:00000003 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 286.3123ms (afa2e885)
+2019-07-15T11:43:39.8662600+02:00 0HLO913EO173I:00000003 [INF] Request finished in 316.6694ms 404 application/json; charset=utf-8 (791a596a)
+2019-07-15T11:44:03.6608648+02:00 0HLO913SDLI5L:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T11:44:03.7018498+02:00 0HLO913SDLI5L:00000001 [INF] Request finished in 44.5491ms 200  (791a596a)
+2019-07-15T11:44:06.1681684+02:00 0HLO913SDLI5L:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T11:44:06.2980066+02:00 0HLO913SDLI5L:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T11:44:06.5185309+02:00 0HLO913SDLI5L:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T11:44:06.5358114+02:00 0HLO913SDLI5L:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T11:44:06.9564927+02:00 0HLO913SDLI5L:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T11:55:02.7917878+02:00 0HLO91A0RIDLP:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T11:55:02.8308961+02:00 0HLO91A0RIDLP:00000001 [INF] Request finished in 42.4044ms 200  (791a596a)
+2019-07-15T11:55:08.1394486+02:00 0HLO91A0RIDLP:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T11:55:08.2698408+02:00 0HLO91A0RIDLP:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T11:55:08.4921338+02:00 0HLO91A0RIDLP:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T11:55:08.5089058+02:00 0HLO91A0RIDLP:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T11:55:08.9536578+02:00 0HLO91A0RIDLP:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T11:55:36.8093466+02:00 0HLO91A0RIDLP:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 27848.7067ms. (50a9e262)
+2019-07-15T11:55:36.8241638+02:00 0HLO91A0RIDLP:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType5`1[[System.Collections.Generic.List`1[[WeeeTrackerAPI.Entities.SolicitudConsulta, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T11:55:36.8555285+02:00 0HLO91A0RIDLP:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 28354.4869ms (afa2e885)
+2019-07-15T11:55:36.8905686+02:00 0HLO91A0RIDLP:00000002 [INF] Request finished in 28752.0882ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-15T11:55:39.2371133+02:00 0HLO91A0RIDLP:00000003 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T11:55:39.2469988+02:00 0HLO91A0RIDLP:00000003 [INF] Successfully validated the token. (60169667)
+2019-07-15T11:55:39.2547647+02:00 0HLO91A0RIDLP:00000003 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T11:55:39.2631832+02:00 0HLO91A0RIDLP:00000003 [INF] Authorization was successful. (0d575a54)
+2019-07-15T11:55:39.3023632+02:00 0HLO91A0RIDLP:00000003 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T11:57:17.3185805+02:00 0HLO91B8UFMMP:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T11:57:17.3691263+02:00 0HLO91B8UFMMP:00000001 [INF] Request finished in 47.5454ms 200  (791a596a)
+2019-07-15T11:57:20.8436989+02:00 0HLO91B8UFMMP:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T11:57:20.9809361+02:00 0HLO91B8UFMMP:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T11:57:21.2330354+02:00 0HLO91B8UFMMP:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T11:57:21.2470791+02:00 0HLO91B8UFMMP:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T11:57:21.6607975+02:00 0HLO91B8UFMMP:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T11:57:31.3667375+02:00 0HLO91B8UFMMP:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 9697.9476ms. (50a9e262)
+2019-07-15T11:57:31.3814831+02:00 0HLO91B8UFMMP:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T11:57:31.3990112+02:00 0HLO91B8UFMMP:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 10156.9434ms (afa2e885)
+2019-07-15T11:57:31.4111388+02:00 0HLO91B8UFMMP:00000002 [INF] Request finished in 10567.5649ms 404 application/json; charset=utf-8 (791a596a)
+2019-07-15T11:57:49.0956595+02:00 0HLO91BIDGB9P:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T11:57:49.1374598+02:00 0HLO91BIDGB9P:00000001 [INF] Request finished in 45.4798ms 200  (791a596a)
+2019-07-15T11:57:53.5743088+02:00 0HLO91BIDGB9P:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T11:57:53.7138482+02:00 0HLO91BIDGB9P:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T11:57:53.9500602+02:00 0HLO91BIDGB9P:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T11:57:53.9636049+02:00 0HLO91BIDGB9P:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T11:57:54.3722256+02:00 0HLO91BIDGB9P:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T11:58:47.0300722+02:00 0HLO91BIDGB9P:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 52650.0994ms. (50a9e262)
+2019-07-15T11:58:47.0602297+02:00 0HLO91BIDGB9P:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T11:58:47.0825085+02:00 0HLO91BIDGB9P:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 53121.4823ms (afa2e885)
+2019-07-15T11:58:47.1010776+02:00 0HLO91BIDGB9P:00000002 [INF] Request finished in 53522.4526ms 404 application/json; charset=utf-8 (791a596a)
+2019-07-15T11:58:52.0750259+02:00 0HLO91BIDGB9P:00000003 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T11:58:52.0822991+02:00 0HLO91BIDGB9P:00000003 [INF] Successfully validated the token. (60169667)
+2019-07-15T11:58:52.0884767+02:00 0HLO91BIDGB9P:00000003 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T11:58:52.0946320+02:00 0HLO91BIDGB9P:00000003 [INF] Authorization was successful. (0d575a54)
+2019-07-15T11:58:52.1360125+02:00 0HLO91BIDGB9P:00000003 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T11:59:04.6603783+02:00 0HLO91BIDGB9P:00000003 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 12514.5177ms. (50a9e262)
+2019-07-15T11:59:04.6882425+02:00 0HLO91BIDGB9P:00000003 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T11:59:04.6980052+02:00 0HLO91BIDGB9P:00000003 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 12600.2772ms (afa2e885)
+2019-07-15T11:59:04.7075091+02:00 0HLO91BIDGB9P:00000003 [INF] Request finished in 12629.5506ms 404 application/json; charset=utf-8 (791a596a)
+2019-07-15T11:59:43.7023880+02:00 0HLO91BIDGB9P:00000004 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/validacion application/json 56 (ca22a1cb)
+2019-07-15T11:59:43.7081155+02:00 0HLO91BIDGB9P:00000004 [INF] Successfully validated the token. (60169667)
+2019-07-15T11:59:43.7195565+02:00 0HLO91BIDGB9P:00000004 [INF] Route matched with "{action = \"ValidacionSolicitud\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.ValidacionSolicitud (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T11:59:43.7247846+02:00 0HLO91BIDGB9P:00000004 [INF] Authorization was successful. (0d575a54)
+2019-07-15T11:59:43.7588775+02:00 0HLO91BIDGB9P:00000004 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.ValidacionSolicitud (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudValidacion"]) - Validation state: Valid (4e3479ed)
+2019-07-15T11:59:44.0399288+02:00 0HLO91BIDGB9P:00000004 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.ValidacionSolicitud (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 276.5661ms. (50a9e262)
+2019-07-15T11:59:44.0447314+02:00 0HLO91BIDGB9P:00000004 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType5`1[[ServiceEcoapp.CambioFechaEstimadaResponse, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-07-15T11:59:44.0533557+02:00 0HLO91BIDGB9P:00000004 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.ValidacionSolicitud (WeeeTrackerAPI)" in 328.8868ms (afa2e885)
+2019-07-15T11:59:44.0588717+02:00 0HLO91BIDGB9P:00000004 [INF] Request finished in 357.1259ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-15T12:05:02.2975646+02:00 0HLO91FJH4HP6:00000001 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/validacion application/json 56 (ca22a1cb)
+2019-07-15T12:05:02.3731381+02:00 0HLO91FJH4HP6:00000001 [INF] Successfully validated the token. (60169667)
+2019-07-15T12:05:02.4780407+02:00 0HLO91FJH4HP6:00000001 [INF] Route matched with "{action = \"ValidacionSolicitud\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.ValidacionSolicitud (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T12:05:02.4870735+02:00 0HLO91FJH4HP6:00000001 [INF] Authorization was successful. (0d575a54)
+2019-07-15T12:05:02.7357983+02:00 0HLO91FJH4HP6:00000001 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.ValidacionSolicitud (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudValidacion"]) - Validation state: Valid (4e3479ed)
+2019-07-15T12:05:03.5419430+02:00 0HLO91FJH4HP6:00000001 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.ValidacionSolicitud (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 803.3668ms. (50a9e262)
+2019-07-15T12:05:03.5502049+02:00 0HLO91FJH4HP6:00000001 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType5`1[[ServiceEcoapp.CambioFechaEstimadaResponse, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-07-15T12:05:03.5653488+02:00 0HLO91FJH4HP6:00000001 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.ValidacionSolicitud (WeeeTrackerAPI)" in 1082.2079ms (afa2e885)
+2019-07-15T12:05:03.5746927+02:00 0HLO91FJH4HP6:00000001 [INF] Request finished in 1282.3392ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-15T12:14:15.3787872+02:00 0HLO91KOBDQVS:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T12:14:15.4196414+02:00 0HLO91KOBDQVS:00000001 [INF] Request finished in 44.1492ms 200  (791a596a)
+2019-07-15T12:14:44.3243905+02:00 0HLO91KOBDQVS:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/validacion application/json 56 (ca22a1cb)
+2019-07-15T12:14:44.4549330+02:00 0HLO91KOBDQVS:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T12:14:44.7103894+02:00 0HLO91KOBDQVS:00000002 [INF] Route matched with "{action = \"ValidacionSolicitud\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.ValidacionSolicitud (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T12:14:44.7289346+02:00 0HLO91KOBDQVS:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T12:14:45.1921533+02:00 0HLO91KOBDQVS:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.ValidacionSolicitud (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudValidacion"]) - Validation state: Valid (4e3479ed)
+2019-07-15T12:14:47.0555072+02:00 0HLO91KOBDQVS:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.ValidacionSolicitud (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1855.745ms. (50a9e262)
+2019-07-15T12:14:47.0685445+02:00 0HLO91KOBDQVS:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType5`1[[ServiceEcoapp.CambioFechaEstimadaResponse, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-07-15T12:14:47.0873337+02:00 0HLO91KOBDQVS:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.ValidacionSolicitud (WeeeTrackerAPI)" in 2368.4668ms (afa2e885)
+2019-07-15T12:14:47.1002259+02:00 0HLO91KOBDQVS:00000002 [INF] Request finished in 2774.8995ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-15T12:14:51.6073157+02:00 0HLO91KOBDQVS:00000003 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T12:14:51.6130758+02:00 0HLO91KOBDQVS:00000003 [INF] Successfully validated the token. (60169667)
+2019-07-15T12:14:51.6573371+02:00 0HLO91KOBDQVS:00000003 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T12:14:51.6977020+02:00 0HLO91KOBDQVS:00000003 [INF] Authorization was successful. (0d575a54)
+2019-07-15T12:14:51.7602668+02:00 0HLO91KOBDQVS:00000003 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T12:17:52.6158172+02:00 0HLO91MP33U8U:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T12:17:52.6650494+02:00 0HLO91MP33U8U:00000001 [INF] Request finished in 47.8845ms 200  (791a596a)
+2019-07-15T12:18:06.9624785+02:00 0HLO91MP33U8U:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T12:18:07.1119883+02:00 0HLO91MP33U8U:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T12:18:07.3567911+02:00 0HLO91MP33U8U:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T12:18:07.3729009+02:00 0HLO91MP33U8U:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T12:18:07.8231404+02:00 0HLO91MP33U8U:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T12:20:41.5108327+02:00 0HLO91OBDU6M5:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T12:20:41.5785015+02:00 0HLO91OBDU6M5:00000001 [INF] Request finished in 49.1509ms 200  (791a596a)
+2019-07-15T12:20:44.7163224+02:00 0HLO91OBDU6M5:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T12:20:44.8685787+02:00 0HLO91OBDU6M5:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T12:20:45.1343673+02:00 0HLO91OBDU6M5:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T12:20:45.1495180+02:00 0HLO91OBDU6M5:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T12:20:45.5932090+02:00 0HLO91OBDU6M5:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T12:21:28.6643514+02:00 0HLO91OBDU6M5:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 43062.9419ms. (50a9e262)
+2019-07-15T12:21:28.6779757+02:00 0HLO91OBDU6M5:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType5`1[[System.Collections.Generic.List`1[[WeeeTrackerAPI.Entities.SolicitudConsulta, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T12:21:28.7141498+02:00 0HLO91OBDU6M5:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 43572.326ms (afa2e885)
+2019-07-15T12:21:28.7277268+02:00 0HLO91OBDU6M5:00000002 [INF] Request finished in 44013.5378ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-15T12:22:32.2277050+02:00 0HLO91PCDQL8L:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T12:22:32.2686656+02:00 0HLO91PCDQL8L:00000001 [INF] Request finished in 44.284ms 200  (791a596a)
+2019-07-15T12:22:36.5024444+02:00 0HLO91PCDQL8L:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T12:22:36.6518382+02:00 0HLO91PCDQL8L:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T12:22:36.8830649+02:00 0HLO91PCDQL8L:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T12:22:36.8969538+02:00 0HLO91PCDQL8L:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T12:22:37.3035772+02:00 0HLO91PCDQL8L:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T12:36:51.9324161+02:00 0HLO921CKJREJ:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T12:36:51.9739314+02:00 0HLO921CKJREJ:00000001 [INF] Request finished in 45.0514ms 200  (791a596a)
+2019-07-15T12:36:58.5778575+02:00 0HLO921CKJREJ:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T12:36:58.7249752+02:00 0HLO921CKJREJ:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T12:36:58.9782521+02:00 0HLO921CKJREJ:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T12:36:58.9923469+02:00 0HLO921CKJREJ:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T12:36:59.4353513+02:00 0HLO921CKJREJ:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T12:37:52.9870295+02:00 0HLO921CKJREJ:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 53543.737ms. (50a9e262)
+2019-07-15T12:37:53.0059473+02:00 0HLO921CKJREJ:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T12:37:53.0311491+02:00 0HLO921CKJREJ:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 54039.7511ms (afa2e885)
+2019-07-15T12:37:53.0492062+02:00 0HLO921CKJREJ:00000002 [INF] Request finished in 54468.1219ms 404 application/json; charset=utf-8 (791a596a)
+2019-07-15T12:38:35.3773917+02:00 0HLO922BF5PQI:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T12:38:35.4198855+02:00 0HLO922BF5PQI:00000001 [INF] Request finished in 45.2875ms 200  (791a596a)
+2019-07-15T12:38:39.9747432+02:00 0HLO922BF5PQI:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T12:38:40.1140836+02:00 0HLO922BF5PQI:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T12:38:40.3885032+02:00 0HLO922BF5PQI:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T12:38:40.4019649+02:00 0HLO922BF5PQI:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T12:38:40.8175528+02:00 0HLO922BF5PQI:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T12:42:42.5209919+02:00 0HLO922BF5PQI:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 241695.1264ms. (50a9e262)
+2019-07-15T12:42:42.5359662+02:00 0HLO922BF5PQI:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T12:42:42.5629179+02:00 0HLO922BF5PQI:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 242165.8966ms (afa2e885)
+2019-07-15T12:42:42.5771731+02:00 0HLO922BF5PQI:00000002 [INF] Request finished in 242602.0362ms 404 application/json; charset=utf-8 (791a596a)
+2019-07-15T12:46:23.7973492+02:00 0HLO926N1T3RO:00000001 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T12:46:23.7973492+02:00 0HLO926N1T3RN:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T12:46:23.8536523+02:00 0HLO926N1T3RN:00000001 [INF] Request finished in 71.7358ms 200  (791a596a)
+2019-07-15T12:46:23.9564699+02:00 0HLO926N1T3RO:00000001 [INF] Successfully validated the token. (60169667)
+2019-07-15T12:46:24.1717934+02:00 0HLO926N1T3RO:00000001 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T12:46:24.1849876+02:00 0HLO926N1T3RO:00000001 [INF] Authorization was successful. (0d575a54)
+2019-07-15T12:46:24.5998826+02:00 0HLO926N1T3RO:00000001 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T12:48:14.9046713+02:00 0HLO926N1T3RO:00000001 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 110295.2683ms. (50a9e262)
+2019-07-15T12:48:14.9193811+02:00 0HLO926N1T3RO:00000001 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T12:48:14.9364695+02:00 0HLO926N1T3RO:00000001 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 110756.6291ms (afa2e885)
+2019-07-15T12:48:14.9493110+02:00 0HLO926N1T3RO:00000001 [INF] Request finished in 111158.5409ms 404 application/json; charset=utf-8 (791a596a)
+2019-07-15T12:50:36.3829178+02:00 0HLO9292B7311:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T12:50:36.4287732+02:00 0HLO9292B7311:00000001 [INF] Request finished in 49.3221ms 200  (791a596a)
+2019-07-15T12:50:42.3264517+02:00 0HLO9292B7311:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T12:50:42.4784304+02:00 0HLO9292B7311:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T12:50:42.7304444+02:00 0HLO9292B7311:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T12:50:42.7451394+02:00 0HLO9292B7311:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T12:50:43.1728845+02:00 0HLO9292B7311:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T12:53:33.0663253+02:00 0HLO92AN062UO:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T12:53:33.1085419+02:00 0HLO92AN062UO:00000001 [INF] Request finished in 45.5708ms 200  (791a596a)
+2019-07-15T12:53:36.3247387+02:00 0HLO92AN062UO:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T12:53:36.4719684+02:00 0HLO92AN062UO:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T12:53:36.6993597+02:00 0HLO92AN062UO:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T12:53:36.7144120+02:00 0HLO92AN062UO:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T12:53:37.1852368+02:00 0HLO92AN062UO:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T13:20:40.8390539+02:00 0HLO92PS3S228:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T13:20:40.8815722+02:00 0HLO92PS3S228:00000001 [INF] Request finished in 45.3017ms 200  (791a596a)
+2019-07-15T13:25:03.4663318+02:00 0HLO92PS3S229:00000001 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T13:25:03.6087544+02:00 0HLO92PS3S229:00000001 [INF] Successfully validated the token. (60169667)
+2019-07-15T13:25:03.8499556+02:00 0HLO92PS3S229:00000001 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T13:25:03.8636727+02:00 0HLO92PS3S229:00000001 [INF] Authorization was successful. (0d575a54)
+2019-07-15T13:25:04.3393620+02:00 0HLO92PS3S229:00000001 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T13:25:40.9437552+02:00 0HLO92PS3S229:00000001 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 36590.7426ms. (50a9e262)
+2019-07-15T13:25:40.9762001+02:00 0HLO92PS3S229:00000001 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType5`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T13:25:41.0004922+02:00 0HLO92PS3S229:00000001 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 37140.1072ms (afa2e885)
+2019-07-15T13:25:41.0187309+02:00 0HLO92PS3S229:00000001 [INF] Request finished in 37551.1212ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-15T13:31:42.9727384+02:00 0HLO9301EAEQK:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T13:31:43.0206617+02:00 0HLO9301EAEQK:00000001 [INF] Request finished in 52.249ms 200  (791a596a)
+2019-07-15T13:33:00.0969076+02:00 0HLO9301EAEQL:00000001 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T13:33:00.2497352+02:00 0HLO9301EAEQL:00000001 [INF] Successfully validated the token. (60169667)
+2019-07-15T13:33:00.5210658+02:00 0HLO9301EAEQL:00000001 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T13:33:00.5361892+02:00 0HLO9301EAEQL:00000001 [INF] Authorization was successful. (0d575a54)
+2019-07-15T13:33:00.9843085+02:00 0HLO9301EAEQL:00000001 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T13:33:25.6135393+02:00 0HLO9301EAEQL:00000001 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 24618.819ms. (50a9e262)
+2019-07-15T13:33:25.6329180+02:00 0HLO9301EAEQL:00000001 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType5`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T13:33:25.6597383+02:00 0HLO9301EAEQL:00000001 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 25126.5767ms (afa2e885)
+2019-07-15T13:33:25.6803071+02:00 0HLO9301EAEQL:00000001 [INF] Request finished in 25585.4992ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-15T13:35:40.4824292+02:00 0HLO93287GUUO:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T13:35:40.5232914+02:00 0HLO93287GUUO:00000001 [INF] Request finished in 44.2209ms 200  (791a596a)
+2019-07-15T13:35:48.5849231+02:00 0HLO93287GUUO:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T13:35:48.7553948+02:00 0HLO93287GUUO:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T13:35:49.0034618+02:00 0HLO93287GUUO:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T13:35:49.0199989+02:00 0HLO93287GUUO:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T13:35:49.4204641+02:00 0HLO93287GUUO:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T13:38:21.8768475+02:00 0HLO93287GUUO:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 152445.7515ms. (50a9e262)
+2019-07-15T13:38:21.8962546+02:00 0HLO93287GUUO:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType5`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T13:38:21.9304034+02:00 0HLO93287GUUO:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 152918.0025ms (afa2e885)
+2019-07-15T13:38:21.9430042+02:00 0HLO93287GUUO:00000002 [INF] Request finished in 153358.4896ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-15T13:41:25.7000788+02:00 0HLO935F3MFET:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T13:41:25.7494874+02:00 0HLO935F3MFET:00000001 [INF] Request finished in 45.5253ms 200  (791a596a)
+2019-07-15T13:41:31.5149378+02:00 0HLO935F3MFET:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T13:41:31.6801512+02:00 0HLO935F3MFET:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T13:41:31.9507867+02:00 0HLO935F3MFET:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T13:41:31.9724773+02:00 0HLO935F3MFET:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T13:41:32.4153975+02:00 0HLO935F3MFET:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T13:43:41.2125793+02:00 0HLO935F3MFET:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 128788.3657ms. (50a9e262)
+2019-07-15T13:43:41.2281760+02:00 0HLO935F3MFET:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType5`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T13:43:41.2541941+02:00 0HLO935F3MFET:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 129295.6853ms (afa2e885)
+2019-07-15T13:43:41.2670192+02:00 0HLO935F3MFET:00000002 [INF] Request finished in 129752.3527ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-15T13:51:08.6741682+02:00 0HLO93ASRAK01:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T13:51:08.7180045+02:00 0HLO93ASRAK01:00000001 [INF] Request finished in 47.2684ms 200  (791a596a)
+2019-07-15T13:51:14.4722398+02:00 0HLO93ASRAK01:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T13:51:14.5983768+02:00 0HLO93ASRAK01:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T13:51:14.8252140+02:00 0HLO93ASRAK01:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T13:51:14.8397406+02:00 0HLO93ASRAK01:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T13:51:15.2706504+02:00 0HLO93ASRAK01:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T13:51:55.1058926+02:00 0HLO93ASRAK01:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 39826.991ms. (50a9e262)
+2019-07-15T13:51:55.1206013+02:00 0HLO93ASRAK01:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T13:51:55.1474318+02:00 0HLO93ASRAK01:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 40312.7725ms (afa2e885)
+2019-07-15T13:51:55.1606193+02:00 0HLO93ASRAK01:00000002 [INF] Request finished in 40690.8518ms 404 application/json; charset=utf-8 (791a596a)
+2019-07-15T13:52:42.9953824+02:00 0HLO93BOUSG3A:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T13:52:43.0366656+02:00 0HLO93BOUSG3A:00000001 [INF] Request finished in 46.0612ms 200  (791a596a)
+2019-07-15T13:52:46.4038291+02:00 0HLO93BOUSG3A:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T13:52:46.5567380+02:00 0HLO93BOUSG3A:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T13:52:46.8225948+02:00 0HLO93BOUSG3A:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T13:52:46.8371123+02:00 0HLO93BOUSG3A:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T13:52:47.2775419+02:00 0HLO93BOUSG3A:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T13:52:59.0617542+02:00 0HLO93BOUSG3A:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 11777.4544ms. (50a9e262)
+2019-07-15T13:52:59.0772673+02:00 0HLO93BOUSG3A:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T13:52:59.1019616+02:00 0HLO93BOUSG3A:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 12268.2108ms (afa2e885)
+2019-07-15T13:52:59.1222528+02:00 0HLO93BOUSG3A:00000002 [INF] Request finished in 12712.9736ms 404 application/json; charset=utf-8 (791a596a)
+2019-07-15T13:58:05.2046763+02:00 0HLO93EOVNQIM:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T13:58:05.2683509+02:00 0HLO93EOVNQIM:00000001 [INF] Request finished in 47.9294ms 200  (791a596a)
+2019-07-15T13:58:09.5786835+02:00 0HLO93EOVNQIM:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T13:58:09.7309206+02:00 0HLO93EOVNQIM:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T13:58:09.9687152+02:00 0HLO93EOVNQIM:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T13:58:09.9828169+02:00 0HLO93EOVNQIM:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T13:58:10.4072646+02:00 0HLO93EOVNQIM:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T13:58:55.6821218+02:00 0HLO93EOVNQIM:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 45265.3482ms. (50a9e262)
+2019-07-15T13:58:55.7023680+02:00 0HLO93EOVNQIM:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType5`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T13:58:55.7357812+02:00 0HLO93EOVNQIM:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 45756.6814ms (afa2e885)
+2019-07-15T13:58:55.7514428+02:00 0HLO93EOVNQIM:00000002 [INF] Request finished in 46173.0083ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-15T14:00:37.2935494+02:00 0HLO93G6A7G2H:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T14:00:37.3356967+02:00 0HLO93G6A7G2H:00000001 [INF] Request finished in 45.6095ms 200  (791a596a)
+2019-07-15T14:00:42.7792250+02:00 0HLO93G6A7G2H:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T14:00:42.9154541+02:00 0HLO93G6A7G2H:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T14:00:43.1719988+02:00 0HLO93G6A7G2H:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T14:00:43.1860480+02:00 0HLO93G6A7G2H:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T14:00:43.6196015+02:00 0HLO93G6A7G2H:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T14:01:14.1123484+02:00 0HLO93G6A7G2H:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 30485.9987ms. (50a9e262)
+2019-07-15T14:01:14.1263687+02:00 0HLO93G6A7G2H:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType5`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T14:01:14.1441448+02:00 0HLO93G6A7G2H:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 30963.3037ms (afa2e885)
+2019-07-15T14:01:14.1572764+02:00 0HLO93G6A7G2H:00000002 [INF] Request finished in 31377.8261ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-15T14:02:35.8514597+02:00 0HLO93H9KTHQG:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T14:02:35.8909924+02:00 0HLO93H9KTHQG:00000001 [INF] Request finished in 43.5968ms 200  (791a596a)
+2019-07-15T14:02:39.4217076+02:00 0HLO93H9KTHQG:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T14:02:39.5651121+02:00 0HLO93H9KTHQG:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T14:02:39.8046652+02:00 0HLO93H9KTHQG:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T14:02:39.8189369+02:00 0HLO93H9KTHQG:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T14:02:40.2768701+02:00 0HLO93H9KTHQG:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T14:03:06.4304855+02:00 0HLO93H9KTHQG:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 26145.8956ms. (50a9e262)
+2019-07-15T14:03:06.4468480+02:00 0HLO93H9KTHQG:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T14:03:06.4797440+02:00 0HLO93H9KTHQG:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 26664.5873ms (afa2e885)
+2019-07-15T14:03:06.5058754+02:00 0HLO93H9KTHQG:00000002 [INF] Request finished in 27082.0486ms 404 application/json; charset=utf-8 (791a596a)
+2019-07-15T14:03:08.2352569+02:00 0HLO93H9KTHQG:00000003 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T14:03:08.2433756+02:00 0HLO93H9KTHQG:00000003 [INF] Successfully validated the token. (60169667)
+2019-07-15T14:03:08.2482617+02:00 0HLO93H9KTHQG:00000003 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T14:03:08.2547584+02:00 0HLO93H9KTHQG:00000003 [INF] Authorization was successful. (0d575a54)
+2019-07-15T14:03:08.2936568+02:00 0HLO93H9KTHQG:00000003 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T14:04:58.8843051+02:00 0HLO93H9KTHQG:00000003 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 110557.5809ms. (50a9e262)
+2019-07-15T14:04:58.8987390+02:00 0HLO93H9KTHQG:00000003 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T14:04:58.9310144+02:00 0HLO93H9KTHQG:00000003 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 110675.7762ms (afa2e885)
+2019-07-15T14:04:58.9540145+02:00 0HLO93H9KTHQG:00000003 [INF] Request finished in 110703.0664ms 404 application/json; charset=utf-8 (791a596a)
+2019-07-15T14:06:50.4488720+02:00 0HLO93JLGT81O:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T14:06:50.4921298+02:00 0HLO93JLGT81O:00000001 [INF] Request finished in 45.9952ms 200  (791a596a)
+2019-07-15T14:06:55.7586739+02:00 0HLO93JLGT81O:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T14:06:55.8999149+02:00 0HLO93JLGT81O:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T14:06:56.1370348+02:00 0HLO93JLGT81O:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T14:06:56.1503184+02:00 0HLO93JLGT81O:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T14:06:56.5634441+02:00 0HLO93JLGT81O:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T14:08:29.4683440+02:00 0HLO93JLGT81O:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 92897.0486ms. (50a9e262)
+2019-07-15T14:08:29.4841586+02:00 0HLO93JLGT81O:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T14:08:29.5241310+02:00 0HLO93JLGT81O:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 93377.251ms (afa2e885)
+2019-07-15T14:08:29.5370806+02:00 0HLO93JLGT81O:00000002 [INF] Request finished in 93777.5648ms 404 application/json; charset=utf-8 (791a596a)
+2019-07-15T14:14:56.4818006+02:00 0HLO93O6C2LA4:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T14:14:56.5452909+02:00 0HLO93O6C2LA4:00000001 [INF] Request finished in 45.4366ms 200  (791a596a)
+2019-07-15T14:14:57.5572961+02:00 0HLO93O6C2LA4:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T14:14:57.7122958+02:00 0HLO93O6C2LA4:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T14:14:57.9572868+02:00 0HLO93O6C2LA4:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T14:14:57.9707701+02:00 0HLO93O6C2LA4:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T14:14:58.3992416+02:00 0HLO93O6C2LA4:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T14:15:21.8472551+02:00 0HLO93O6C2LA4:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 23431.919ms. (50a9e262)
+2019-07-15T14:15:21.8660688+02:00 0HLO93O6C2LA4:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T14:15:21.8870983+02:00 0HLO93O6C2LA4:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 23917.8495ms (afa2e885)
+2019-07-15T14:15:21.9252520+02:00 0HLO93O6C2LA4:00000002 [INF] Request finished in 24353.2199ms 404 application/json; charset=utf-8 (791a596a)
+2019-07-15T14:15:26.5499478+02:00 0HLO93O6C2LA4:00000003 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T14:15:26.5572927+02:00 0HLO93O6C2LA4:00000003 [INF] Successfully validated the token. (60169667)
+2019-07-15T14:15:26.5628746+02:00 0HLO93O6C2LA4:00000003 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T14:15:26.5696092+02:00 0HLO93O6C2LA4:00000003 [INF] Authorization was successful. (0d575a54)
+2019-07-15T14:15:26.6067196+02:00 0HLO93O6C2LA4:00000003 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T14:20:29.0833846+02:00 0HLO93R9FV74J:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T14:20:29.1277300+02:00 0HLO93R9FV74J:00000001 [INF] Request finished in 49.5792ms 200  (791a596a)
+2019-07-15T14:20:36.1529677+02:00 0HLO93R9FV74J:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T14:20:36.3300248+02:00 0HLO93R9FV74J:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T14:20:36.5813567+02:00 0HLO93R9FV74J:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T14:20:36.5981248+02:00 0HLO93R9FV74J:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T14:20:37.0627475+02:00 0HLO93R9FV74J:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T14:24:03.0539018+02:00 0HLO93T98C8OR:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T14:24:03.1257588+02:00 0HLO93T98C8OR:00000001 [INF] Request finished in 49.5587ms 200  (791a596a)
+2019-07-15T14:24:06.3826033+02:00 0HLO93T98C8OR:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T14:24:06.5248313+02:00 0HLO93T98C8OR:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T14:24:06.7759863+02:00 0HLO93T98C8OR:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T14:24:06.7962576+02:00 0HLO93T98C8OR:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T14:24:07.2180628+02:00 0HLO93T98C8OR:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T14:28:55.8772191+02:00 0HLO9400H4S2M:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T14:28:55.9191781+02:00 0HLO9400H4S2M:00000001 [INF] Request finished in 45.9184ms 200  (791a596a)
+2019-07-15T14:29:02.5554011+02:00 0HLO9400H4S2M:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T14:29:02.6928568+02:00 0HLO9400H4S2M:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T14:29:02.9271818+02:00 0HLO9400H4S2M:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T14:29:02.9423768+02:00 0HLO9400H4S2M:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T14:29:03.3689038+02:00 0HLO9400H4S2M:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T14:29:43.4507540+02:00 0HLO9400H4S2M:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 40067.064ms. (50a9e262)
+2019-07-15T14:29:43.4645598+02:00 0HLO9400H4S2M:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType5`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T14:29:43.4917442+02:00 0HLO9400H4S2M:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 40556.1735ms (afa2e885)
+2019-07-15T14:29:43.5153132+02:00 0HLO9400H4S2M:00000002 [INF] Request finished in 40959.9547ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-15T14:31:01.3795751+02:00 0HLO9415TTMT1:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T14:31:01.4226770+02:00 0HLO9415TTMT1:00000001 [INF] Request finished in 47.0386ms 200  (791a596a)
+2019-07-15T14:31:18.5804078+02:00 0HLO9415TTMT1:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T14:31:18.7623762+02:00 0HLO9415TTMT1:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T14:31:19.0288274+02:00 0HLO9415TTMT1:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T14:31:19.0419359+02:00 0HLO9415TTMT1:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T14:31:19.4724030+02:00 0HLO9415TTMT1:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T14:32:27.6005653+02:00 0HLO9415TTMT1:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 68118.9115ms. (50a9e262)
+2019-07-15T14:32:27.6151584+02:00 0HLO9415TTMT1:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType5`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T14:32:27.6329124+02:00 0HLO9415TTMT1:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 68594.9803ms (afa2e885)
+2019-07-15T14:32:27.6465127+02:00 0HLO9415TTMT1:00000002 [INF] Request finished in 69066.4411ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-15T14:36:02.4052770+02:00 0HLO943VKQVU1:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T14:36:02.4465960+02:00 0HLO943VKQVU1:00000001 [INF] Request finished in 44.6754ms 200  (791a596a)
+2019-07-15T14:36:08.0520285+02:00 0HLO943VKQVU1:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T14:36:08.2014382+02:00 0HLO943VKQVU1:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T14:36:08.4395741+02:00 0HLO943VKQVU1:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T14:36:08.4530084+02:00 0HLO943VKQVU1:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T14:36:08.8641767+02:00 0HLO943VKQVU1:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T14:40:03.7815887+02:00 0HLO9467IRIK3:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T14:40:03.8265515+02:00 0HLO9467IRIK3:00000001 [INF] Request finished in 47.2638ms 200  (791a596a)
+2019-07-15T14:40:05.7271591+02:00 0HLO9467IRIK3:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T14:40:05.8705466+02:00 0HLO9467IRIK3:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T14:40:06.1540446+02:00 0HLO9467IRIK3:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T14:40:06.1673492+02:00 0HLO9467IRIK3:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T14:40:06.5819291+02:00 0HLO9467IRIK3:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T14:56:59.1847589+02:00 0HLO94FM6BPQ5:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T14:56:59.2315410+02:00 0HLO94FM6BPQ5:00000001 [INF] Request finished in 50.2915ms 200  (791a596a)
+2019-07-15T14:57:01.1406182+02:00 0HLO94FM6BPQ5:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T14:57:01.2976305+02:00 0HLO94FM6BPQ5:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T14:57:01.5939098+02:00 0HLO94FM6BPQ5:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T14:57:01.6075177+02:00 0HLO94FM6BPQ5:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T14:57:02.0374621+02:00 0HLO94FM6BPQ5:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T15:06:07.2540986+02:00 0HLO94KPH0V32:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T15:06:07.3051405+02:00 0HLO94KPH0V32:00000001 [INF] Request finished in 55.1378ms 200  (791a596a)
+2019-07-15T15:06:18.2193878+02:00 0HLO94KPH0V32:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T15:06:18.3618155+02:00 0HLO94KPH0V32:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T15:06:18.6048951+02:00 0HLO94KPH0V32:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T15:06:18.6192073+02:00 0HLO94KPH0V32:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T15:06:19.0304318+02:00 0HLO94KPH0V32:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T15:06:45.4636194+02:00 0HLO94KPH0V32:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 26423.2241ms. (50a9e262)
+2019-07-15T15:06:45.4791085+02:00 0HLO94KPH0V32:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType5`1[[System.Collections.Generic.List`1[[WeeeTrackerAPI.Entities.SolicitudConsulta, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T15:06:45.5024034+02:00 0HLO94KPH0V32:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 26886.597ms (afa2e885)
+2019-07-15T15:06:45.5150339+02:00 0HLO94KPH0V32:00000002 [INF] Request finished in 27298.4342ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-15T15:26:02.3081095+02:00 0HLO94VTM2UCD:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T15:26:02.3722006+02:00 0HLO94VTM2UCD:00000001 [INF] Request finished in 47.5938ms 200  (791a596a)
+2019-07-15T15:26:29.0996343+02:00 0HLO94VTM2UCD:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T15:26:29.2336322+02:00 0HLO94VTM2UCD:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T15:26:29.4576813+02:00 0HLO94VTM2UCD:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T15:26:29.4724736+02:00 0HLO94VTM2UCD:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T15:26:29.8954463+02:00 0HLO94VTM2UCD:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T15:32:06.3177345+02:00 0HLO953A584RM:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T15:32:06.3640313+02:00 0HLO953A584RM:00000001 [INF] Request finished in 46.9948ms 200  (791a596a)
+2019-07-15T15:32:07.7007745+02:00 0HLO953A584RM:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T15:32:07.8596045+02:00 0HLO953A584RM:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T15:32:08.1362685+02:00 0HLO953A584RM:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T15:32:08.1506893+02:00 0HLO953A584RM:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T15:32:08.5621732+02:00 0HLO953A584RM:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T15:33:36.3212094+02:00 0HLO953A584RM:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 87750.8833ms. (50a9e262)
+2019-07-15T15:33:36.3356796+02:00 0HLO953A584RM:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType5`1[[System.Collections.Generic.List`1[[WeeeTrackerAPI.Entities.SolicitudConsulta, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T15:33:36.3719378+02:00 0HLO953A584RM:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 88226.406ms (afa2e885)
+2019-07-15T15:33:36.3848663+02:00 0HLO953A584RM:00000002 [INF] Request finished in 88683.4028ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-15T15:34:47.6048257+02:00 0HLO954Q7QDH6:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T15:34:47.6470230+02:00 0HLO954Q7QDH6:00000001 [INF] Request finished in 46.0203ms 200  (791a596a)
+2019-07-15T15:34:51.8575594+02:00 0HLO954Q7QDH6:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T15:34:51.9912910+02:00 0HLO954Q7QDH6:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T15:34:52.2092394+02:00 0HLO954Q7QDH6:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T15:34:52.2227931+02:00 0HLO954Q7QDH6:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T15:34:52.6310299+02:00 0HLO954Q7QDH6:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T15:34:54.6290319+02:00 0HLO954Q7QDH6:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1989.8493ms. (50a9e262)
+2019-07-15T15:34:54.6438509+02:00 0HLO954Q7QDH6:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType5`1[[System.Collections.Generic.List`1[[WeeeTrackerAPI.Entities.SolicitudConsulta, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T15:34:54.6696933+02:00 0HLO954Q7QDH6:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 2451.4233ms (afa2e885)
+2019-07-15T15:34:54.6853071+02:00 0HLO954Q7QDH6:00000002 [INF] Request finished in 2827.3471ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-15T15:47:10.1459328+02:00 0HLO95BNGS7SM:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T15:47:10.2019092+02:00 0HLO95BNGS7SM:00000001 [INF] Request finished in 56.1129ms 200  (791a596a)
+2019-07-15T15:47:13.1931284+02:00 0HLO95BNGS7SM:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T15:47:13.3263783+02:00 0HLO95BNGS7SM:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T15:47:13.5620680+02:00 0HLO95BNGS7SM:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T15:47:13.5769211+02:00 0HLO95BNGS7SM:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T15:47:14.0013103+02:00 0HLO95BNGS7SM:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T15:47:16.6947666+02:00 0HLO95BNGS7SM:00000002 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-15T15:47:16.9499066+02:00 0HLO95BNGS7SM:00000002 [INF] Executed DbCommand ("48"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T15:47:16.9966966+02:00 0HLO95BNGS7SM:00000002 [INF] Executed DbCommand ("19"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T15:47:17.0802170+02:00 0HLO95BNGS7SM:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 3071.04ms. (50a9e262)
+2019-07-15T15:47:17.0936337+02:00 0HLO95BNGS7SM:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T15:47:17.1118950+02:00 0HLO95BNGS7SM:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 3541.0041ms (afa2e885)
+2019-07-15T15:47:17.1243457+02:00 0HLO95BNGS7SM:00000002 [INF] Request finished in 3932.8488ms 404 application/json; charset=utf-8 (791a596a)
+2019-07-15T15:47:26.3918506+02:00 0HLO95BNGS7SM:00000003 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T15:47:26.4003299+02:00 0HLO95BNGS7SM:00000003 [INF] Successfully validated the token. (60169667)
+2019-07-15T15:47:26.4066798+02:00 0HLO95BNGS7SM:00000003 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T15:47:26.4128273+02:00 0HLO95BNGS7SM:00000003 [INF] Authorization was successful. (0d575a54)
+2019-07-15T15:47:26.4479419+02:00 0HLO95BNGS7SM:00000003 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T15:47:33.0864764+02:00 0HLO95BNGS7SM:00000003 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-15T15:47:33.1119553+02:00 0HLO95BNGS7SM:00000003 [INF] Executed DbCommand ("18"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T15:47:48.5722608+02:00 0HLO95BNGS7SM:00000003 [INF] Executed DbCommand ("19"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T15:50:20.1691810+02:00 0HLO95DG5FVSC:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T15:50:20.2104039+02:00 0HLO95DG5FVSC:00000001 [INF] Request finished in 45.0037ms 200  (791a596a)
+2019-07-15T15:50:23.4816890+02:00 0HLO95DG5FVSC:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T15:50:23.6116370+02:00 0HLO95DG5FVSC:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T15:50:23.8243385+02:00 0HLO95DG5FVSC:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T15:50:23.8395910+02:00 0HLO95DG5FVSC:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T15:50:24.2804501+02:00 0HLO95DG5FVSC:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T15:50:27.4140475+02:00 0HLO95DG5FVSC:00000002 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-15T15:50:27.6646689+02:00 0HLO95DG5FVSC:00000002 [INF] Executed DbCommand ("42"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T15:50:27.7243357+02:00 0HLO95DG5FVSC:00000002 [INF] Executed DbCommand ("27"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T15:50:43.7836305+02:00 0HLO95DG5FVSC:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 19491.5044ms. (50a9e262)
+2019-07-15T15:50:43.7993011+02:00 0HLO95DG5FVSC:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T15:50:43.8225795+02:00 0HLO95DG5FVSC:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 19988.2916ms (afa2e885)
+2019-07-15T15:50:43.8368222+02:00 0HLO95DG5FVSC:00000002 [INF] Request finished in 20356.8819ms 404 application/json; charset=utf-8 (791a596a)
+2019-07-15T15:50:45.4040402+02:00 0HLO95DG5FVSC:00000003 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T15:50:45.4145009+02:00 0HLO95DG5FVSC:00000003 [INF] Successfully validated the token. (60169667)
+2019-07-15T15:50:45.4207553+02:00 0HLO95DG5FVSC:00000003 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T15:50:45.4279097+02:00 0HLO95DG5FVSC:00000003 [INF] Authorization was successful. (0d575a54)
+2019-07-15T15:50:45.4727228+02:00 0HLO95DG5FVSC:00000003 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T15:51:07.1676558+02:00 0HLO95DG5FVSC:00000003 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-15T15:51:07.1915134+02:00 0HLO95DG5FVSC:00000003 [INF] Executed DbCommand ("18"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T15:51:07.2168027+02:00 0HLO95DG5FVSC:00000003 [INF] Executed DbCommand ("18"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T15:51:07.2762204+02:00 0HLO95DG5FVSC:00000003 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 21798.8355ms. (50a9e262)
+2019-07-15T15:51:07.2817171+02:00 0HLO95DG5FVSC:00000003 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T15:51:07.2869104+02:00 0HLO95DG5FVSC:00000003 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 21861.2655ms (afa2e885)
+2019-07-15T15:51:07.2925595+02:00 0HLO95DG5FVSC:00000003 [INF] Request finished in 21898.584ms 404 application/json; charset=utf-8 (791a596a)
+2019-07-15T15:51:27.3880367+02:00 0HLO95E46FADU:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T15:51:27.4410509+02:00 0HLO95E46FADU:00000001 [INF] Request finished in 51.0271ms 200  (791a596a)
+2019-07-15T15:51:29.2295442+02:00 0HLO95E46FADU:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T15:51:29.3638408+02:00 0HLO95E46FADU:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T15:51:29.5844702+02:00 0HLO95E46FADU:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T15:51:29.5997461+02:00 0HLO95E46FADU:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T15:51:30.0125180+02:00 0HLO95E46FADU:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T15:51:31.8529764+02:00 0HLO95E46FADU:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1832.5531ms. (50a9e262)
+2019-07-15T15:51:31.8672236+02:00 0HLO95E46FADU:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType5`1[[System.Collections.Generic.List`1[[WeeeTrackerAPI.Entities.SolicitudConsulta, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T15:51:31.8982714+02:00 0HLO95E46FADU:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 2304.267ms (afa2e885)
+2019-07-15T15:51:31.9169201+02:00 0HLO95E46FADU:00000002 [INF] Request finished in 2686.749ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-15T15:54:04.5913544+02:00 0HLO95FJ1MIPQ:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T15:54:04.6747496+02:00 0HLO95FJ1MIPQ:00000001 [INF] Request finished in 46.2433ms 200  (791a596a)
+2019-07-15T15:54:07.9118360+02:00 0HLO95FJ1MIPQ:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T15:54:08.0497302+02:00 0HLO95FJ1MIPQ:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T15:54:08.2836939+02:00 0HLO95FJ1MIPQ:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T15:54:08.3040357+02:00 0HLO95FJ1MIPQ:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T15:54:08.7210179+02:00 0HLO95FJ1MIPQ:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T15:54:13.3154903+02:00 0HLO95FJ1MIPQ:00000002 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-15T15:54:13.6785321+02:00 0HLO95FJ1MIPQ:00000002 [INF] Executed DbCommand ("49"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T15:54:22.2123062+02:00 0HLO95FJ1MIPQ:00000002 [INF] Executed DbCommand ("25"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T15:54:23.8536710+02:00 0HLO95FJ1MIPQ:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 15124.3899ms. (50a9e262)
+2019-07-15T15:54:23.8674552+02:00 0HLO95FJ1MIPQ:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T15:54:23.8851693+02:00 0HLO95FJ1MIPQ:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 15592.3441ms (afa2e885)
+2019-07-15T15:54:23.8976518+02:00 0HLO95FJ1MIPQ:00000002 [INF] Request finished in 15985.8079ms 404 application/json; charset=utf-8 (791a596a)
+2019-07-15T15:54:30.8486335+02:00 0HLO95FJ1MIPQ:00000003 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T15:54:30.8554789+02:00 0HLO95FJ1MIPQ:00000003 [INF] Successfully validated the token. (60169667)
+2019-07-15T15:54:30.8605750+02:00 0HLO95FJ1MIPQ:00000003 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T15:54:30.8677999+02:00 0HLO95FJ1MIPQ:00000003 [INF] Authorization was successful. (0d575a54)
+2019-07-15T15:54:30.9063547+02:00 0HLO95FJ1MIPQ:00000003 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T15:54:31.5492361+02:00 0HLO95FJ1MIPQ:00000003 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-15T15:54:31.5734213+02:00 0HLO95FJ1MIPQ:00000003 [INF] Executed DbCommand ("17"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T15:54:33.7514120+02:00 0HLO95FJ1MIPQ:00000003 [INF] Executed DbCommand ("18"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T15:57:39.9411855+02:00 0HLO95HJ7E90D:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T15:57:39.9845986+02:00 0HLO95HJ7E90D:00000001 [INF] Request finished in 47.1922ms 200  (791a596a)
+2019-07-15T15:57:43.2129388+02:00 0HLO95HJ7E90D:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T15:57:43.3387937+02:00 0HLO95HJ7E90D:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T15:57:43.5499609+02:00 0HLO95HJ7E90D:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T15:57:43.5634914+02:00 0HLO95HJ7E90D:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T15:57:43.9997532+02:00 0HLO95HJ7E90D:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T15:57:59.5894878+02:00 0HLO95HJ7E90D:00000002 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-15T15:57:59.8730793+02:00 0HLO95HJ7E90D:00000002 [INF] Executed DbCommand ("39"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T15:58:10.6187094+02:00 0HLO95HJ7E90D:00000002 [INF] Executed DbCommand ("21"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T15:59:05.4490472+02:00 0HLO95HJ7E90D:00000002 [INF] Executed DbCommand ("17"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:00:43.5792729+02:00 0HLO95J9UJS3A:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T16:00:43.6222963+02:00 0HLO95J9UJS3A:00000001 [INF] Request finished in 46.3843ms 200  (791a596a)
+2019-07-15T16:00:46.6303216+02:00 0HLO95J9UJS3A:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T16:00:46.7649510+02:00 0HLO95J9UJS3A:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T16:00:46.9902118+02:00 0HLO95J9UJS3A:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T16:00:47.0039335+02:00 0HLO95J9UJS3A:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T16:00:47.4422587+02:00 0HLO95J9UJS3A:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T16:00:53.2587971+02:00 0HLO95J9UJS3A:00000002 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-15T16:00:53.5187015+02:00 0HLO95J9UJS3A:00000002 [INF] Executed DbCommand ("31"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:00:53.5682296+02:00 0HLO95J9UJS3A:00000002 [INF] Executed DbCommand ("21"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:00:55.3582395+02:00 0HLO95J9UJS3A:00000002 [INF] Executed DbCommand ("28"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:00:55.3839254+02:00 0HLO95J9UJS3A:00000002 [INF] Executed DbCommand ("19"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:00:59.6878483+02:00 0HLO95J9UJS3A:00000002 [INF] Executed DbCommand ("19"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:00:59.7205674+02:00 0HLO95J9UJS3A:00000002 [INF] Executed DbCommand ("23"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:00:59.7462818+02:00 0HLO95J9UJS3A:00000002 [INF] Executed DbCommand ("18"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:00:59.7692746+02:00 0HLO95J9UJS3A:00000002 [INF] Executed DbCommand ("17"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:00:59.7926053+02:00 0HLO95J9UJS3A:00000002 [INF] Executed DbCommand ("17"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:00:59.8165203+02:00 0HLO95J9UJS3A:00000002 [INF] Executed DbCommand ("18"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:00:59.8397952+02:00 0HLO95J9UJS3A:00000002 [INF] Executed DbCommand ("18"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:00:59.8650402+02:00 0HLO95J9UJS3A:00000002 [INF] Executed DbCommand ("20"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:00:59.8991901+02:00 0HLO95J9UJS3A:00000002 [INF] Executed DbCommand ("28"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:00:59.9256378+02:00 0HLO95J9UJS3A:00000002 [INF] Executed DbCommand ("21"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:00:59.9517885+02:00 0HLO95J9UJS3A:00000002 [INF] Executed DbCommand ("20"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:00:59.9757314+02:00 0HLO95J9UJS3A:00000002 [INF] Executed DbCommand ("18"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:00:59.9997208+02:00 0HLO95J9UJS3A:00000002 [INF] Executed DbCommand ("19"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:01:00.0270941+02:00 0HLO95J9UJS3A:00000002 [INF] Executed DbCommand ("22"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:01:00.0503486+02:00 0HLO95J9UJS3A:00000002 [INF] Executed DbCommand ("18"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:01:00.0773571+02:00 0HLO95J9UJS3A:00000002 [INF] Executed DbCommand ("21"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:01:00.1033434+02:00 0HLO95J9UJS3A:00000002 [INF] Executed DbCommand ("20"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:01:00.1254118+02:00 0HLO95J9UJS3A:00000002 [INF] Executed DbCommand ("17"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:01:00.1357787+02:00 0HLO95J9UJS3A:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 12686.163ms. (50a9e262)
+2019-07-15T16:01:00.1498166+02:00 0HLO95J9UJS3A:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType5`1[[System.Collections.Generic.List`1[[WeeeTrackerAPI.Entities.SolicitudConsulta, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T16:01:00.1760640+02:00 0HLO95J9UJS3A:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 13178.1482ms (afa2e885)
+2019-07-15T16:01:00.1912801+02:00 0HLO95J9UJS3A:00000002 [INF] Request finished in 13561.1786ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-15T16:03:41.0213932+02:00 0HLO95KUQGKP1:00000001 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T16:03:41.0995353+02:00 0HLO95KUQGKP1:00000001 [INF] Successfully validated the token. (60169667)
+2019-07-15T16:03:41.2083269+02:00 0HLO95KUQGKP1:00000001 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T16:03:41.2176954+02:00 0HLO95KUQGKP1:00000001 [INF] Authorization was successful. (0d575a54)
+2019-07-15T16:03:41.4813545+02:00 0HLO95KUQGKP1:00000001 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T16:03:43.4742872+02:00 0HLO95KUQGKP1:00000001 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-15T16:03:43.6090145+02:00 0HLO95KUQGKP1:00000001 [INF] Executed DbCommand ("4"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:03:43.6320727+02:00 0HLO95KUQGKP1:00000001 [INF] Executed DbCommand ("3"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:03:43.6421602+02:00 0HLO95KUQGKP1:00000001 [INF] Executed DbCommand ("3"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:03:43.6453124+02:00 0HLO95KUQGKP1:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:03:43.6479611+02:00 0HLO95KUQGKP1:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:03:43.6509484+02:00 0HLO95KUQGKP1:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:03:43.6539425+02:00 0HLO95KUQGKP1:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:03:43.6563347+02:00 0HLO95KUQGKP1:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:03:43.6590261+02:00 0HLO95KUQGKP1:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:03:43.6616163+02:00 0HLO95KUQGKP1:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:03:43.6641814+02:00 0HLO95KUQGKP1:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:03:43.6668534+02:00 0HLO95KUQGKP1:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:03:43.6698156+02:00 0HLO95KUQGKP1:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:03:43.6726486+02:00 0HLO95KUQGKP1:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:03:43.6752684+02:00 0HLO95KUQGKP1:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:03:43.6779080+02:00 0HLO95KUQGKP1:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:03:43.6806047+02:00 0HLO95KUQGKP1:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:03:43.6835037+02:00 0HLO95KUQGKP1:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:03:43.6864227+02:00 0HLO95KUQGKP1:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:03:43.6894981+02:00 0HLO95KUQGKP1:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:03:43.6920398+02:00 0HLO95KUQGKP1:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:03:43.6946715+02:00 0HLO95KUQGKP1:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:03:43.7021547+02:00 0HLO95KUQGKP1:00000001 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 2216.2052ms. (50a9e262)
+2019-07-15T16:03:43.7135529+02:00 0HLO95KUQGKP1:00000001 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType5`1[[System.Collections.Generic.List`1[[WeeeTrackerAPI.Entities.SolicitudConsulta, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T16:03:43.7383167+02:00 0HLO95KUQGKP1:00000001 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 2525.6668ms (afa2e885)
+2019-07-15T16:03:43.7462766+02:00 0HLO95KUQGKP1:00000001 [INF] Request finished in 2731.5274ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-15T16:25:06.3694705+02:00 0HLO960TT0Q6I:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T16:25:06.4190344+02:00 0HLO960TT0Q6I:00000001 [INF] Request finished in 52.6251ms 200  (791a596a)
+2019-07-15T16:25:12.6953349+02:00 0HLO960TT0Q6I:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T16:25:12.8371527+02:00 0HLO960TT0Q6I:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T16:25:13.0758974+02:00 0HLO960TT0Q6I:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T16:25:13.0898227+02:00 0HLO960TT0Q6I:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T16:25:13.5073931+02:00 0HLO960TT0Q6I:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T16:25:16.2354566+02:00 0HLO960TT0Q6I:00000002 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-15T16:25:16.6056762+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("67"ms) [Parameters=["@__idFraccion_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidFraccion], [r].[nombre]
+FROM [Fracciones] AS [r]
+WHERE [r].[pidFraccion] = @__idFraccion_0" (0723d8ff)
+2019-07-15T16:25:16.6587644+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("25"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:25:16.7115721+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("37"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:25:16.7443657+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("21"ms) [Parameters=["@__idFraccion_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidFraccion], [r].[nombre]
+FROM [Fracciones] AS [r]
+WHERE [r].[pidFraccion] = @__idFraccion_0" (0723d8ff)
+2019-07-15T16:25:16.7684508+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("19"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:25:16.7933175+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("19"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:25:16.8175323+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("18"ms) [Parameters=["@__idFraccion_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidFraccion], [r].[nombre]
+FROM [Fracciones] AS [r]
+WHERE [r].[pidFraccion] = @__idFraccion_0" (0723d8ff)
+2019-07-15T16:25:16.8444777+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("21"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:25:16.8688552+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("19"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:25:16.8975864+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("23"ms) [Parameters=["@__idFraccion_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidFraccion], [r].[nombre]
+FROM [Fracciones] AS [r]
+WHERE [r].[pidFraccion] = @__idFraccion_0" (0723d8ff)
+2019-07-15T16:25:16.9214223+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("19"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:25:16.9503885+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("24"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:25:16.9993863+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("43"ms) [Parameters=["@__idFraccion_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidFraccion], [r].[nombre]
+FROM [Fracciones] AS [r]
+WHERE [r].[pidFraccion] = @__idFraccion_0" (0723d8ff)
+2019-07-15T16:25:17.0220554+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("17"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:25:17.0452184+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("18"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:25:17.0688034+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("18"ms) [Parameters=["@__idFraccion_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidFraccion], [r].[nombre]
+FROM [Fracciones] AS [r]
+WHERE [r].[pidFraccion] = @__idFraccion_0" (0723d8ff)
+2019-07-15T16:25:17.0909519+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("17"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:25:17.1139111+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("17"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:25:17.1375719+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("18"ms) [Parameters=["@__idFraccion_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidFraccion], [r].[nombre]
+FROM [Fracciones] AS [r]
+WHERE [r].[pidFraccion] = @__idFraccion_0" (0723d8ff)
+2019-07-15T16:25:17.1608889+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("18"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:25:17.1862147+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("19"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:25:17.2092172+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("18"ms) [Parameters=["@__idFraccion_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidFraccion], [r].[nombre]
+FROM [Fracciones] AS [r]
+WHERE [r].[pidFraccion] = @__idFraccion_0" (0723d8ff)
+2019-07-15T16:25:17.2432914+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("22"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:25:17.2717990+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("22"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:25:17.2941712+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("17"ms) [Parameters=["@__idFraccion_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidFraccion], [r].[nombre]
+FROM [Fracciones] AS [r]
+WHERE [r].[pidFraccion] = @__idFraccion_0" (0723d8ff)
+2019-07-15T16:25:17.3154533+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("16"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:25:17.3440906+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("18"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:25:17.3688452+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("19"ms) [Parameters=["@__idFraccion_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidFraccion], [r].[nombre]
+FROM [Fracciones] AS [r]
+WHERE [r].[pidFraccion] = @__idFraccion_0" (0723d8ff)
+2019-07-15T16:25:17.3997712+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("19"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:25:17.4271410+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("20"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:25:17.4500213+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("17"ms) [Parameters=["@__idFraccion_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidFraccion], [r].[nombre]
+FROM [Fracciones] AS [r]
+WHERE [r].[pidFraccion] = @__idFraccion_0" (0723d8ff)
+2019-07-15T16:25:17.4717505+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("17"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:25:17.4945147+02:00 0HLO960TT0Q6I:00000002 [INF] Executed DbCommand ("17"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:25:17.5052029+02:00 0HLO960TT0Q6I:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 3990.3305ms. (50a9e262)
+2019-07-15T16:25:17.5187852+02:00 0HLO960TT0Q6I:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType5`1[[System.Collections.Generic.List`1[[WeeeTrackerAPI.Entities.SolicitudConsulta, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T16:25:17.5448767+02:00 0HLO960TT0Q6I:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 4460.8982ms (afa2e885)
+2019-07-15T16:25:17.5589829+02:00 0HLO960TT0Q6I:00000002 [INF] Request finished in 4864.6299ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-15T16:30:50.0012995+02:00 0HLO9644A4SA0:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-15T16:30:50.0494799+02:00 0HLO9644A4SA0:00000001 [INF] Request finished in 44.6123ms 200  (791a596a)
+2019-07-15T16:30:51.0415131+02:00 0HLO9644A4SA0:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/consulta?= application/json 48 (ca22a1cb)
+2019-07-15T16:30:51.1956270+02:00 0HLO9644A4SA0:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-15T16:30:51.4665264+02:00 0HLO9644A4SA0:00000002 [INF] Route matched with "{action = \"GetSolicitudes\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" (a44c0341)
+2019-07-15T16:30:51.4894515+02:00 0HLO9644A4SA0:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-15T16:30:51.9539269+02:00 0HLO9644A4SA0:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-15T16:30:54.6969579+02:00 0HLO9644A4SA0:00000002 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-15T16:30:55.0313585+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("71"ms) [Parameters=["@__idFraccion_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidFraccion], [r].[nombre]
+FROM [Fracciones] AS [r]
+WHERE [r].[pidFraccion] = @__idFraccion_0" (0723d8ff)
+2019-07-15T16:30:55.1127386+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("52"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:30:55.1839597+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("56"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:30:55.2726210+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("71"ms) [Parameters=["@__idTipoCont_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidTipoContenedor], [r].[nombre]
+FROM [TiposContenedor] AS [r]
+WHERE [r].[pidTipoContenedor] = @__idTipoCont_0" (0723d8ff)
+2019-07-15T16:30:55.3322128+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("51"ms) [Parameters=["@__idFraccion_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidFraccion], [r].[nombre]
+FROM [Fracciones] AS [r]
+WHERE [r].[pidFraccion] = @__idFraccion_0" (0723d8ff)
+2019-07-15T16:30:55.3803756+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("42"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:30:55.4405333+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("55"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:30:55.4818717+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("35"ms) [Parameters=["@__idTipoCont_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidTipoContenedor], [r].[nombre]
+FROM [TiposContenedor] AS [r]
+WHERE [r].[pidTipoContenedor] = @__idTipoCont_0" (0723d8ff)
+2019-07-15T16:30:55.5210795+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("34"ms) [Parameters=["@__idFraccion_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidFraccion], [r].[nombre]
+FROM [Fracciones] AS [r]
+WHERE [r].[pidFraccion] = @__idFraccion_0" (0723d8ff)
+2019-07-15T16:30:55.5588048+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("33"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:30:55.5938353+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("30"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:30:55.6325716+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("33"ms) [Parameters=["@__idTipoCont_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidTipoContenedor], [r].[nombre]
+FROM [TiposContenedor] AS [r]
+WHERE [r].[pidTipoContenedor] = @__idTipoCont_0" (0723d8ff)
+2019-07-15T16:30:55.6554181+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("17"ms) [Parameters=["@__idFraccion_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidFraccion], [r].[nombre]
+FROM [Fracciones] AS [r]
+WHERE [r].[pidFraccion] = @__idFraccion_0" (0723d8ff)
+2019-07-15T16:30:55.6836191+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("22"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:30:55.7062325+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("17"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:30:55.7286115+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("17"ms) [Parameters=["@__idTipoCont_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidTipoContenedor], [r].[nombre]
+FROM [TiposContenedor] AS [r]
+WHERE [r].[pidTipoContenedor] = @__idTipoCont_0" (0723d8ff)
+2019-07-15T16:30:55.7908115+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("56"ms) [Parameters=["@__idFraccion_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidFraccion], [r].[nombre]
+FROM [Fracciones] AS [r]
+WHERE [r].[pidFraccion] = @__idFraccion_0" (0723d8ff)
+2019-07-15T16:30:55.8200644+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("23"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:30:55.8540602+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("24"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:30:55.8873669+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("22"ms) [Parameters=["@__idTipoCont_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidTipoContenedor], [r].[nombre]
+FROM [TiposContenedor] AS [r]
+WHERE [r].[pidTipoContenedor] = @__idTipoCont_0" (0723d8ff)
+2019-07-15T16:30:55.9115140+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("19"ms) [Parameters=["@__idFraccion_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidFraccion], [r].[nombre]
+FROM [Fracciones] AS [r]
+WHERE [r].[pidFraccion] = @__idFraccion_0" (0723d8ff)
+2019-07-15T16:30:55.9342280+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("17"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:30:55.9610335+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("21"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:30:55.9827275+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("16"ms) [Parameters=["@__idTipoCont_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidTipoContenedor], [r].[nombre]
+FROM [TiposContenedor] AS [r]
+WHERE [r].[pidTipoContenedor] = @__idTipoCont_0" (0723d8ff)
+2019-07-15T16:30:56.0057931+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("17"ms) [Parameters=["@__idFraccion_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidFraccion], [r].[nombre]
+FROM [Fracciones] AS [r]
+WHERE [r].[pidFraccion] = @__idFraccion_0" (0723d8ff)
+2019-07-15T16:30:56.0273023+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("17"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:30:56.0487984+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("16"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:30:56.0711500+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("17"ms) [Parameters=["@__idTipoCont_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidTipoContenedor], [r].[nombre]
+FROM [TiposContenedor] AS [r]
+WHERE [r].[pidTipoContenedor] = @__idTipoCont_0" (0723d8ff)
+2019-07-15T16:30:56.0923645+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("16"ms) [Parameters=["@__idFraccion_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidFraccion], [r].[nombre]
+FROM [Fracciones] AS [r]
+WHERE [r].[pidFraccion] = @__idFraccion_0" (0723d8ff)
+2019-07-15T16:30:56.1144949+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("17"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:30:56.1356905+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("16"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:30:56.1673469+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("17"ms) [Parameters=["@__idTipoCont_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidTipoContenedor], [r].[nombre]
+FROM [TiposContenedor] AS [r]
+WHERE [r].[pidTipoContenedor] = @__idTipoCont_0" (0723d8ff)
+2019-07-15T16:30:56.1978497+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("24"ms) [Parameters=["@__idFraccion_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidFraccion], [r].[nombre]
+FROM [Fracciones] AS [r]
+WHERE [r].[pidFraccion] = @__idFraccion_0" (0723d8ff)
+2019-07-15T16:30:56.2196814+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("17"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:30:56.2478238+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("16"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:30:56.2720675+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("18"ms) [Parameters=["@__idTipoCont_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidTipoContenedor], [r].[nombre]
+FROM [TiposContenedor] AS [r]
+WHERE [r].[pidTipoContenedor] = @__idTipoCont_0" (0723d8ff)
+2019-07-15T16:30:56.2933701+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("16"ms) [Parameters=["@__idFraccion_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidFraccion], [r].[nombre]
+FROM [Fracciones] AS [r]
+WHERE [r].[pidFraccion] = @__idFraccion_0" (0723d8ff)
+2019-07-15T16:30:56.3182619+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("19"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:30:56.3465528+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("22"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:30:56.3692156+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("17"ms) [Parameters=["@__idTipoCont_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidTipoContenedor], [r].[nombre]
+FROM [TiposContenedor] AS [r]
+WHERE [r].[pidTipoContenedor] = @__idTipoCont_0" (0723d8ff)
+2019-07-15T16:30:56.3933945+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("19"ms) [Parameters=["@__idFraccion_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidFraccion], [r].[nombre]
+FROM [Fracciones] AS [r]
+WHERE [r].[pidFraccion] = @__idFraccion_0" (0723d8ff)
+2019-07-15T16:30:56.4162064+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("17"ms) [Parameters=["@__idResiduo_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidResiduo], [r].[nombre]
+FROM [Residuos] AS [r]
+WHERE [r].[pidResiduo] = @__idResiduo_0" (0723d8ff)
+2019-07-15T16:30:56.4380490+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("16"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-15T16:30:56.4601116+02:00 0HLO9644A4SA0:00000002 [INF] Executed DbCommand ("17"ms) [Parameters=["@__idTipoCont_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pidTipoContenedor], [r].[nombre]
+FROM [TiposContenedor] AS [r]
+WHERE [r].[pidTipoContenedor] = @__idTipoCont_0" (0723d8ff)
+2019-07-15T16:30:56.4717585+02:00 0HLO9644A4SA0:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 4509.6133ms. (50a9e262)
+2019-07-15T16:30:56.4855671+02:00 0HLO9644A4SA0:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType5`1[[System.Collections.Generic.List`1[[WeeeTrackerAPI.Entities.SolicitudConsulta, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-15T16:30:56.5144201+02:00 0HLO9644A4SA0:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.GetSolicitudes (WeeeTrackerAPI)" in 5036.8975ms (afa2e885)
+2019-07-15T16:30:56.5348876+02:00 0HLO9644A4SA0:00000002 [INF] Request finished in 5490.745ms 200 application/json; charset=utf-8 (791a596a)

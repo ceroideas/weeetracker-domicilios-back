@@ -1,0 +1,1202 @@
+2019-07-18T09:33:15.2674877+02:00 0HLOBA8P184EB:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-18T09:33:15.3567166+02:00 0HLOBA8P184EB:00000001 [INF] Request finished in 84.0568ms 200  (791a596a)
+2019-07-18T09:33:18.8661073+02:00 0HLOBA8P184EB:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/users/login application/json 43 (ca22a1cb)
+2019-07-18T09:33:19.2382252+02:00 0HLOBA8P184EB:00000002 [INF] Route matched with "{action = \"Authenticate\", controller = \"Users\"}". Executing action "WeeeTrackerAPI.Controllers.UsersController.Authenticate (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T09:33:19.6462460+02:00 0HLOBA8P184EB:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.UsersController.Authenticate (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.User"]) - Validation state: Valid (4e3479ed)
+2019-07-18T09:33:21.0078152+02:00 0HLOBA8P184EB:00000002 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-18T09:33:21.0730819+02:00 0HLOBA8P184EB:00000002 [WRN] The Include operation for navigation '"new WtkUsuario() {Id = [u].Id, Usuario = [u].Usuario, Password = [u].Password, SidTercero = [u].SidTercero, SidTipoTercero = [u].SidTipoTercero, Estado = [u].Estado, WtkUsuarioPerfiles = [u].WtkUsuarioPerfiles}.WtkUsuarioPerfiles"' is unnecessary and was ignored because the navigation is not reachable in the final query results. See https://go.microsoft.com/fwlink/?linkid=850303 for more information. (10efaee6)
+2019-07-18T09:33:21.6898584+02:00 0HLOBA8P184EB:00000002 [INF] Executed DbCommand ("362"ms) [Parameters=["@__username_0='?' (Size = 50) (DbType = AnsiString), @__password_1='?' (Size = 50) (DbType = AnsiString)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [u].[Id], [u].[Usuario], [u].[Password], [u].[sidTercero], [u].[sidTipoTercero], [u].[Estado]
+FROM [WTK_USUARIO] AS [u]
+WHERE ([u].[Usuario] = @__username_0) AND ([u].[Password] = @__password_1)
+ORDER BY [u].[Id]" (0723d8ff)
+2019-07-18T09:33:21.7358714+02:00 0HLOBA8P184EB:00000002 [INF] Executed DbCommand ("24"ms) [Parameters=["@__username_0='?' (Size = 50) (DbType = AnsiString), @__password_1='?' (Size = 50) (DbType = AnsiString)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [u.WtkUsuarioPerfiles].[sidUsuario], [u.WtkUsuarioPerfiles].[sidPerfil], [t].[Id]
+FROM [WTK_USUARIO_PERFILES] AS [u.WtkUsuarioPerfiles]
+INNER JOIN (
+    SELECT TOP(1) [u0].[Id]
+    FROM [WTK_USUARIO] AS [u0]
+    WHERE ([u0].[Usuario] = @__username_0) AND ([u0].[Password] = @__password_1)
+    ORDER BY [u0].[Id]
+) AS [t] ON [u.WtkUsuarioPerfiles].[sidUsuario] = [t].[Id]
+ORDER BY [t].[Id]" (0723d8ff)
+2019-07-18T09:33:21.8231241+02:00 0HLOBA8P184EB:00000002 [INF] Executed DbCommand ("38"ms) [Parameters=["@__usuario_SidTercero_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [t.WtkTextoLopd].[Id], [t.WtkTextoLopd].[sidTercero], [t.WtkTextoLopd].[Texto], [t].[pidTercero], [t].[nombre]
+FROM [Terceros] AS [t]
+LEFT JOIN [WTK_TEXTO_LOPD] AS [t.WtkTextoLopd] ON [t].[pidTercero] = [t.WtkTextoLopd].[sidTercero]
+WHERE [t].[pidTercero] = @__usuario_SidTercero_0" (0723d8ff)
+2019-07-18T09:33:21.9153635+02:00 0HLOBA8P184EB:00000002 [INF] Executed DbCommand ("43"ms) [Parameters=["@__usuario_Id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [d].[pidDireccionTercero], [d].[nombre]
+FROM [DireccionesTercero] AS [d]
+WHERE EXISTS (
+    SELECT 1
+    FROM [WTK_USUARIO_DIRECCIONES] AS [u]
+    WHERE ([u].[sidUsuario] = @__usuario_Id_0) AND ([d].[pidDireccionTercero] = [u].[sidDireccion]))
+ORDER BY [d].[nombre]" (0723d8ff)
+2019-07-18T09:33:21.9672901+02:00 0HLOBA8P184EB:00000002 [INF] Executed DbCommand ("32"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [item].[Id], [item].[Nombre], [item].[Orden]
+FROM [WTK_RESIDUOESPECIFICO] AS [item]
+ORDER BY [item].[Orden]" (0723d8ff)
+2019-07-18T09:33:22.0063116+02:00 0HLOBA8P184EB:00000002 [INF] Executed DbCommand ("24"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [item].[pidMarca], [item].[nombre]
+FROM [Marcas] AS [item]
+ORDER BY [item].[nombre]" (0723d8ff)
+2019-07-18T09:33:22.0481480+02:00 0HLOBA8P184EB:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.UsersController.Authenticate (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 2395.6096ms. (50a9e262)
+2019-07-18T09:33:22.0592184+02:00 0HLOBA8P184EB:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType6`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-18T09:33:22.0749984+02:00 0HLOBA8P184EB:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.UsersController.Authenticate (WeeeTrackerAPI)" in 2827.5207ms (afa2e885)
+2019-07-18T09:33:22.0869574+02:00 0HLOBA8P184EB:00000002 [INF] Request finished in 3221.7547ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-18T09:33:33.4417927+02:00 0HLOBA8P184EB:00000003 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/residuo application/json 38 (ca22a1cb)
+2019-07-18T09:33:33.4611618+02:00 0HLOBA8P184EB:00000003 [INF] Successfully validated the token. (60169667)
+2019-07-18T09:33:33.4752063+02:00 0HLOBA8P184EB:00000003 [INF] Route matched with "{action = \"GetResiduo\", controller = \"Residuo\"}". Executing action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T09:33:33.4949303+02:00 0HLOBA8P184EB:00000003 [INF] Authorization was successful. (0d575a54)
+2019-07-18T09:33:43.3634055+02:00 0HLOBA8P184EB:00000003 [INF] Executing action method "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Residuo"]) - Validation state: Valid (4e3479ed)
+2019-07-18T09:33:43.3877944+02:00 0HLOBA8P184EB:00000003 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-18T09:33:43.3976905+02:00 0HLOBA8P184EB:00000003 [WRN] The Include operation for navigation '"[r].SidEstadoRaeeNavigation"' is unnecessary and was ignored because the navigation is not reachable in the final query results. See https://go.microsoft.com/fwlink/?linkid=850303 for more information. (10efaee6)
+2019-07-18T09:33:43.4410270+02:00 0HLOBA8P184EB:00000003 [INF] Executed DbCommand ("24"ms) [Parameters=["@__idRaee_0='?' (Size = 50)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [r].[pidRAEE], [r].[sidResiduoEspecifico], [r].[sidMarca], [r].[serie], [r].[destino], [r].[canibalizado], [r].[sidEstadoRAEE], [r.SidEstadoRaeeNavigation].[nombre]
+FROM [RAEEs] AS [r]
+INNER JOIN [EstadosRAEE] AS [r.SidEstadoRaeeNavigation] ON [r].[sidEstadoRAEE] = [r.SidEstadoRaeeNavigation].[pidEstadoRAEE]
+WHERE ([r].[pidRAEE] = @__idRaee_0) AND ([r].[sidEstadoRAEE] = [r].[sidEstadoRAEE])" (0723d8ff)
+2019-07-18T09:33:43.4542374+02:00 0HLOBA8P184EB:00000003 [INF] Executed action method "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 85.8749ms. (50a9e262)
+2019-07-18T09:33:43.4592123+02:00 0HLOBA8P184EB:00000003 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[<>f__AnonymousType49`8[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Boolean, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-07-18T09:33:43.4718419+02:00 0HLOBA8P184EB:00000003 [INF] Executed action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" in 9990.6838ms (afa2e885)
+2019-07-18T09:33:43.4776587+02:00 0HLOBA8P184EB:00000003 [INF] Request finished in 10036.5556ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-18T13:05:22.1531894+02:00 0HLOBDV9UCKDC:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-18T13:05:22.2394517+02:00 0HLOBDV9UCKDC:00000001 [INF] Request finished in 60.8808ms 200  (791a596a)
+2019-07-18T13:05:30.0214832+02:00 0HLOBDV9UCKDC:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/residuo application/json 38 (ca22a1cb)
+2019-07-18T13:05:30.1915300+02:00 0HLOBDV9UCKDC:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-18T13:05:30.4760393+02:00 0HLOBDV9UCKDC:00000002 [INF] Route matched with "{action = \"GetResiduo\", controller = \"Residuo\"}". Executing action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T13:05:30.4910882+02:00 0HLOBDV9UCKDC:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-18T13:05:43.8977283+02:00 0HLOBDV9UCKDC:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Residuo"]) - Validation state: Valid (4e3479ed)
+2019-07-18T13:05:45.2601560+02:00 0HLOBDV9UCKDC:00000002 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-18T13:05:45.3098718+02:00 0HLOBDV9UCKDC:00000002 [WRN] The Include operation for navigation '"[r].SidEstadoRaeeNavigation"' is unnecessary and was ignored because the navigation is not reachable in the final query results. See https://go.microsoft.com/fwlink/?linkid=850303 for more information. (10efaee6)
+2019-07-18T13:05:45.5665661+02:00 0HLOBDV9UCKDC:00000002 [INF] Executed DbCommand ("47"ms) [Parameters=["@__idRaee_0='?' (Size = 50)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [r].[pidRAEE], [r].[sidResiduoEspecifico], [r].[sidMarca], [r].[serie], [r].[destino], [r].[canibalizado], [r].[sidEstadoRAEE], [r.SidEstadoRaeeNavigation].[nombre]
+FROM [RAEEs] AS [r]
+INNER JOIN [EstadosRAEE] AS [r.SidEstadoRaeeNavigation] ON [r].[sidEstadoRAEE] = [r.SidEstadoRaeeNavigation].[pidEstadoRAEE]
+WHERE ([r].[pidRAEE] = @__idRaee_0) AND ([r].[sidEstadoRAEE] = [r].[sidEstadoRAEE])" (0723d8ff)
+2019-07-18T13:05:45.5916797+02:00 0HLOBDV9UCKDC:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1690.0104ms. (50a9e262)
+2019-07-18T13:05:45.6033665+02:00 0HLOBDV9UCKDC:00000002 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[<>f__AnonymousType49`8[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Boolean, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-07-18T13:05:45.6307626+02:00 0HLOBDV9UCKDC:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" in 15180.2639ms (afa2e885)
+2019-07-18T13:05:45.6402428+02:00 0HLOBDV9UCKDC:00000002 [INF] Request finished in 15656.3714ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-18T13:09:10.6490401+02:00 0HLOBE1E1EHR8:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-18T13:09:10.6901514+02:00 0HLOBE1E1EHR8:00000001 [INF] Request finished in 45.4383ms 200  (791a596a)
+2019-07-18T13:09:13.5212472+02:00 0HLOBE1E1EHR8:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/residuo application/json 38 (ca22a1cb)
+2019-07-18T13:09:13.6500777+02:00 0HLOBE1E1EHR8:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-18T13:09:13.8757374+02:00 0HLOBE1E1EHR8:00000002 [INF] Route matched with "{action = \"GetResiduo\", controller = \"Residuo\"}". Executing action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T13:09:13.8953379+02:00 0HLOBE1E1EHR8:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-18T13:09:13.9284673+02:00 0HLOBE1E1EHR8:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" in 43.9609ms (afa2e885)
+2019-07-18T13:09:14.0491496+02:00 0HLOBE1E1EHR8:00000002 [ERR] Connection id ""0HLOBE1E1EHR8"", Request id ""0HLOBE1E1EHR8:00000002"": An unhandled exception was thrown by the application. (560e7d32)
+System.InvalidOperationException: A circular dependency was detected for the service of type 'WeeeTrackerAPI.Core.Interfaces.IRaee'.
+WeeeTrackerAPI.Core.Interfaces.IRaee(WeeeTrackerAPI.Core.Services.RaeeService) -> WeeeTrackerAPI.Core.Interfaces.IEstado(WeeeTrackerAPI.Services.EstadoService) -> WeeeTrackerAPI.Core.Interfaces.IRaee
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteChain.CheckCircularDependency(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.CreateServiceAccessor(Type serviceType)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.IISIntegration.IISMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.Extensions.UsePathBaseMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2019-07-18T13:09:14.0685884+02:00 0HLOBE1E1EHR8:00000002 [INF] Request finished in 546.9877ms 500  (791a596a)
+2019-07-18T13:09:14.0838255+02:00  [INF] Connection id ""0HLOBE1E1EHR8"", Request id ""0HLOBE1E1EHR8:00000002"": the application completed without reading the entire request body. (54ac9468)
+2019-07-18T13:10:58.9353726+02:00 0HLOBE2EA7LI3:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-18T13:10:58.9880871+02:00 0HLOBE2EA7LI3:00000001 [INF] Request finished in 50.2773ms 200  (791a596a)
+2019-07-18T13:10:59.1337086+02:00 0HLOBE2EA7LI3:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/residuo application/json 38 (ca22a1cb)
+2019-07-18T13:10:59.2831455+02:00 0HLOBE2EA7LI3:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-18T13:10:59.5140520+02:00 0HLOBE2EA7LI3:00000002 [INF] Route matched with "{action = \"GetResiduo\", controller = \"Residuo\"}". Executing action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T13:10:59.5283368+02:00 0HLOBE2EA7LI3:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-18T13:10:59.5562699+02:00 0HLOBE2EA7LI3:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" in 32.3555ms (afa2e885)
+2019-07-18T13:10:59.6176104+02:00 0HLOBE2EA7LI3:00000002 [ERR] Connection id ""0HLOBE2EA7LI3"", Request id ""0HLOBE2EA7LI3:00000002"": An unhandled exception was thrown by the application. (560e7d32)
+System.InvalidOperationException: A circular dependency was detected for the service of type 'WeeeTrackerAPI.Core.Interfaces.IRaee'.
+WeeeTrackerAPI.Core.Interfaces.IRaee(WeeeTrackerAPI.Core.Services.RaeeService) -> WeeeTrackerAPI.Core.Interfaces.IEstado(WeeeTrackerAPI.Services.EstadoService) -> WeeeTrackerAPI.Core.Interfaces.IRaee
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteChain.CheckCircularDependency(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.CreateServiceAccessor(Type serviceType)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.IISIntegration.IISMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.Extensions.UsePathBaseMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2019-07-18T13:10:59.6278287+02:00 0HLOBE2EA7LI3:00000002 [INF] Request finished in 492.7651ms 500  (791a596a)
+2019-07-18T13:10:59.6488971+02:00  [INF] Connection id ""0HLOBE2EA7LI3"", Request id ""0HLOBE2EA7LI3:00000002"": the application completed without reading the entire request body. (54ac9468)
+2019-07-18T13:11:53.1535093+02:00 0HLOBE2UFA6OI:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-18T13:11:53.1936553+02:00 0HLOBE2UFA6OI:00000001 [INF] Request finished in 43.173ms 200  (791a596a)
+2019-07-18T13:12:01.4626716+02:00 0HLOBE2UFA6OI:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/residuo application/json 38 (ca22a1cb)
+2019-07-18T13:12:01.6023067+02:00 0HLOBE2UFA6OI:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-18T13:12:01.8208592+02:00 0HLOBE2UFA6OI:00000002 [INF] Route matched with "{action = \"GetResiduo\", controller = \"Residuo\"}". Executing action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T13:12:01.8354518+02:00 0HLOBE2UFA6OI:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-18T13:12:17.7071052+02:00 0HLOBE2UFA6OI:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Residuo"]) - Validation state: Valid (4e3479ed)
+2019-07-18T13:12:19.1270378+02:00 0HLOBE2UFA6OI:00000002 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-18T13:12:19.1772593+02:00 0HLOBE2UFA6OI:00000002 [WRN] The Include operation for navigation '"[r].SidEstadoRaeeNavigation"' is unnecessary and was ignored because the navigation is not reachable in the final query results. See https://go.microsoft.com/fwlink/?linkid=850303 for more information. (10efaee6)
+2019-07-18T13:12:19.7443743+02:00 0HLOBE2UFA6OI:00000002 [INF] Executed DbCommand ("120"ms) [Parameters=["@__idRaee_0='?' (Size = 50)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [r].[pidRAEE], [r].[sidResiduoEspecifico], [r].[sidMarca], [r].[serie], [r].[destino], [r].[canibalizado], [r].[sidEstadoRAEE], [r.SidEstadoRaeeNavigation].[nombre]
+FROM [RAEEs] AS [r]
+INNER JOIN [EstadosRAEE] AS [r.SidEstadoRaeeNavigation] ON [r].[sidEstadoRAEE] = [r.SidEstadoRaeeNavigation].[pidEstadoRAEE]
+WHERE ([r].[pidRAEE] = @__idRaee_0) AND ([r].[sidEstadoRAEE] = [r].[sidEstadoRAEE])" (0723d8ff)
+2019-07-18T13:12:19.7730270+02:00 0HLOBE2UFA6OI:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 2056.2227ms. (50a9e262)
+2019-07-18T13:12:19.7851773+02:00 0HLOBE2UFA6OI:00000002 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[<>f__AnonymousType49`8[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Boolean, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-07-18T13:12:19.8093301+02:00 0HLOBE2UFA6OI:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" in 17978.6222ms (afa2e885)
+2019-07-18T13:12:19.8210453+02:00 0HLOBE2UFA6OI:00000002 [INF] Request finished in 18357.0952ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-18T13:12:58.4817608+02:00 0HLOBE3HUBDHQ:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-18T13:12:58.5267787+02:00 0HLOBE3HUBDHQ:00000001 [INF] Request finished in 48.6474ms 200  (791a596a)
+2019-07-18T13:13:01.5619349+02:00 0HLOBE3HUBDHQ:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/residuo application/json 38 (ca22a1cb)
+2019-07-18T13:13:01.7035161+02:00 0HLOBE3HUBDHQ:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-18T13:13:01.9425702+02:00 0HLOBE3HUBDHQ:00000002 [INF] Route matched with "{action = \"GetResiduo\", controller = \"Residuo\"}". Executing action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T13:13:01.9564881+02:00 0HLOBE3HUBDHQ:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-18T13:13:04.6280274+02:00 0HLOBE3HUBDHQ:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Residuo"]) - Validation state: Valid (4e3479ed)
+2019-07-18T13:13:05.9863099+02:00 0HLOBE3HUBDHQ:00000002 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-18T13:13:06.0468335+02:00 0HLOBE3HUBDHQ:00000002 [WRN] The Include operation for navigation '"[r].SidEstadoRaeeNavigation"' is unnecessary and was ignored because the navigation is not reachable in the final query results. See https://go.microsoft.com/fwlink/?linkid=850303 for more information. (10efaee6)
+2019-07-18T13:13:06.3017756+02:00 0HLOBE3HUBDHQ:00000002 [INF] Executed DbCommand ("50"ms) [Parameters=["@__idRaee_0='?' (Size = 50)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [r].[pidRAEE], [r].[sidResiduoEspecifico], [r].[sidMarca], [r].[serie], [r].[destino], [r].[canibalizado], [r].[sidEstadoRAEE], [r.SidEstadoRaeeNavigation].[nombre]
+FROM [RAEEs] AS [r]
+INNER JOIN [EstadosRAEE] AS [r.SidEstadoRaeeNavigation] ON [r].[sidEstadoRAEE] = [r.SidEstadoRaeeNavigation].[pidEstadoRAEE]
+WHERE ([r].[pidRAEE] = @__idRaee_0) AND ([r].[sidEstadoRAEE] = [r].[sidEstadoRAEE])" (0723d8ff)
+2019-07-18T13:13:06.3237631+02:00 0HLOBE3HUBDHQ:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1688.6656ms. (50a9e262)
+2019-07-18T13:13:06.3347234+02:00 0HLOBE3HUBDHQ:00000002 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[<>f__AnonymousType49`8[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Boolean, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-07-18T13:13:06.3562848+02:00 0HLOBE3HUBDHQ:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" in 4405.1897ms (afa2e885)
+2019-07-18T13:13:06.3652568+02:00 0HLOBE3HUBDHQ:00000002 [INF] Request finished in 4804.3543ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-18T13:17:38.2665984+02:00 0HLOBE65AHP9P:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-18T13:17:38.3079021+02:00 0HLOBE65AHP9P:00000001 [INF] Request finished in 44.5656ms 200  (791a596a)
+2019-07-18T13:17:41.7320969+02:00 0HLOBE65AHP9P:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/residuo application/json 38 (ca22a1cb)
+2019-07-18T13:17:41.8821257+02:00 0HLOBE65AHP9P:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-18T13:17:42.0992686+02:00 0HLOBE65AHP9P:00000002 [INF] Route matched with "{action = \"GetResiduo\", controller = \"Residuo\"}". Executing action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T13:17:42.1208756+02:00 0HLOBE65AHP9P:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-18T13:17:42.1441188+02:00 0HLOBE65AHP9P:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" in 38.3385ms (afa2e885)
+2019-07-18T13:17:42.1997488+02:00 0HLOBE65AHP9P:00000002 [ERR] Connection id ""0HLOBE65AHP9P"", Request id ""0HLOBE65AHP9P:00000002"": An unhandled exception was thrown by the application. (560e7d32)
+System.InvalidOperationException: A circular dependency was detected for the service of type 'WeeeTrackerAPI.Core.Interfaces.IRaee'.
+WeeeTrackerAPI.Core.Interfaces.IRaee(WeeeTrackerAPI.Core.Services.RaeeService) -> WeeeTrackerAPI.Core.Interfaces.IEstado(WeeeTrackerAPI.Services.EstadoService) -> WeeeTrackerAPI.Core.Interfaces.IRaee
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteChain.CheckCircularDependency(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.CreateServiceAccessor(Type serviceType)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.IISIntegration.IISMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.Extensions.UsePathBaseMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2019-07-18T13:17:42.2093977+02:00 0HLOBE65AHP9P:00000002 [INF] Request finished in 477.0325ms 500  (791a596a)
+2019-07-18T13:17:42.2280191+02:00  [INF] Connection id ""0HLOBE65AHP9P"", Request id ""0HLOBE65AHP9P:00000002"": the application completed without reading the entire request body. (54ac9468)
+2019-07-18T13:17:55.7317425+02:00 0HLOBE65AHP9P:00000003 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/residuo application/json 38 (ca22a1cb)
+2019-07-18T13:17:55.7394704+02:00 0HLOBE65AHP9P:00000003 [INF] Successfully validated the token. (60169667)
+2019-07-18T13:17:55.7444658+02:00 0HLOBE65AHP9P:00000003 [INF] Route matched with "{action = \"GetResiduo\", controller = \"Residuo\"}". Executing action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T13:17:55.7504265+02:00 0HLOBE65AHP9P:00000003 [INF] Authorization was successful. (0d575a54)
+2019-07-18T13:17:55.7565063+02:00 0HLOBE65AHP9P:00000003 [INF] Executed action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" in 7.4405ms (afa2e885)
+2019-07-18T13:17:55.7729529+02:00 0HLOBE65AHP9P:00000003 [ERR] Connection id ""0HLOBE65AHP9P"", Request id ""0HLOBE65AHP9P:00000003"": An unhandled exception was thrown by the application. (560e7d32)
+System.InvalidOperationException: A circular dependency was detected for the service of type 'WeeeTrackerAPI.Core.Interfaces.IRaee'.
+WeeeTrackerAPI.Core.Interfaces.IRaee(WeeeTrackerAPI.Core.Services.RaeeService) -> WeeeTrackerAPI.Core.Interfaces.IEstado(WeeeTrackerAPI.Services.EstadoService) -> WeeeTrackerAPI.Core.Interfaces.IRaee
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteChain.CheckCircularDependency(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.CreateServiceAccessor(Type serviceType)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.IISIntegration.IISMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.Extensions.UsePathBaseMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2019-07-18T13:17:55.7803035+02:00 0HLOBE65AHP9P:00000003 [INF] Request finished in 46.5732ms 500  (791a596a)
+2019-07-18T13:17:55.7887612+02:00  [INF] Connection id ""0HLOBE65AHP9P"", Request id ""0HLOBE65AHP9P:00000003"": the application completed without reading the entire request body. (54ac9468)
+2019-07-18T13:18:12.3563078+02:00 0HLOBE6FFHNTN:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-18T13:18:12.4003358+02:00 0HLOBE6FFHNTN:00000001 [INF] Request finished in 48.8067ms 200  (791a596a)
+2019-07-18T13:19:39.3313318+02:00 0HLOBE79D0S2J:00000001 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/residuo application/json 38 (ca22a1cb)
+2019-07-18T13:19:39.3313466+02:00 0HLOBE79D0S2K:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-18T13:19:39.3751374+02:00 0HLOBE79D0S2K:00000001 [INF] Request finished in 52.0875ms 200  (791a596a)
+2019-07-18T13:19:39.4961778+02:00 0HLOBE79D0S2J:00000001 [INF] Successfully validated the token. (60169667)
+2019-07-18T13:19:39.7489572+02:00 0HLOBE79D0S2J:00000001 [INF] Route matched with "{action = \"GetResiduo\", controller = \"Residuo\"}". Executing action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T13:19:39.7628972+02:00 0HLOBE79D0S2J:00000001 [INF] Authorization was successful. (0d575a54)
+2019-07-18T13:19:39.7883117+02:00 0HLOBE79D0S2J:00000001 [INF] Executed action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" in 31.8828ms (afa2e885)
+2019-07-18T13:19:39.8386944+02:00 0HLOBE79D0S2J:00000001 [ERR] Connection id ""0HLOBE79D0S2J"", Request id ""0HLOBE79D0S2J:00000001"": An unhandled exception was thrown by the application. (560e7d32)
+System.InvalidOperationException: A circular dependency was detected for the service of type 'WeeeTrackerAPI.Core.Interfaces.IRaee'.
+WeeeTrackerAPI.Core.Interfaces.IRaee(WeeeTrackerAPI.Core.Services.RaeeService) -> WeeeTrackerAPI.Core.Interfaces.IEstado(WeeeTrackerAPI.Services.EstadoService) -> WeeeTrackerAPI.Core.Interfaces.IRaee
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteChain.CheckCircularDependency(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.CreateServiceAccessor(Type serviceType)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.IISIntegration.IISMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.Extensions.UsePathBaseMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2019-07-18T13:19:39.8477488+02:00 0HLOBE79D0S2J:00000001 [INF] Request finished in 519.0791ms 500  (791a596a)
+2019-07-18T13:19:39.8697876+02:00  [INF] Connection id ""0HLOBE79D0S2J"", Request id ""0HLOBE79D0S2J:00000001"": the application completed without reading the entire request body. (54ac9468)
+2019-07-18T13:19:43.4456053+02:00 0HLOBE79D0S2K:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/residuo application/json 38 (ca22a1cb)
+2019-07-18T13:19:43.4532318+02:00 0HLOBE79D0S2K:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-18T13:19:43.4578995+02:00 0HLOBE79D0S2K:00000002 [INF] Route matched with "{action = \"GetResiduo\", controller = \"Residuo\"}". Executing action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T13:19:43.4632692+02:00 0HLOBE79D0S2K:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-18T13:19:43.4736714+02:00 0HLOBE79D0S2K:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" in 7.3261ms (afa2e885)
+2019-07-18T13:19:43.5036394+02:00 0HLOBE79D0S2K:00000002 [ERR] Connection id ""0HLOBE79D0S2K"", Request id ""0HLOBE79D0S2K:00000002"": An unhandled exception was thrown by the application. (560e7d32)
+System.InvalidOperationException: A circular dependency was detected for the service of type 'WeeeTrackerAPI.Core.Interfaces.IRaee'.
+WeeeTrackerAPI.Core.Interfaces.IRaee(WeeeTrackerAPI.Core.Services.RaeeService) -> WeeeTrackerAPI.Core.Interfaces.IEstado(WeeeTrackerAPI.Services.EstadoService) -> WeeeTrackerAPI.Core.Interfaces.IRaee
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteChain.CheckCircularDependency(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.CreateServiceAccessor(Type serviceType)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.IISIntegration.IISMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.Extensions.UsePathBaseMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2019-07-18T13:19:43.5134925+02:00 0HLOBE79D0S2K:00000002 [INF] Request finished in 67.7535ms 500  (791a596a)
+2019-07-18T13:19:43.5238930+02:00  [INF] Connection id ""0HLOBE79D0S2K"", Request id ""0HLOBE79D0S2K:00000002"": the application completed without reading the entire request body. (54ac9468)
+2019-07-18T13:20:47.9874676+02:00 0HLOBE7TRU919:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-18T13:20:48.0327831+02:00 0HLOBE7TRU919:00000001 [INF] Request finished in 47.3099ms 200  (791a596a)
+2019-07-18T13:20:52.1936139+02:00 0HLOBE7TRU919:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/residuo application/json 38 (ca22a1cb)
+2019-07-18T13:20:52.3214775+02:00 0HLOBE7TRU919:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-18T13:20:52.5322249+02:00 0HLOBE7TRU919:00000002 [INF] Route matched with "{action = \"GetResiduo\", controller = \"Residuo\"}". Executing action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T13:20:52.5463044+02:00 0HLOBE7TRU919:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-18T13:21:22.8085716+02:00 0HLOBE7TRU919:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Residuo"]) - Validation state: Valid (4e3479ed)
+2019-07-18T13:21:24.1771764+02:00 0HLOBE7TRU919:00000002 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-18T13:21:24.2251600+02:00 0HLOBE7TRU919:00000002 [WRN] The Include operation for navigation '"[r].SidEstadoRaeeNavigation"' is unnecessary and was ignored because the navigation is not reachable in the final query results. See https://go.microsoft.com/fwlink/?linkid=850303 for more information. (10efaee6)
+2019-07-18T13:21:24.4124879+02:00 0HLOBE7TRU919:00000002 [INF] Executed DbCommand ("35"ms) [Parameters=["@__idRaee_0='?' (Size = 50)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [r].[pidRAEE], [r].[sidResiduoEspecifico], [r].[sidMarca], [r].[serie], [r].[destino], [r].[canibalizado], [r].[sidEstadoRAEE], [r.SidEstadoRaeeNavigation].[nombre]
+FROM [RAEEs] AS [r]
+INNER JOIN [EstadosRAEE] AS [r.SidEstadoRaeeNavigation] ON [r].[sidEstadoRAEE] = [r.SidEstadoRaeeNavigation].[pidEstadoRAEE]
+WHERE ([r].[pidRAEE] = @__idRaee_0) AND ([r].[sidEstadoRAEE] = [r].[sidEstadoRAEE])" (0723d8ff)
+2019-07-18T13:21:24.4339458+02:00 0HLOBE7TRU919:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1619.1069ms. (50a9e262)
+2019-07-18T13:21:24.4447883+02:00 0HLOBE7TRU919:00000002 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[<>f__AnonymousType49`8[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Boolean, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-07-18T13:21:24.4659436+02:00 0HLOBE7TRU919:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" in 31926.4232ms (afa2e885)
+2019-07-18T13:21:24.4742005+02:00 0HLOBE7TRU919:00000002 [INF] Request finished in 32281.0376ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-18T13:24:37.8789957+02:00 0HLOBEA2C9V5C:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-18T13:24:37.9354176+02:00 0HLOBEA2C9V5C:00000001 [INF] Request finished in 48.8289ms 200  (791a596a)
+2019-07-18T13:24:40.5619525+02:00 0HLOBEA2C9V5C:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/residuo application/json 38 (ca22a1cb)
+2019-07-18T13:24:40.6973238+02:00 0HLOBEA2C9V5C:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-18T13:24:40.9093136+02:00 0HLOBEA2C9V5C:00000002 [INF] Route matched with "{action = \"GetResiduo\", controller = \"Residuo\"}". Executing action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T13:24:40.9231171+02:00 0HLOBEA2C9V5C:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-18T13:24:50.6382549+02:00 0HLOBEA2C9V5C:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Residuo"]) - Validation state: Valid (4e3479ed)
+2019-07-18T13:24:52.0160406+02:00 0HLOBEA2C9V5C:00000002 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-18T13:24:52.0712303+02:00 0HLOBEA2C9V5C:00000002 [WRN] The Include operation for navigation '"[r].SidEstadoRaeeNavigation"' is unnecessary and was ignored because the navigation is not reachable in the final query results. See https://go.microsoft.com/fwlink/?linkid=850303 for more information. (10efaee6)
+2019-07-18T13:24:52.2960286+02:00 0HLOBEA2C9V5C:00000002 [INF] Executed DbCommand ("41"ms) [Parameters=["@__idRaee_0='?' (Size = 50)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [r].[pidRAEE], [r].[sidResiduoEspecifico], [r].[sidMarca], [r].[serie], [r].[destino], [r].[canibalizado], [r].[sidEstadoRAEE], [r.SidEstadoRaeeNavigation].[nombre]
+FROM [RAEEs] AS [r]
+INNER JOIN [EstadosRAEE] AS [r.SidEstadoRaeeNavigation] ON [r].[sidEstadoRAEE] = [r.SidEstadoRaeeNavigation].[pidEstadoRAEE]
+WHERE ([r].[pidRAEE] = @__idRaee_0) AND ([r].[sidEstadoRAEE] = [r].[sidEstadoRAEE])" (0723d8ff)
+2019-07-18T13:24:52.3200199+02:00 0HLOBEA2C9V5C:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1674.0235ms. (50a9e262)
+2019-07-18T13:24:52.3318681+02:00 0HLOBEA2C9V5C:00000002 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[<>f__AnonymousType49`8[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Boolean, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-07-18T13:24:52.3563536+02:00 0HLOBEA2C9V5C:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" in 11438.2251ms (afa2e885)
+2019-07-18T13:24:52.3654036+02:00 0HLOBEA2C9V5C:00000002 [INF] Request finished in 11803.8179ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-18T14:50:42.5318457+02:00 0HLOBFQ5I7EQ4:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-18T14:50:42.5845567+02:00 0HLOBFQ5I7EQ4:00000001 [INF] Request finished in 55.8421ms 200  (791a596a)
+2019-07-18T14:50:51.6242362+02:00 0HLOBFQ5I7EQ4:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/residuo application/json 38 (ca22a1cb)
+2019-07-18T14:50:51.8125056+02:00 0HLOBFQ5I7EQ4:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-18T14:50:52.1413566+02:00 0HLOBFQ5I7EQ4:00000002 [INF] Route matched with "{action = \"GetResiduo\", controller = \"Residuo\"}". Executing action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T14:50:52.1601158+02:00 0HLOBFQ5I7EQ4:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-18T14:50:52.6025080+02:00 0HLOBFQ5I7EQ4:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Residuo"]) - Validation state: Valid (4e3479ed)
+2019-07-18T14:50:54.1160183+02:00 0HLOBFQ5I7EQ4:00000002 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-18T14:50:54.1686826+02:00 0HLOBFQ5I7EQ4:00000002 [WRN] The Include operation for navigation '"[r].SidEstadoRaeeNavigation"' is unnecessary and was ignored because the navigation is not reachable in the final query results. See https://go.microsoft.com/fwlink/?linkid=850303 for more information. (10efaee6)
+2019-07-18T14:50:54.4798025+02:00 0HLOBFQ5I7EQ4:00000002 [INF] Executed DbCommand ("49"ms) [Parameters=["@__idRaee_0='?' (Size = 50)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [r].[pidRAEE], [r].[sidResiduoEspecifico], [r].[sidMarca], [r].[serie], [r].[destino], [r].[canibalizado], [r].[sidEstadoRAEE], [r.SidEstadoRaeeNavigation].[nombre]
+FROM [RAEEs] AS [r]
+INNER JOIN [EstadosRAEE] AS [r.SidEstadoRaeeNavigation] ON [r].[sidEstadoRAEE] = [r.SidEstadoRaeeNavigation].[pidEstadoRAEE]
+WHERE ([r].[pidRAEE] = @__idRaee_0) AND ([r].[sidEstadoRAEE] = [r].[sidEstadoRAEE])" (0723d8ff)
+2019-07-18T14:50:54.5131782+02:00 0HLOBFQ5I7EQ4:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1902.2033ms. (50a9e262)
+2019-07-18T14:50:54.5257096+02:00 0HLOBFQ5I7EQ4:00000002 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[<>f__AnonymousType49`8[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Boolean, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-07-18T14:50:54.5519651+02:00 0HLOBFQ5I7EQ4:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" in 2400.6585ms (afa2e885)
+2019-07-18T14:50:54.5628120+02:00 0HLOBFQ5I7EQ4:00000002 [INF] Request finished in 2936.8993ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-18T14:50:57.7327189+02:00 0HLOBFQ5I7EQ4:00000003 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/residuo application/json 38 (ca22a1cb)
+2019-07-18T14:50:57.7479156+02:00 0HLOBFQ5I7EQ4:00000003 [INF] Successfully validated the token. (60169667)
+2019-07-18T14:50:57.7538781+02:00 0HLOBFQ5I7EQ4:00000003 [INF] Route matched with "{action = \"GetResiduo\", controller = \"Residuo\"}". Executing action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T14:50:57.7595755+02:00 0HLOBFQ5I7EQ4:00000003 [INF] Authorization was successful. (0d575a54)
+2019-07-18T14:50:57.7907182+02:00 0HLOBFQ5I7EQ4:00000003 [INF] Executing action method "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Residuo"]) - Validation state: Valid (4e3479ed)
+2019-07-18T14:50:57.8169515+02:00 0HLOBFQ5I7EQ4:00000003 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-18T14:50:57.8686231+02:00 0HLOBFQ5I7EQ4:00000003 [INF] Executed DbCommand ("35"ms) [Parameters=["@__idRaee_0='?' (Size = 50)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [r].[pidRAEE], [r].[sidResiduoEspecifico], [r].[sidMarca], [r].[serie], [r].[destino], [r].[canibalizado], [r].[sidEstadoRAEE], [r.SidEstadoRaeeNavigation].[nombre]
+FROM [RAEEs] AS [r]
+INNER JOIN [EstadosRAEE] AS [r.SidEstadoRaeeNavigation] ON [r].[sidEstadoRAEE] = [r.SidEstadoRaeeNavigation].[pidEstadoRAEE]
+WHERE ([r].[pidRAEE] = @__idRaee_0) AND ([r].[sidEstadoRAEE] = [r].[sidEstadoRAEE])" (0723d8ff)
+2019-07-18T14:50:57.8776651+02:00 0HLOBFQ5I7EQ4:00000003 [INF] Executed action method "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 80.7191ms. (50a9e262)
+2019-07-18T14:50:57.8832919+02:00 0HLOBFQ5I7EQ4:00000003 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[<>f__AnonymousType49`8[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Boolean, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-07-18T14:50:57.8940820+02:00 0HLOBFQ5I7EQ4:00000003 [INF] Executed action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" in 131.0453ms (afa2e885)
+2019-07-18T14:50:57.9084368+02:00 0HLOBFQ5I7EQ4:00000003 [INF] Request finished in 174.0255ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-18T14:51:05.1891303+02:00 0HLOBFQ5I7EQ4:00000004 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/residuo application/json 38 (ca22a1cb)
+2019-07-18T14:51:05.1958647+02:00 0HLOBFQ5I7EQ4:00000004 [INF] Successfully validated the token. (60169667)
+2019-07-18T14:51:05.2024769+02:00 0HLOBFQ5I7EQ4:00000004 [INF] Route matched with "{action = \"GetResiduo\", controller = \"Residuo\"}". Executing action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T14:51:05.2071800+02:00 0HLOBFQ5I7EQ4:00000004 [INF] Authorization was successful. (0d575a54)
+2019-07-18T14:51:05.2349019+02:00 0HLOBFQ5I7EQ4:00000004 [INF] Executing action method "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Residuo"]) - Validation state: Valid (4e3479ed)
+2019-07-18T14:51:05.2446044+02:00 0HLOBFQ5I7EQ4:00000004 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-18T14:51:05.2988223+02:00 0HLOBFQ5I7EQ4:00000004 [INF] Executed DbCommand ("46"ms) [Parameters=["@__idRaee_0='?' (Size = 50)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [r].[pidRAEE], [r].[sidResiduoEspecifico], [r].[sidMarca], [r].[serie], [r].[destino], [r].[canibalizado], [r].[sidEstadoRAEE], [r.SidEstadoRaeeNavigation].[nombre]
+FROM [RAEEs] AS [r]
+INNER JOIN [EstadosRAEE] AS [r.SidEstadoRaeeNavigation] ON [r].[sidEstadoRAEE] = [r.SidEstadoRaeeNavigation].[pidEstadoRAEE]
+WHERE ([r].[pidRAEE] = @__idRaee_0) AND ([r].[sidEstadoRAEE] = [r].[sidEstadoRAEE])" (0723d8ff)
+2019-07-18T14:51:05.3101023+02:00 0HLOBFQ5I7EQ4:00000004 [INF] Executed action method "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 68.5739ms. (50a9e262)
+2019-07-18T14:51:05.3158071+02:00 0HLOBFQ5I7EQ4:00000004 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-18T14:51:05.3281168+02:00 0HLOBFQ5I7EQ4:00000004 [INF] Executed action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" in 118.899ms (afa2e885)
+2019-07-18T14:51:05.3355555+02:00 0HLOBFQ5I7EQ4:00000004 [INF] Request finished in 145.4718ms 404 application/json; charset=utf-8 (791a596a)
+2019-07-18T14:51:28.7907365+02:00 0HLOBFQ5I7EQ4:00000005 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/residuo/alta application/json 8735 (ca22a1cb)
+2019-07-18T14:51:28.9056481+02:00 0HLOBFQ5I7EQ4:00000005 [INF] Failed to validate the token. (616bef97)
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '07/18/2019 11:17:49', Current time: '07/18/2019 12:51:28'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2019-07-18T14:51:28.9125448+02:00 0HLOBFQ5I7EQ4:00000005 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '07/18/2019 11:17:49', Current time: '07/18/2019 12:51:28'." (48071232)
+2019-07-18T14:51:28.9213864+02:00 0HLOBFQ5I7EQ4:00000005 [INF] Route matched with "{action = \"AltaResiduo\", controller = \"Residuo\"}". Executing action "WeeeTrackerAPI.Controllers.ResiduoController.AltaResiduo (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T14:51:28.9259336+02:00 0HLOBFQ5I7EQ4:00000005 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '07/18/2019 11:17:49', Current time: '07/18/2019 12:51:28'." (48071232)
+2019-07-18T14:51:28.9305171+02:00 0HLOBFQ5I7EQ4:00000005 [INF] Authorization failed. (b15dd539)
+2019-07-18T14:51:28.9385004+02:00 0HLOBFQ5I7EQ4:00000005 [INF] Authorization failed for the request at filter '"Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter"'. (8b6446cb)
+2019-07-18T14:51:28.9470991+02:00 0HLOBFQ5I7EQ4:00000005 [INF] Executing ChallengeResult with authentication schemes (["Bearer"]). (f3dca807)
+2019-07-18T14:51:28.9630377+02:00 0HLOBFQ5I7EQ4:00000005 [INF] AuthenticationScheme: "Bearer" was challenged. (d45f1f38)
+2019-07-18T14:51:28.9666558+02:00 0HLOBFQ5I7EQ4:00000005 [INF] Executed action "WeeeTrackerAPI.Controllers.ResiduoController.AltaResiduo (WeeeTrackerAPI)" in 41.6176ms (afa2e885)
+2019-07-18T14:51:28.9764749+02:00 0HLOBFQ5I7EQ4:00000005 [INF] Request finished in 189.0322ms 401  (791a596a)
+2019-07-18T14:51:28.9970721+02:00  [INF] Connection id ""0HLOBFQ5I7EQ4"", Request id ""0HLOBFQ5I7EQ4:00000005"": the application completed without reading the entire request body. (54ac9468)
+2019-07-18T14:51:49.3756998+02:00 0HLOBFQ5I7EQ4:00000006 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/residuo/alta application/json 8735 (ca22a1cb)
+2019-07-18T14:51:49.3822522+02:00 0HLOBFQ5I7EQ4:00000006 [INF] Successfully validated the token. (60169667)
+2019-07-18T14:51:49.3882080+02:00 0HLOBFQ5I7EQ4:00000006 [INF] Route matched with "{action = \"AltaResiduo\", controller = \"Residuo\"}". Executing action "WeeeTrackerAPI.Controllers.ResiduoController.AltaResiduo (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T14:51:49.3927290+02:00 0HLOBFQ5I7EQ4:00000006 [INF] Authorization was successful. (0d575a54)
+2019-07-18T14:51:49.4318969+02:00 0HLOBFQ5I7EQ4:00000006 [INF] Executing action method "WeeeTrackerAPI.Controllers.ResiduoController.AltaResiduo (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Residuo"]) - Validation state: Valid (4e3479ed)
+2019-07-18T14:51:49.4446304+02:00 0HLOBFQ5I7EQ4:00000006 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-18T14:51:49.5104298+02:00 0HLOBFQ5I7EQ4:00000006 [INF] Executed DbCommand ("33"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-18T14:51:50.0250528+02:00 0HLOBFQ5I7EQ4:00000006 [INF] Executed DbCommand ("327"ms) [Parameters=["@p0='?' (Size = 50), @p1='?' (DbType = Boolean), @p2='?' (Size = 15), @p3='?' (DbType = Int32), @p4='?', @p5='?', @p6='?', @p7='?' (DbType = Single), @p8='?', @p9='?' (Size = 50), @p10='?' (DbType = Int32), @p11='?' (DbType = Int32), @p12='?' (DbType = Int32), @p13='?' (DbType = Int32), @p14='?' (DbType = Int32), @p15='?' (DbType = Int32), @p16='?' (DbType = Int32), @p17='?' (DbType = Int32), @p18='?' (DbType = Int32), @p19='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [RAEEs] ([pidRAEE], [canibalizado], [codigoRefTercero], [destino], [DiasVida], [DistanciaHastaTratamiento], [DistanciaHastaTratamientoTramos], [pesoEstimado], [pesoReal], [serie], [sidCertificadoTratamiento], [sidEstadoRAEE], [sidFraccion], [sidMarca], [sidPaisCodigoRAEE], [sidResiduo], [sidResiduoEspecifico], [sidSIG], [sidTipoContenedor], [sidTipoEtiqueta])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19);
+SELECT [estado], [rowguid]
+FROM [RAEEs]
+WHERE @@ROWCOUNT = 1 AND [pidRAEE] = @p0;" (0723d8ff)
+2019-07-18T14:51:50.2189862+02:00 0HLOBFQ5I7EQ4:00000006 [INF] Executed DbCommand ("63"ms) [Parameters=["@p0='?' (Size = 100) (DbType = AnsiString), @p1='?' (DbType = DateTime), @p2='?' (DbType = Double), @p3='?' (DbType = Double), @p4='?', @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (Size = 50), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [WTK_CAMBIO_ESTADO] ([Albaran], [fecha], [gpsX], [gpsY], [gpsZ], [sidDireccionTercero], [sidEstado], [sidRAEE], [sidTercero], [sidUsuario])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+SELECT [Id]
+FROM [WTK_CAMBIO_ESTADO]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2019-07-18T14:51:50.2805400+02:00 0HLOBFQ5I7EQ4:00000006 [INF] Executed DbCommand ("26"ms) [Parameters=["@p0='?' (Size = 255) (DbType = AnsiString), @p1='?' (Size = 4000), @p2='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [WTK_CAMBIO_ESTADO_FIRMA] ([firma], [Nombre], [sidCambioEstado])
+VALUES (@p0, @p1, @p2);
+SELECT [Id]
+FROM [WTK_CAMBIO_ESTADO_FIRMA]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2019-07-18T14:51:50.5243472+02:00 0HLOBFQ5I7EQ4:00000006 [ERR] The process cannot access the file 'D:\PROYECTOS\ECOLEC\ecolec_weeetracker_appgestionback\WeeeTrackerAPI\Files\FIRMAS\WTK_SIG_132079279102340816.png' because it is being used by another process. (bdf19a6d)
+2019-07-18T14:51:50.5283584+02:00 0HLOBFQ5I7EQ4:00000006 [INF] Executed action method "WeeeTrackerAPI.Controllers.ResiduoController.AltaResiduo (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.BadRequestObjectResult" in 1092.9002ms. (50a9e262)
+2019-07-18T14:51:50.5322513+02:00 0HLOBFQ5I7EQ4:00000006 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType3`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-18T14:51:50.5397868+02:00 0HLOBFQ5I7EQ4:00000006 [INF] Executed action "WeeeTrackerAPI.Controllers.ResiduoController.AltaResiduo (WeeeTrackerAPI)" in 1145.5787ms (afa2e885)
+2019-07-18T14:51:50.5456868+02:00 0HLOBFQ5I7EQ4:00000006 [INF] Request finished in 1173.0743ms 400 application/json; charset=utf-8 (791a596a)
+2019-07-18T14:52:01.4112537+02:00 0HLOBFQ5I7EQ4:00000007 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/residuo/alta application/json 8735 (ca22a1cb)
+2019-07-18T14:52:01.4205328+02:00 0HLOBFQ5I7EQ4:00000007 [INF] Successfully validated the token. (60169667)
+2019-07-18T14:52:01.4259475+02:00 0HLOBFQ5I7EQ4:00000007 [INF] Route matched with "{action = \"AltaResiduo\", controller = \"Residuo\"}". Executing action "WeeeTrackerAPI.Controllers.ResiduoController.AltaResiduo (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T14:52:01.4324477+02:00 0HLOBFQ5I7EQ4:00000007 [INF] Authorization was successful. (0d575a54)
+2019-07-18T14:52:01.4807446+02:00 0HLOBFQ5I7EQ4:00000007 [INF] Executing action method "WeeeTrackerAPI.Controllers.ResiduoController.AltaResiduo (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Residuo"]) - Validation state: Valid (4e3479ed)
+2019-07-18T14:52:01.4903851+02:00 0HLOBFQ5I7EQ4:00000007 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-18T14:52:04.4311597+02:00 0HLOBFQ5I7EQ4:00000007 [INF] Executed DbCommand ("26"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-18T14:52:04.4960045+02:00 0HLOBFQ5I7EQ4:00000007 [INF] Executed DbCommand ("27"ms) [Parameters=["@p0='?' (Size = 50), @p1='?' (DbType = Boolean), @p2='?' (Size = 15), @p3='?' (DbType = Int32), @p4='?', @p5='?', @p6='?', @p7='?' (DbType = Single), @p8='?', @p9='?' (Size = 50), @p10='?' (DbType = Int32), @p11='?' (DbType = Int32), @p12='?' (DbType = Int32), @p13='?' (DbType = Int32), @p14='?' (DbType = Int32), @p15='?' (DbType = Int32), @p16='?' (DbType = Int32), @p17='?' (DbType = Int32), @p18='?' (DbType = Int32), @p19='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [RAEEs] ([pidRAEE], [canibalizado], [codigoRefTercero], [destino], [DiasVida], [DistanciaHastaTratamiento], [DistanciaHastaTratamientoTramos], [pesoEstimado], [pesoReal], [serie], [sidCertificadoTratamiento], [sidEstadoRAEE], [sidFraccion], [sidMarca], [sidPaisCodigoRAEE], [sidResiduo], [sidResiduoEspecifico], [sidSIG], [sidTipoContenedor], [sidTipoEtiqueta])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19);
+SELECT [estado], [rowguid]
+FROM [RAEEs]
+WHERE @@ROWCOUNT = 1 AND [pidRAEE] = @p0;" (0723d8ff)
+2019-07-18T14:52:06.1648296+02:00 0HLOBFQ5I7EQ4:00000007 [INF] Executed DbCommand ("23"ms) [Parameters=["@p0='?' (Size = 100) (DbType = AnsiString), @p1='?' (DbType = DateTime), @p2='?' (DbType = Double), @p3='?' (DbType = Double), @p4='?', @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (Size = 50), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [WTK_CAMBIO_ESTADO] ([Albaran], [fecha], [gpsX], [gpsY], [gpsZ], [sidDireccionTercero], [sidEstado], [sidRAEE], [sidTercero], [sidUsuario])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+SELECT [Id]
+FROM [WTK_CAMBIO_ESTADO]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2019-07-18T14:52:28.7816052+02:00 0HLOBFQ5I7EQ4:00000007 [INF] Executed DbCommand ("20"ms) [Parameters=["@p0='?' (Size = 255) (DbType = AnsiString), @p1='?' (Size = 4000), @p2='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [WTK_CAMBIO_ESTADO_FIRMA] ([firma], [Nombre], [sidCambioEstado])
+VALUES (@p0, @p1, @p2);
+SELECT [Id]
+FROM [WTK_CAMBIO_ESTADO_FIRMA]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2019-07-18T14:53:00.0961288+02:00 0HLOBFQ5I7EQ4:00000007 [ERR] The process cannot access the file 'D:\PROYECTOS\ECOLEC\ecolec_weeetracker_appgestionback\WeeeTrackerAPI\Files\FIRMAS\WTK_SIG_132079279479692465.png' because it is being used by another process. (4e13a3d2)
+2019-07-18T14:53:00.1001156+02:00 0HLOBFQ5I7EQ4:00000007 [INF] Executed action method "WeeeTrackerAPI.Controllers.ResiduoController.AltaResiduo (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.BadRequestObjectResult" in 58615.4068ms. (50a9e262)
+2019-07-18T14:53:00.1057248+02:00 0HLOBFQ5I7EQ4:00000007 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType3`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-18T14:53:00.1106690+02:00 0HLOBFQ5I7EQ4:00000007 [INF] Executed action "WeeeTrackerAPI.Controllers.ResiduoController.AltaResiduo (WeeeTrackerAPI)" in 58679.9661ms (afa2e885)
+2019-07-18T14:53:00.1173739+02:00 0HLOBFQ5I7EQ4:00000007 [INF] Request finished in 58709.735ms 400 application/json; charset=utf-8 (791a596a)
+2019-07-18T14:54:37.1138229+02:00 0HLOBFSBFEPHU:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-18T14:54:37.1540485+02:00 0HLOBFSBFEPHU:00000001 [INF] Request finished in 43.2617ms 200  (791a596a)
+2019-07-18T14:54:44.2930977+02:00 0HLOBFSBFEPHU:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/residuo/alta application/json 8735 (ca22a1cb)
+2019-07-18T14:54:44.4615515+02:00 0HLOBFSBFEPHU:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-18T14:54:44.6839064+02:00 0HLOBFSBFEPHU:00000002 [INF] Route matched with "{action = \"AltaResiduo\", controller = \"Residuo\"}". Executing action "WeeeTrackerAPI.Controllers.ResiduoController.AltaResiduo (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T14:54:44.7014453+02:00 0HLOBFSBFEPHU:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-18T14:54:45.0378313+02:00 0HLOBFSBFEPHU:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.ResiduoController.AltaResiduo (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Residuo"]) - Validation state: Valid (4e3479ed)
+2019-07-18T14:54:46.2950421+02:00 0HLOBFSBFEPHU:00000002 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-18T14:54:52.7173241+02:00 0HLOBFSBFEPHU:00000002 [INF] Executed DbCommand ("125"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-18T14:54:52.9658775+02:00 0HLOBFSBFEPHU:00000002 [INF] Executed DbCommand ("78"ms) [Parameters=["@p0='?' (Size = 50), @p1='?' (DbType = Boolean), @p2='?' (Size = 15), @p3='?' (DbType = Int32), @p4='?', @p5='?', @p6='?', @p7='?' (DbType = Single), @p8='?', @p9='?' (Size = 50), @p10='?' (DbType = Int32), @p11='?' (DbType = Int32), @p12='?' (DbType = Int32), @p13='?' (DbType = Int32), @p14='?' (DbType = Int32), @p15='?' (DbType = Int32), @p16='?' (DbType = Int32), @p17='?' (DbType = Int32), @p18='?' (DbType = Int32), @p19='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [RAEEs] ([pidRAEE], [canibalizado], [codigoRefTercero], [destino], [DiasVida], [DistanciaHastaTratamiento], [DistanciaHastaTratamientoTramos], [pesoEstimado], [pesoReal], [serie], [sidCertificadoTratamiento], [sidEstadoRAEE], [sidFraccion], [sidMarca], [sidPaisCodigoRAEE], [sidResiduo], [sidResiduoEspecifico], [sidSIG], [sidTipoContenedor], [sidTipoEtiqueta])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19);
+SELECT [estado], [rowguid]
+FROM [RAEEs]
+WHERE @@ROWCOUNT = 1 AND [pidRAEE] = @p0;" (0723d8ff)
+2019-07-18T14:54:53.1452103+02:00 0HLOBFSBFEPHU:00000002 [INF] Executed DbCommand ("66"ms) [Parameters=["@p0='?' (Size = 100) (DbType = AnsiString), @p1='?' (DbType = DateTime), @p2='?' (DbType = Double), @p3='?' (DbType = Double), @p4='?', @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (Size = 50), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [WTK_CAMBIO_ESTADO] ([Albaran], [fecha], [gpsX], [gpsY], [gpsZ], [sidDireccionTercero], [sidEstado], [sidRAEE], [sidTercero], [sidUsuario])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+SELECT [Id]
+FROM [WTK_CAMBIO_ESTADO]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2019-07-18T14:54:53.2507000+02:00 0HLOBFSBFEPHU:00000002 [INF] Executed DbCommand ("75"ms) [Parameters=["@p0='?' (Size = 255) (DbType = AnsiString), @p1='?' (Size = 4000), @p2='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [WTK_CAMBIO_ESTADO_FIRMA] ([firma], [Nombre], [sidCambioEstado])
+VALUES (@p0, @p1, @p2);
+SELECT [Id]
+FROM [WTK_CAMBIO_ESTADO_FIRMA]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2019-07-18T14:55:21.6429572+02:00 0HLOBFSBFEPHU:00000002 [INF] Executed DbCommand ("49"ms) [Parameters=["@p0='?' (Size = 255) (DbType = AnsiString), @p1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [WTK_CAMBIO_ESTADO_FOTOGRAFIA] ([fichero], [sidCambioEstado])
+VALUES (@p0, @p1);
+SELECT [Id]
+FROM [WTK_CAMBIO_ESTADO_FOTOGRAFIA]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2019-07-18T14:55:25.3764649+02:00 0HLOBFSBFEPHU:00000002 [INF] Executed DbCommand ("31"ms) [Parameters=["@p0='?' (Size = 255) (DbType = AnsiString), @p1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [WTK_CAMBIO_ESTADO_FOTOGRAFIA] ([fichero], [sidCambioEstado])
+VALUES (@p0, @p1);
+SELECT [Id]
+FROM [WTK_CAMBIO_ESTADO_FOTOGRAFIA]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2019-07-18T14:55:31.1782377+02:00 0HLOBFSBFEPHU:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.ResiduoController.AltaResiduo (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 46133.0285ms. (50a9e262)
+2019-07-18T14:55:31.1893259+02:00 0HLOBFSBFEPHU:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-18T14:55:31.2067299+02:00 0HLOBFSBFEPHU:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.ResiduoController.AltaResiduo (WeeeTrackerAPI)" in 46513.0403ms (afa2e885)
+2019-07-18T14:55:31.2155984+02:00 0HLOBFSBFEPHU:00000002 [INF] Request finished in 46922.8278ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-18T14:56:27.0790780+02:00 0HLOBFSBFEPHU:00000003 [INF] Request starting HTTP/1.1 PUT http://localhost/WeeeTrackerAPI/estado/entrada application/json 6911 (ca22a1cb)
+2019-07-18T14:56:27.0950251+02:00 0HLOBFSBFEPHU:00000003 [INF] Successfully validated the token. (60169667)
+2019-07-18T14:56:27.1025009+02:00 0HLOBFSBFEPHU:00000003 [INF] Route matched with "{action = \"AltaEntrada\", controller = \"Estado\"}". Executing action "WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T14:56:27.1089681+02:00 0HLOBFSBFEPHU:00000003 [INF] Authorization was successful. (0d575a54)
+2019-07-18T14:56:27.1865577+02:00 0HLOBFSBFEPHU:00000003 [INF] Executing ObjectResult, writing value of type '"Microsoft.AspNetCore.Mvc.SerializableError"'. (8a1b66c8)
+2019-07-18T14:56:27.2041268+02:00 0HLOBFSBFEPHU:00000003 [INF] Executed action "WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada (WeeeTrackerAPI)" in 91.6042ms (afa2e885)
+2019-07-18T14:56:27.2121572+02:00 0HLOBFSBFEPHU:00000003 [INF] Request finished in 132.0392ms 400 application/json; charset=utf-8 (791a596a)
+2019-07-18T14:57:30.8507503+02:00 0HLOBFSBFEPHV:00000001 [INF] Request starting HTTP/1.1 PUT http://localhost/WeeeTrackerAPI/estado/entrada application/json 6915 (ca22a1cb)
+2019-07-18T14:57:30.8667480+02:00 0HLOBFSBFEPHV:00000001 [INF] Successfully validated the token. (60169667)
+2019-07-18T14:57:30.9117540+02:00 0HLOBFSBFEPHV:00000001 [INF] Route matched with "{action = \"AltaEntrada\", controller = \"Estado\"}". Executing action "WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T14:57:30.9175145+02:00 0HLOBFSBFEPHV:00000001 [INF] Authorization was successful. (0d575a54)
+2019-07-18T14:57:30.9537580+02:00 0HLOBFSBFEPHV:00000001 [INF] Executing action method "WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Residuo"]) - Validation state: Valid (4e3479ed)
+2019-07-18T14:57:30.9641800+02:00 0HLOBFSBFEPHV:00000001 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-18T14:57:32.1698017+02:00 0HLOBFSBFEPHV:00000001 [INF] Executed DbCommand ("22"ms) [Parameters=["@p0='?' (Size = 100) (DbType = AnsiString), @p1='?' (DbType = DateTime), @p2='?' (DbType = Double), @p3='?' (DbType = Double), @p4='?', @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (Size = 50), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [WTK_CAMBIO_ESTADO] ([Albaran], [fecha], [gpsX], [gpsY], [gpsZ], [sidDireccionTercero], [sidEstado], [sidRAEE], [sidTercero], [sidUsuario])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+SELECT [Id]
+FROM [WTK_CAMBIO_ESTADO]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2019-07-18T14:58:02.7504414+02:00 0HLOBFSBFEPHV:00000001 [INF] Executed action "WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada (WeeeTrackerAPI)" in 31833.2699ms (afa2e885)
+2019-07-18T14:58:02.8275715+02:00 0HLOBFSBFEPHV:00000001 [ERR] Connection id ""0HLOBFSBFEPHV"", Request id ""0HLOBFSBFEPHV:00000001"": An unhandled exception was thrown by the application. (560e7d32)
+System.Exception: Value cannot be null.
+Parameter name: logger
+   at WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada(Residuo residuo) in D:\PROYECTOS\ECOLEC\ecolec_weeetracker_appgestionback\WeeeTrackerAPI\Controllers\EstadoController.cs:line 96
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.IISIntegration.IISMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.Extensions.UsePathBaseMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2019-07-18T14:58:02.8338270+02:00 0HLOBFSBFEPHV:00000001 [INF] Request finished in 31982.1357ms 500  (791a596a)
+2019-07-18T14:58:10.7177502+02:00 0HLOBFSBFEPHV:00000002 [INF] Request starting HTTP/1.1 PUT http://localhost/WeeeTrackerAPI/estado/entrada application/json 6915 (ca22a1cb)
+2019-07-18T14:58:10.7269657+02:00 0HLOBFSBFEPHV:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-18T14:58:10.7327661+02:00 0HLOBFSBFEPHV:00000002 [INF] Route matched with "{action = \"AltaEntrada\", controller = \"Estado\"}". Executing action "WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T14:58:10.7388600+02:00 0HLOBFSBFEPHV:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-18T14:58:10.7726890+02:00 0HLOBFSBFEPHV:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Residuo"]) - Validation state: Valid (4e3479ed)
+2019-07-18T14:58:10.7806995+02:00 0HLOBFSBFEPHV:00000002 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-18T14:58:10.8218263+02:00 0HLOBFSBFEPHV:00000002 [INF] Executed DbCommand ("32"ms) [Parameters=["@p0='?' (Size = 100) (DbType = AnsiString), @p1='?' (DbType = DateTime), @p2='?' (DbType = Double), @p3='?' (DbType = Double), @p4='?', @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (Size = 50), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [WTK_CAMBIO_ESTADO] ([Albaran], [fecha], [gpsX], [gpsY], [gpsZ], [sidDireccionTercero], [sidEstado], [sidRAEE], [sidTercero], [sidUsuario])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+SELECT [Id]
+FROM [WTK_CAMBIO_ESTADO]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2019-07-18T14:59:37.4152831+02:00 0HLOBFV4VA4GD:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-18T14:59:37.4673097+02:00 0HLOBFV4VA4GD:00000001 [INF] Request finished in 46.6665ms 200  (791a596a)
+2019-07-18T14:59:39.6145832+02:00 0HLOBFV4VA4GD:00000002 [INF] Request starting HTTP/1.1 PUT http://localhost/WeeeTrackerAPI/estado/entrada application/json 6915 (ca22a1cb)
+2019-07-18T14:59:39.8019584+02:00 0HLOBFV4VA4GD:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-18T14:59:40.0808279+02:00 0HLOBFV4VA4GD:00000002 [INF] Route matched with "{action = \"AltaEntrada\", controller = \"Estado\"}". Executing action "WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T14:59:40.0957556+02:00 0HLOBFV4VA4GD:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-18T14:59:40.1207423+02:00 0HLOBFV4VA4GD:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada (WeeeTrackerAPI)" in 33.1156ms (afa2e885)
+2019-07-18T14:59:40.1972739+02:00 0HLOBFV4VA4GD:00000002 [ERR] Connection id ""0HLOBFV4VA4GD"", Request id ""0HLOBFV4VA4GD:00000002"": An unhandled exception was thrown by the application. (560e7d32)
+System.InvalidOperationException: A circular dependency was detected for the service of type 'WeeeTrackerAPI.Core.Interfaces.IEstado'.
+WeeeTrackerAPI.Core.Interfaces.IEstado(WeeeTrackerAPI.Services.EstadoService) -> WeeeTrackerAPI.Core.Interfaces.IRaee(WeeeTrackerAPI.Core.Services.RaeeService) -> WeeeTrackerAPI.Core.Interfaces.IEstado
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteChain.CheckCircularDependency(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.CreateServiceAccessor(Type serviceType)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.IISIntegration.IISMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.Extensions.UsePathBaseMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2019-07-18T14:59:40.2110723+02:00 0HLOBFV4VA4GD:00000002 [INF] Request finished in 600.6698ms 500  (791a596a)
+2019-07-18T14:59:40.2378625+02:00  [INF] Connection id ""0HLOBFV4VA4GD"", Request id ""0HLOBFV4VA4GD:00000002"": the application completed without reading the entire request body. (54ac9468)
+2019-07-18T15:01:20.2845796+02:00 0HLOBG03KANN2:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-18T15:01:20.3293388+02:00 0HLOBG03KANN2:00000001 [INF] Request finished in 46.4361ms 200  (791a596a)
+2019-07-18T15:01:31.6473177+02:00 0HLOBG03KANN2:00000002 [INF] Request starting HTTP/1.1 PUT http://localhost/WeeeTrackerAPI/estado/entrada application/json 6915 (ca22a1cb)
+2019-07-18T15:01:31.7921137+02:00 0HLOBG03KANN2:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-18T15:01:32.0148430+02:00 0HLOBG03KANN2:00000002 [INF] Route matched with "{action = \"AltaEntrada\", controller = \"Estado\"}". Executing action "WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T15:01:32.0328791+02:00 0HLOBG03KANN2:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-18T15:01:32.0643534+02:00 0HLOBG03KANN2:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada (WeeeTrackerAPI)" in 40.4793ms (afa2e885)
+2019-07-18T15:01:32.1278399+02:00 0HLOBG03KANN2:00000002 [ERR] Connection id ""0HLOBG03KANN2"", Request id ""0HLOBG03KANN2:00000002"": An unhandled exception was thrown by the application. (560e7d32)
+System.InvalidOperationException: A circular dependency was detected for the service of type 'WeeeTrackerAPI.Core.Interfaces.IEstado'.
+WeeeTrackerAPI.Core.Interfaces.IEstado(WeeeTrackerAPI.Services.EstadoService) -> WeeeTrackerAPI.Core.Interfaces.IRaee(WeeeTrackerAPI.Core.Services.RaeeService) -> WeeeTrackerAPI.Core.Interfaces.IEstado
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteChain.CheckCircularDependency(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.CreateServiceAccessor(Type serviceType)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.IISIntegration.IISMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.Extensions.UsePathBaseMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2019-07-18T15:01:32.1392961+02:00 0HLOBG03KANN2:00000002 [INF] Request finished in 489.9963ms 500  (791a596a)
+2019-07-18T15:01:32.1620346+02:00  [INF] Connection id ""0HLOBG03KANN2"", Request id ""0HLOBG03KANN2:00000002"": the application completed without reading the entire request body. (54ac9468)
+2019-07-18T15:02:37.9346427+02:00 0HLOBG0QO6MGH:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-18T15:02:37.9792465+02:00 0HLOBG0QO6MGH:00000001 [INF] Request finished in 47.2405ms 200  (791a596a)
+2019-07-18T15:02:38.2250778+02:00 0HLOBG0QO6MGH:00000002 [INF] Request starting HTTP/1.1 PUT http://localhost/WeeeTrackerAPI/estado/entrada application/json 6915 (ca22a1cb)
+2019-07-18T15:02:38.3766925+02:00 0HLOBG0QO6MGH:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-18T15:02:38.6243602+02:00 0HLOBG0QO6MGH:00000002 [INF] Route matched with "{action = \"AltaEntrada\", controller = \"Estado\"}". Executing action "WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T15:02:38.6385682+02:00 0HLOBG0QO6MGH:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-18T15:03:53.0010321+02:00 0HLOBG0QO6MGH:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Residuo"]) - Validation state: Valid (4e3479ed)
+2019-07-18T15:03:54.5797308+02:00 0HLOBG0QO6MGH:00000002 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-18T15:03:54.9058108+02:00 0HLOBG0QO6MGH:00000002 [INF] Executed DbCommand ("44"ms) [Parameters=["@p0='?' (Size = 100) (DbType = AnsiString), @p1='?' (DbType = DateTime), @p2='?' (DbType = Double), @p3='?' (DbType = Double), @p4='?', @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (Size = 50), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [WTK_CAMBIO_ESTADO] ([Albaran], [fecha], [gpsX], [gpsY], [gpsZ], [sidDireccionTercero], [sidEstado], [sidRAEE], [sidTercero], [sidUsuario])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+SELECT [Id]
+FROM [WTK_CAMBIO_ESTADO]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2019-07-18T15:04:36.7015636+02:00 0HLOBG0QO6MGH:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada (WeeeTrackerAPI)" in 118068.0329ms (afa2e885)
+2019-07-18T15:04:36.7738695+02:00 0HLOBG0QO6MGH:00000002 [ERR] Connection id ""0HLOBG0QO6MGH"", Request id ""0HLOBG0QO6MGH:00000002"": An unhandled exception was thrown by the application. (560e7d32)
+System.Exception: Value cannot be null.
+Parameter name: logger
+   at WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada(Residuo residuo) in D:\PROYECTOS\ECOLEC\ecolec_weeetracker_appgestionback\WeeeTrackerAPI\Controllers\EstadoController.cs:line 96
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.IISIntegration.IISMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.Extensions.UsePathBaseMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2019-07-18T15:04:36.7860767+02:00 0HLOBG0QO6MGH:00000002 [INF] Request finished in 118561.1234ms 500  (791a596a)
+2019-07-18T15:14:19.9862592+02:00 0HLOBG7C0095C:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-18T15:14:20.0565409+02:00 0HLOBG7C0095C:00000001 [INF] Request finished in 54.8147ms 200  (791a596a)
+2019-07-18T15:14:22.2009666+02:00 0HLOBG7C0095C:00000002 [INF] Request starting HTTP/1.1 PUT http://localhost/WeeeTrackerAPI/estado/entrada application/json 6915 (ca22a1cb)
+2019-07-18T15:14:22.3423975+02:00 0HLOBG7C0095C:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-18T15:14:22.5678695+02:00 0HLOBG7C0095C:00000002 [INF] Route matched with "{action = \"AltaEntrada\", controller = \"Estado\"}". Executing action "WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T15:14:22.5826493+02:00 0HLOBG7C0095C:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-18T15:14:22.5991476+02:00 0HLOBG7C0095C:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada (WeeeTrackerAPI)" in 22.9177ms (afa2e885)
+2019-07-18T15:14:22.6730219+02:00 0HLOBG7C0095C:00000002 [ERR] Connection id ""0HLOBG7C0095C"", Request id ""0HLOBG7C0095C:00000002"": An unhandled exception was thrown by the application. (560e7d32)
+System.InvalidOperationException: Unable to resolve service for type 'WeeeTrackerAPI.Core.Interfaces.IMarca' while attempting to activate 'WeeeTrackerAPI.Services.EstadoService'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.CreateServiceAccessor(Type serviceType)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.IISIntegration.IISMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.Extensions.UsePathBaseMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2019-07-18T15:14:22.6876383+02:00 0HLOBG7C0095C:00000002 [INF] Request finished in 482.4995ms 500  (791a596a)
+2019-07-18T15:14:22.7096333+02:00  [INF] Connection id ""0HLOBG7C0095C"", Request id ""0HLOBG7C0095C:00000002"": the application completed without reading the entire request body. (54ac9468)
+2019-07-18T15:16:19.8031832+02:00 0HLOBG8FMQQ6D:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-18T15:16:19.8582369+02:00 0HLOBG8FMQQ6D:00000001 [INF] Request finished in 51.08ms 200  (791a596a)
+2019-07-18T15:16:21.9124105+02:00 0HLOBG8FMQQ6D:00000002 [INF] Request starting HTTP/1.1 PUT http://localhost/WeeeTrackerAPI/estado/entrada application/json 6915 (ca22a1cb)
+2019-07-18T15:16:22.0549480+02:00 0HLOBG8FMQQ6D:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-18T15:16:22.3054453+02:00 0HLOBG8FMQQ6D:00000002 [INF] Route matched with "{action = \"AltaEntrada\", controller = \"Estado\"}". Executing action "WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T15:16:22.3206557+02:00 0HLOBG8FMQQ6D:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-18T15:16:22.3481126+02:00 0HLOBG8FMQQ6D:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada (WeeeTrackerAPI)" in 34.0144ms (afa2e885)
+2019-07-18T15:16:22.4076844+02:00 0HLOBG8FMQQ6D:00000002 [ERR] Connection id ""0HLOBG8FMQQ6D"", Request id ""0HLOBG8FMQQ6D:00000002"": An unhandled exception was thrown by the application. (560e7d32)
+System.InvalidOperationException: A circular dependency was detected for the service of type 'WeeeTrackerAPI.Core.Interfaces.IEstado'.
+WeeeTrackerAPI.Core.Interfaces.IEstado(WeeeTrackerAPI.Services.EstadoService) -> WeeeTrackerAPI.Core.Interfaces.IRaee(WeeeTrackerAPI.Core.Services.RaeeService) -> WeeeTrackerAPI.Core.Interfaces.IEstado
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteChain.CheckCircularDependency(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.CreateServiceAccessor(Type serviceType)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.IISIntegration.IISMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.Extensions.UsePathBaseMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2019-07-18T15:16:22.4200134+02:00 0HLOBG8FMQQ6D:00000002 [INF] Request finished in 506.1721ms 500  (791a596a)
+2019-07-18T15:16:22.4420948+02:00  [INF] Connection id ""0HLOBG8FMQQ6D"", Request id ""0HLOBG8FMQQ6D:00000002"": the application completed without reading the entire request body. (54ac9468)
+2019-07-18T15:18:37.4574981+02:00 0HLOBG9ONDUFN:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-18T15:18:37.4973943+02:00 0HLOBG9ONDUFN:00000001 [INF] Request finished in 42.938ms 200  (791a596a)
+2019-07-18T15:18:41.1969109+02:00 0HLOBG9ONDUFN:00000002 [INF] Request starting HTTP/1.1 PUT http://localhost/WeeeTrackerAPI/estado/entrada application/json 6915 (ca22a1cb)
+2019-07-18T15:18:41.3401721+02:00 0HLOBG9ONDUFN:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-18T15:18:41.5866758+02:00 0HLOBG9ONDUFN:00000002 [INF] Route matched with "{action = \"AltaEntrada\", controller = \"Estado\"}". Executing action "WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T15:18:41.6009686+02:00 0HLOBG9ONDUFN:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-18T15:18:53.2631001+02:00 0HLOBG9ONDUFN:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Residuo"]) - Validation state: Valid (4e3479ed)
+2019-07-18T15:18:54.6108803+02:00 0HLOBG9ONDUFN:00000002 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-18T15:18:57.3511801+02:00 0HLOBG9ONDUFN:00000002 [INF] Executed DbCommand ("37"ms) [Parameters=["@p0='?' (Size = 100) (DbType = AnsiString), @p1='?' (DbType = DateTime), @p2='?' (DbType = Double), @p3='?' (DbType = Double), @p4='?', @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (Size = 50), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [WTK_CAMBIO_ESTADO] ([Albaran], [fecha], [gpsX], [gpsY], [gpsZ], [sidDireccionTercero], [sidEstado], [sidRAEE], [sidTercero], [sidUsuario])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+SELECT [Id]
+FROM [WTK_CAMBIO_ESTADO]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2019-07-18T15:19:05.2460004+02:00 0HLOBG9ONDUFN:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada (WeeeTrackerAPI)" in 23650.4163ms (afa2e885)
+2019-07-18T15:19:05.3135201+02:00 0HLOBG9ONDUFN:00000002 [ERR] Connection id ""0HLOBG9ONDUFN"", Request id ""0HLOBG9ONDUFN:00000002"": An unhandled exception was thrown by the application. (560e7d32)
+System.Exception: Value cannot be null.
+Parameter name: logger
+   at WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada(Residuo residuo) in D:\PROYECTOS\ECOLEC\ecolec_weeetracker_appgestionback\WeeeTrackerAPI\Controllers\EstadoController.cs:line 96
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.IISIntegration.IISMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Builder.Extensions.UsePathBaseMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2019-07-18T15:19:05.3245060+02:00 0HLOBG9ONDUFN:00000002 [INF] Request finished in 24127.7247ms 500  (791a596a)
+2019-07-18T15:33:52.5430835+02:00 0HLOBGI9ED0P8:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-18T15:33:52.5848178+02:00 0HLOBGI9ED0P8:00000001 [INF] Request finished in 45.5105ms 200  (791a596a)
+2019-07-18T15:34:06.5267951+02:00 0HLOBGI9ED0P8:00000002 [INF] Request starting HTTP/1.1 PUT http://localhost/WeeeTrackerAPI/estado/entrada application/json 6915 (ca22a1cb)
+2019-07-18T15:34:06.6753407+02:00 0HLOBGI9ED0P8:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-18T15:34:06.9040712+02:00 0HLOBGI9ED0P8:00000002 [INF] Route matched with "{action = \"AltaEntrada\", controller = \"Estado\"}". Executing action "WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T15:34:06.9181950+02:00 0HLOBGI9ED0P8:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-18T15:34:23.5827192+02:00 0HLOBGI9ED0P8:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Residuo"]) - Validation state: Valid (4e3479ed)
+2019-07-18T15:34:24.9230078+02:00 0HLOBGI9ED0P8:00000002 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-18T15:34:25.2187512+02:00 0HLOBGI9ED0P8:00000002 [INF] Executed DbCommand ("34"ms) [Parameters=["@p0='?' (Size = 100) (DbType = AnsiString), @p1='?' (DbType = DateTime), @p2='?' (DbType = Double), @p3='?' (DbType = Double), @p4='?', @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (Size = 50), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [WTK_CAMBIO_ESTADO] ([Albaran], [fecha], [gpsX], [gpsY], [gpsZ], [sidDireccionTercero], [sidEstado], [sidRAEE], [sidTercero], [sidUsuario])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+SELECT [Id]
+FROM [WTK_CAMBIO_ESTADO]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2019-07-18T15:34:28.9223182+02:00 0HLOBGI9ED0P8:00000002 [INF] Executed DbCommand ("28"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-18T15:34:33.3783395+02:00 0HLOBGI9ED0P8:00000002 [INF] Executed DbCommand ("50"ms) [Parameters=["@p9='?' (Size = 50), @p0='?' (DbType = Boolean), @p1='?' (DbType = Int32), @p2='?' (DbType = Single), @p3='?' (Size = 50), @p4='?' (DbType = Int32), @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (DbType = Int32), @p8='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+UPDATE [RAEEs] SET [canibalizado] = @p0, [destino] = @p1, [pesoEstimado] = @p2, [serie] = @p3, [sidEstadoRAEE] = @p4, [sidFraccion] = @p5, [sidMarca] = @p6, [sidResiduo] = @p7, [sidResiduoEspecifico] = @p8
+WHERE [pidRAEE] = @p9;
+SELECT @@ROWCOUNT;" (0723d8ff)
+2019-07-18T15:34:36.6240007+02:00 0HLOBGI9ED0P8:00000002 [INF] Executed DbCommand ("24"ms) [Parameters=["@p0='?' (Size = 255) (DbType = AnsiString), @p1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [WTK_CAMBIO_ESTADO_FOTOGRAFIA] ([fichero], [sidCambioEstado])
+VALUES (@p0, @p1);
+SELECT [Id]
+FROM [WTK_CAMBIO_ESTADO_FOTOGRAFIA]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2019-07-18T15:34:36.7474389+02:00 0HLOBGI9ED0P8:00000002 [INF] Executed DbCommand ("27"ms) [Parameters=["@p0='?' (Size = 255) (DbType = AnsiString), @p1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [WTK_CAMBIO_ESTADO_FOTOGRAFIA] ([fichero], [sidCambioEstado])
+VALUES (@p0, @p1);
+SELECT [Id]
+FROM [WTK_CAMBIO_ESTADO_FOTOGRAFIA]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2019-07-18T15:34:40.5846016+02:00 0HLOBGI9ED0P8:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 16994.1455ms. (50a9e262)
+2019-07-18T15:34:40.6002199+02:00 0HLOBGI9ED0P8:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-18T15:34:40.6248204+02:00 0HLOBGI9ED0P8:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada (WeeeTrackerAPI)" in 33706.804ms (afa2e885)
+2019-07-18T15:34:40.6356964+02:00 0HLOBGI9ED0P8:00000002 [INF] Request finished in 34108.6823ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-18T15:35:12.4632166+02:00 0HLOBGI9ED0P8:00000003 [INF] Request starting HTTP/1.1 PUT http://localhost/WeeeTrackerAPI/estado/salida application/json 262 (ca22a1cb)
+2019-07-18T15:35:12.4699932+02:00 0HLOBGI9ED0P8:00000003 [INF] Successfully validated the token. (60169667)
+2019-07-18T15:35:12.4809414+02:00 0HLOBGI9ED0P8:00000003 [INF] Route matched with "{action = \"AltaSalida\", controller = \"Estado\"}". Executing action "WeeeTrackerAPI.Controllers.EstadoController.AltaSalida (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T15:35:12.4884354+02:00 0HLOBGI9ED0P8:00000003 [INF] Authorization was successful. (0d575a54)
+2019-07-18T15:35:18.6438560+02:00 0HLOBGI9ED0P8:00000003 [INF] Executing action method "WeeeTrackerAPI.Controllers.EstadoController.AltaSalida (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Residuo"]) - Validation state: Valid (4e3479ed)
+2019-07-18T15:35:18.6669120+02:00 0HLOBGI9ED0P8:00000003 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-18T15:35:18.7635867+02:00 0HLOBGI9ED0P8:00000003 [INF] Executed DbCommand ("63"ms) [Parameters=["@p0='?' (Size = 100) (DbType = AnsiString), @p1='?' (DbType = DateTime), @p2='?' (DbType = Double), @p3='?' (DbType = Double), @p4='?', @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (Size = 50), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [WTK_CAMBIO_ESTADO] ([Albaran], [fecha], [gpsX], [gpsY], [gpsZ], [sidDireccionTercero], [sidEstado], [sidRAEE], [sidTercero], [sidUsuario])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+SELECT [Id]
+FROM [WTK_CAMBIO_ESTADO]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2019-07-18T15:35:19.6604375+02:00 0HLOBGI9ED0P8:00000003 [INF] Executed DbCommand ("38"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-18T15:35:19.7411151+02:00 0HLOBGI9ED0P8:00000003 [ERR] Object reference not set to an instance of an object. (f59a5554)
+2019-07-18T15:35:42.3495866+02:00 0HLOBGI9ED0P8:00000003 [INF] Executed DbCommand ("24"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-18T15:35:50.6580254+02:00 0HLOBGI9ED0P8:00000003 [ERR] Object reference not set to an instance of an object. (f59a5554)
+2019-07-18T15:35:50.6950589+02:00 0HLOBGI9ED0P8:00000003 [INF] Executed action method "WeeeTrackerAPI.Controllers.EstadoController.AltaSalida (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 32041.464ms. (50a9e262)
+2019-07-18T15:35:50.7022076+02:00 0HLOBGI9ED0P8:00000003 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-18T15:35:50.7155901+02:00 0HLOBGI9ED0P8:00000003 [INF] Executed action "WeeeTrackerAPI.Controllers.EstadoController.AltaSalida (WeeeTrackerAPI)" in 38224.6811ms (afa2e885)
+2019-07-18T15:35:50.7255975+02:00 0HLOBGI9ED0P8:00000003 [INF] Request finished in 38259.3157ms 404 application/json; charset=utf-8 (791a596a)
+2019-07-18T15:35:53.1770612+02:00 0HLOBGI9ED0P8:00000004 [INF] Request starting HTTP/1.1 PUT http://localhost/WeeeTrackerAPI/estado/salida application/json 262 (ca22a1cb)
+2019-07-18T15:35:53.1824589+02:00 0HLOBGI9ED0P8:00000004 [INF] Successfully validated the token. (60169667)
+2019-07-18T15:35:53.1899301+02:00 0HLOBGI9ED0P8:00000004 [INF] Route matched with "{action = \"AltaSalida\", controller = \"Estado\"}". Executing action "WeeeTrackerAPI.Controllers.EstadoController.AltaSalida (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T15:35:53.1955377+02:00 0HLOBGI9ED0P8:00000004 [INF] Authorization was successful. (0d575a54)
+2019-07-18T15:35:53.2243501+02:00 0HLOBGI9ED0P8:00000004 [INF] Executing action method "WeeeTrackerAPI.Controllers.EstadoController.AltaSalida (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Residuo"]) - Validation state: Valid (4e3479ed)
+2019-07-18T15:35:53.2318999+02:00 0HLOBGI9ED0P8:00000004 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-18T15:35:53.2933496+02:00 0HLOBGI9ED0P8:00000004 [INF] Executed DbCommand ("43"ms) [Parameters=["@p0='?' (Size = 100) (DbType = AnsiString), @p1='?' (DbType = DateTime), @p2='?' (DbType = Double), @p3='?' (DbType = Double), @p4='?', @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (Size = 50), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [WTK_CAMBIO_ESTADO] ([Albaran], [fecha], [gpsX], [gpsY], [gpsZ], [sidDireccionTercero], [sidEstado], [sidRAEE], [sidTercero], [sidUsuario])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+SELECT [Id]
+FROM [WTK_CAMBIO_ESTADO]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2019-07-18T15:36:13.4065319+02:00 0HLOBGI9ED0P8:00000004 [INF] Executed DbCommand ("20"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-18T15:36:13.4458774+02:00 0HLOBGI9ED0P8:00000004 [ERR] Object reference not set to an instance of an object. (f59a5554)
+2019-07-18T15:36:13.4668166+02:00 0HLOBGI9ED0P8:00000004 [INF] Executed action method "WeeeTrackerAPI.Controllers.EstadoController.AltaSalida (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 20237.612ms. (50a9e262)
+2019-07-18T15:36:13.4721180+02:00 0HLOBGI9ED0P8:00000004 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-18T15:36:13.4776681+02:00 0HLOBGI9ED0P8:00000004 [INF] Executed action "WeeeTrackerAPI.Controllers.EstadoController.AltaSalida (WeeeTrackerAPI)" in 20282.3318ms (afa2e885)
+2019-07-18T15:36:13.4837450+02:00 0HLOBGI9ED0P8:00000004 [INF] Request finished in 20305.1807ms 404 application/json; charset=utf-8 (791a596a)
+2019-07-18T15:36:49.1480086+02:00 0HLOBGI9ED0P8:00000005 [INF] Request starting HTTP/1.1 PUT http://localhost/WeeeTrackerAPI/estado/entrada application/json 6915 (ca22a1cb)
+2019-07-18T15:36:49.1529875+02:00 0HLOBGI9ED0P8:00000005 [INF] Successfully validated the token. (60169667)
+2019-07-18T15:36:49.1594262+02:00 0HLOBGI9ED0P8:00000005 [INF] Route matched with "{action = \"AltaEntrada\", controller = \"Estado\"}". Executing action "WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T15:36:49.1643443+02:00 0HLOBGI9ED0P8:00000005 [INF] Authorization was successful. (0d575a54)
+2019-07-18T15:36:49.1901571+02:00 0HLOBGI9ED0P8:00000005 [INF] Executing action method "WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Residuo"]) - Validation state: Valid (4e3479ed)
+2019-07-18T15:36:49.2011657+02:00 0HLOBGI9ED0P8:00000005 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-18T15:36:49.2459265+02:00 0HLOBGI9ED0P8:00000005 [INF] Executed DbCommand ("34"ms) [Parameters=["@p0='?' (Size = 100) (DbType = AnsiString), @p1='?' (DbType = DateTime), @p2='?' (DbType = Double), @p3='?' (DbType = Double), @p4='?', @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (Size = 50), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [WTK_CAMBIO_ESTADO] ([Albaran], [fecha], [gpsX], [gpsY], [gpsZ], [sidDireccionTercero], [sidEstado], [sidRAEE], [sidTercero], [sidUsuario])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+SELECT [Id]
+FROM [WTK_CAMBIO_ESTADO]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2019-07-18T15:36:58.0016243+02:00 0HLOBGI9ED0P8:00000005 [INF] Executed DbCommand ("79"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-18T15:37:03.7904611+02:00 0HLOBGI9ED0P8:00000005 [INF] Executed DbCommand ("68"ms) [Parameters=["@p9='?' (Size = 50), @p0='?' (DbType = Boolean), @p1='?' (DbType = Int32), @p2='?' (DbType = Single), @p3='?' (Size = 50), @p4='?' (DbType = Int32), @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (DbType = Int32), @p8='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+UPDATE [RAEEs] SET [canibalizado] = @p0, [destino] = @p1, [pesoEstimado] = @p2, [serie] = @p3, [sidEstadoRAEE] = @p4, [sidFraccion] = @p5, [sidMarca] = @p6, [sidResiduo] = @p7, [sidResiduoEspecifico] = @p8
+WHERE [pidRAEE] = @p9;
+SELECT @@ROWCOUNT;" (0723d8ff)
+2019-07-18T15:37:06.5274339+02:00 0HLOBGI9ED0P8:00000005 [INF] Executed DbCommand ("103"ms) [Parameters=["@p0='?' (Size = 255) (DbType = AnsiString), @p1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [WTK_CAMBIO_ESTADO_FOTOGRAFIA] ([fichero], [sidCambioEstado])
+VALUES (@p0, @p1);
+SELECT [Id]
+FROM [WTK_CAMBIO_ESTADO_FOTOGRAFIA]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2019-07-18T15:37:06.6386433+02:00 0HLOBGI9ED0P8:00000005 [INF] Executed DbCommand ("101"ms) [Parameters=["@p0='?' (Size = 255) (DbType = AnsiString), @p1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [WTK_CAMBIO_ESTADO_FOTOGRAFIA] ([fichero], [sidCambioEstado])
+VALUES (@p0, @p1);
+SELECT [Id]
+FROM [WTK_CAMBIO_ESTADO_FOTOGRAFIA]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2019-07-18T15:37:10.4456970+02:00 0HLOBGI9ED0P8:00000005 [INF] Executed action method "WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 21250.9274ms. (50a9e262)
+2019-07-18T15:37:10.4499894+02:00 0HLOBGI9ED0P8:00000005 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-18T15:37:10.4569856+02:00 0HLOBGI9ED0P8:00000005 [INF] Executed action "WeeeTrackerAPI.Controllers.EstadoController.AltaEntrada (WeeeTrackerAPI)" in 21290.7297ms (afa2e885)
+2019-07-18T15:37:10.4645967+02:00 0HLOBGI9ED0P8:00000005 [INF] Request finished in 21314.5537ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-18T15:39:30.7422192+02:00 0HLOBGI9ED0P9:00000001 [INF] Request starting HTTP/1.1 PUT http://localhost/WeeeTrackerAPI/estado/salida application/json 6853 (ca22a1cb)
+2019-07-18T15:39:30.7489578+02:00 0HLOBGI9ED0P9:00000001 [INF] Successfully validated the token. (60169667)
+2019-07-18T15:39:30.7542656+02:00 0HLOBGI9ED0P9:00000001 [INF] Route matched with "{action = \"AltaSalida\", controller = \"Estado\"}". Executing action "WeeeTrackerAPI.Controllers.EstadoController.AltaSalida (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T15:39:30.7594521+02:00 0HLOBGI9ED0P9:00000001 [INF] Authorization was successful. (0d575a54)
+2019-07-18T15:39:30.7970488+02:00 0HLOBGI9ED0P9:00000001 [INF] Executing action method "WeeeTrackerAPI.Controllers.EstadoController.AltaSalida (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Residuo"]) - Validation state: Valid (4e3479ed)
+2019-07-18T15:39:30.8037720+02:00 0HLOBGI9ED0P9:00000001 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-18T15:39:30.8631242+02:00 0HLOBGI9ED0P9:00000001 [INF] Executed DbCommand ("40"ms) [Parameters=["@p0='?' (Size = 100) (DbType = AnsiString), @p1='?' (DbType = DateTime), @p2='?' (DbType = Double), @p3='?' (DbType = Double), @p4='?', @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (Size = 50), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [WTK_CAMBIO_ESTADO] ([Albaran], [fecha], [gpsX], [gpsY], [gpsZ], [sidDireccionTercero], [sidEstado], [sidRAEE], [sidTercero], [sidUsuario])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+SELECT [Id]
+FROM [WTK_CAMBIO_ESTADO]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2019-07-18T15:39:30.8940382+02:00 0HLOBGI9ED0P9:00000001 [INF] Executed DbCommand ("24"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-18T15:39:30.9315542+02:00 0HLOBGI9ED0P9:00000001 [INF] Executed DbCommand ("31"ms) [Parameters=["@p9='?' (Size = 50), @p0='?' (DbType = Boolean), @p1='?' (DbType = Int32), @p2='?' (DbType = Single), @p3='?' (Size = 50), @p4='?' (DbType = Int32), @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (DbType = Int32), @p8='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+UPDATE [RAEEs] SET [canibalizado] = @p0, [destino] = @p1, [pesoEstimado] = @p2, [serie] = @p3, [sidEstadoRAEE] = @p4, [sidFraccion] = @p5, [sidMarca] = @p6, [sidResiduo] = @p7, [sidResiduoEspecifico] = @p8
+WHERE [pidRAEE] = @p9;
+SELECT @@ROWCOUNT;" (0723d8ff)
+2019-07-18T15:39:30.9596300+02:00 0HLOBGI9ED0P9:00000001 [INF] Executed DbCommand ("21"ms) [Parameters=["@p0='?' (Size = 255) (DbType = AnsiString), @p1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [WTK_CAMBIO_ESTADO_FOTOGRAFIA] ([fichero], [sidCambioEstado])
+VALUES (@p0, @p1);
+SELECT [Id]
+FROM [WTK_CAMBIO_ESTADO_FOTOGRAFIA]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2019-07-18T15:39:31.0300210+02:00 0HLOBGI9ED0P9:00000001 [INF] Executed DbCommand ("25"ms) [Parameters=["@p0='?' (Size = 255) (DbType = AnsiString), @p1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [WTK_CAMBIO_ESTADO_FOTOGRAFIA] ([fichero], [sidCambioEstado])
+VALUES (@p0, @p1);
+SELECT [Id]
+FROM [WTK_CAMBIO_ESTADO_FOTOGRAFIA]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2019-07-18T15:39:31.0500652+02:00 0HLOBGI9ED0P9:00000001 [INF] Executed action method "WeeeTrackerAPI.Controllers.EstadoController.AltaSalida (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 247.2273ms. (50a9e262)
+2019-07-18T15:39:31.0550789+02:00 0HLOBGI9ED0P9:00000001 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-18T15:39:31.0641532+02:00 0HLOBGI9ED0P9:00000001 [INF] Executed action "WeeeTrackerAPI.Controllers.EstadoController.AltaSalida (WeeeTrackerAPI)" in 301.5227ms (afa2e885)
+2019-07-18T15:39:31.0761039+02:00 0HLOBGI9ED0P9:00000001 [INF] Request finished in 330.1919ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-18T15:55:31.8177138+02:00 0HLOBGUCLHO62:00000001 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/residuo application/json 38 (ca22a1cb)
+2019-07-18T15:55:31.8915107+02:00 0HLOBGUCLHO62:00000001 [INF] Successfully validated the token. (60169667)
+2019-07-18T15:55:31.9924401+02:00 0HLOBGUCLHO62:00000001 [INF] Route matched with "{action = \"GetResiduo\", controller = \"Residuo\"}". Executing action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T15:55:32.0022649+02:00 0HLOBGUCLHO62:00000001 [INF] Authorization was successful. (0d575a54)
+2019-07-18T15:55:32.1701412+02:00 0HLOBGUCLHO62:00000001 [INF] Executing action method "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Residuo"]) - Validation state: Valid (4e3479ed)
+2019-07-18T15:55:33.3367855+02:00 0HLOBGUCLHO62:00000001 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-18T15:55:33.3674930+02:00 0HLOBGUCLHO62:00000001 [WRN] The Include operation for navigation '"[r].SidEstadoRaeeNavigation"' is unnecessary and was ignored because the navigation is not reachable in the final query results. See https://go.microsoft.com/fwlink/?linkid=850303 for more information. (10efaee6)
+2019-07-18T15:55:33.4813921+02:00 0HLOBGUCLHO62:00000001 [INF] Executed DbCommand ("5"ms) [Parameters=["@__idRaee_0='?' (Size = 50)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [r].[pidRAEE], [r].[sidResiduoEspecifico], [r].[sidMarca], [r].[serie], [r].[destino], [r].[canibalizado], [r].[sidEstadoRAEE], [r.SidEstadoRaeeNavigation].[nombre]
+FROM [RAEEs] AS [r]
+INNER JOIN [EstadosRAEE] AS [r.SidEstadoRaeeNavigation] ON [r].[sidEstadoRAEE] = [r.SidEstadoRaeeNavigation].[pidEstadoRAEE]
+WHERE ([r].[pidRAEE] = @__idRaee_0) AND ([r].[sidEstadoRAEE] = [r].[sidEstadoRAEE])" (0723d8ff)
+2019-07-18T15:55:33.4962286+02:00 0HLOBGUCLHO62:00000001 [INF] Executed action method "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.NotFoundObjectResult" in 1322.9232ms. (50a9e262)
+2019-07-18T15:55:33.5024665+02:00 0HLOBGUCLHO62:00000001 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-18T15:55:33.5136327+02:00 0HLOBGUCLHO62:00000001 [INF] Executed action "WeeeTrackerAPI.Controllers.ResiduoController.GetResiduo (WeeeTrackerAPI)" in 1516.5168ms (afa2e885)
+2019-07-18T15:55:33.5193176+02:00 0HLOBGUCLHO62:00000001 [INF] Request finished in 1706.9303ms 404 application/json; charset=utf-8 (791a596a)
+2019-07-18T15:55:50.4456311+02:00 0HLOBGUI6PJ0A:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-18T15:55:50.5173129+02:00 0HLOBGUI6PJ0A:00000001 [INF] Request finished in 67.2671ms 200  (791a596a)
+2019-07-18T15:55:56.4854066+02:00 0HLOBGUI6PJ0A:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/residuo/alta application/json 8735 (ca22a1cb)
+2019-07-18T15:55:56.6520913+02:00 0HLOBGUI6PJ0A:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-18T15:55:56.9229310+02:00 0HLOBGUI6PJ0A:00000002 [INF] Route matched with "{action = \"AltaResiduo\", controller = \"Residuo\"}". Executing action "WeeeTrackerAPI.Controllers.ResiduoController.AltaResiduo (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T15:55:56.9402024+02:00 0HLOBGUI6PJ0A:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-18T15:55:57.3555287+02:00 0HLOBGUI6PJ0A:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.ResiduoController.AltaResiduo (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Residuo"]) - Validation state: Valid (4e3479ed)
+2019-07-18T15:55:58.6305611+02:00 0HLOBGUI6PJ0A:00000002 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-18T15:55:58.8556057+02:00 0HLOBGUI6PJ0A:00000002 [INF] Executed DbCommand ("36"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-18T15:55:59.0591777+02:00 0HLOBGUI6PJ0A:00000002 [INF] Executed DbCommand ("30"ms) [Parameters=["@p0='?' (Size = 50), @p1='?' (DbType = Boolean), @p2='?' (Size = 15), @p3='?' (DbType = Int32), @p4='?', @p5='?', @p6='?', @p7='?' (DbType = Single), @p8='?', @p9='?' (Size = 50), @p10='?' (DbType = Int32), @p11='?' (DbType = Int32), @p12='?' (DbType = Int32), @p13='?' (DbType = Int32), @p14='?' (DbType = Int32), @p15='?' (DbType = Int32), @p16='?' (DbType = Int32), @p17='?' (DbType = Int32), @p18='?' (DbType = Int32), @p19='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [RAEEs] ([pidRAEE], [canibalizado], [codigoRefTercero], [destino], [DiasVida], [DistanciaHastaTratamiento], [DistanciaHastaTratamientoTramos], [pesoEstimado], [pesoReal], [serie], [sidCertificadoTratamiento], [sidEstadoRAEE], [sidFraccion], [sidMarca], [sidPaisCodigoRAEE], [sidResiduo], [sidResiduoEspecifico], [sidSIG], [sidTipoContenedor], [sidTipoEtiqueta])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19);
+SELECT [estado], [rowguid]
+FROM [RAEEs]
+WHERE @@ROWCOUNT = 1 AND [pidRAEE] = @p0;" (0723d8ff)
+2019-07-18T15:55:59.1927393+02:00 0HLOBGUI6PJ0A:00000002 [INF] Executed DbCommand ("26"ms) [Parameters=["@p0='?' (Size = 100) (DbType = AnsiString), @p1='?' (DbType = DateTime), @p2='?' (DbType = Double), @p3='?' (DbType = Double), @p4='?', @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (Size = 50), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [WTK_CAMBIO_ESTADO] ([Albaran], [fecha], [gpsX], [gpsY], [gpsZ], [sidDireccionTercero], [sidEstado], [sidRAEE], [sidTercero], [sidUsuario])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+SELECT [Id]
+FROM [WTK_CAMBIO_ESTADO]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2019-07-18T15:55:59.2417883+02:00 0HLOBGUI6PJ0A:00000002 [INF] Executed DbCommand ("23"ms) [Parameters=["@p0='?' (Size = 255) (DbType = AnsiString), @p1='?' (Size = 4000), @p2='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [WTK_CAMBIO_ESTADO_FIRMA] ([firma], [Nombre], [sidCambioEstado])
+VALUES (@p0, @p1, @p2);
+SELECT [Id]
+FROM [WTK_CAMBIO_ESTADO_FIRMA]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2019-07-18T15:59:51.7746135+02:00 0HLOBGUI6PJ0A:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.ResiduoController.AltaResiduo (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.BadRequestObjectResult" in 234410.1828ms. (50a9e262)
+2019-07-18T15:59:51.7869164+02:00 0HLOBGUI6PJ0A:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType3`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-18T15:59:51.8054519+02:00 0HLOBGUI6PJ0A:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.ResiduoController.AltaResiduo (WeeeTrackerAPI)" in 234872.1443ms (afa2e885)
+2019-07-18T15:59:51.8168194+02:00 0HLOBGUI6PJ0A:00000002 [INF] Request finished in 235329.8921ms 400 application/json; charset=utf-8 (791a596a)
+2019-07-18T16:11:12.0852226+02:00 0HLOBH74SHBVS:00000001 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/residuo/alta application/json 8735 (ca22a1cb)
+2019-07-18T16:11:12.1749672+02:00 0HLOBH74SHBVS:00000001 [INF] Successfully validated the token. (60169667)
+2019-07-18T16:11:12.2907782+02:00 0HLOBH74SHBVS:00000001 [INF] Route matched with "{action = \"AltaResiduo\", controller = \"Residuo\"}". Executing action "WeeeTrackerAPI.Controllers.ResiduoController.AltaResiduo (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T16:11:12.3007549+02:00 0HLOBH74SHBVS:00000001 [INF] Authorization was successful. (0d575a54)
+2019-07-18T16:11:12.5139854+02:00 0HLOBH74SHBVS:00000001 [INF] Executing action method "WeeeTrackerAPI.Controllers.ResiduoController.AltaResiduo (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Residuo"]) - Validation state: Valid (4e3479ed)
+2019-07-18T16:11:13.6995201+02:00 0HLOBH74SHBVS:00000001 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-18T16:11:13.8520450+02:00 0HLOBH74SHBVS:00000001 [INF] Executed DbCommand ("3"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-18T16:11:14.0239868+02:00 0HLOBH74SHBVS:00000001 [INF] Executed DbCommand ("10"ms) [Parameters=["@p0='?' (Size = 50), @p1='?' (DbType = Boolean), @p2='?' (Size = 15), @p3='?' (DbType = Int32), @p4='?', @p5='?', @p6='?', @p7='?' (DbType = Single), @p8='?', @p9='?' (Size = 50), @p10='?' (DbType = Int32), @p11='?' (DbType = Int32), @p12='?' (DbType = Int32), @p13='?' (DbType = Int32), @p14='?' (DbType = Int32), @p15='?' (DbType = Int32), @p16='?' (DbType = Int32), @p17='?' (DbType = Int32), @p18='?' (DbType = Int32), @p19='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [RAEEs] ([pidRAEE], [canibalizado], [codigoRefTercero], [destino], [DiasVida], [DistanciaHastaTratamiento], [DistanciaHastaTratamientoTramos], [pesoEstimado], [pesoReal], [serie], [sidCertificadoTratamiento], [sidEstadoRAEE], [sidFraccion], [sidMarca], [sidPaisCodigoRAEE], [sidResiduo], [sidResiduoEspecifico], [sidSIG], [sidTipoContenedor], [sidTipoEtiqueta])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19);
+SELECT [estado], [rowguid]
+FROM [RAEEs]
+WHERE @@ROWCOUNT = 1 AND [pidRAEE] = @p0;" (0723d8ff)
+2019-07-18T16:11:14.1233035+02:00 0HLOBH74SHBVS:00000001 [INF] Executed DbCommand ("3"ms) [Parameters=["@p0='?' (Size = 100) (DbType = AnsiString), @p1='?' (DbType = DateTime), @p2='?' (DbType = Double), @p3='?' (DbType = Double), @p4='?', @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (Size = 50), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [WTK_CAMBIO_ESTADO] ([Albaran], [fecha], [gpsX], [gpsY], [gpsZ], [sidDireccionTercero], [sidEstado], [sidRAEE], [sidTercero], [sidUsuario])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+SELECT [Id]
+FROM [WTK_CAMBIO_ESTADO]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2019-07-18T16:11:14.1451915+02:00 0HLOBH74SHBVS:00000001 [INF] Executed DbCommand ("3"ms) [Parameters=["@p0='?' (Size = 255) (DbType = AnsiString), @p1='?' (Size = 4000), @p2='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [WTK_CAMBIO_ESTADO_FIRMA] ([firma], [Nombre], [sidCambioEstado])
+VALUES (@p0, @p1, @p2);
+SELECT [Id]
+FROM [WTK_CAMBIO_ESTADO_FIRMA]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2019-07-18T16:11:14.2306575+02:00 0HLOBH74SHBVS:00000001 [INF] Executed action method "WeeeTrackerAPI.Controllers.ResiduoController.AltaResiduo (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.BadRequestObjectResult" in 1712.0674ms. (50a9e262)
+2019-07-18T16:11:14.2390679+02:00 0HLOBH74SHBVS:00000001 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType3`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-18T16:11:14.2504651+02:00 0HLOBH74SHBVS:00000001 [INF] Executed action "WeeeTrackerAPI.Controllers.ResiduoController.AltaResiduo (WeeeTrackerAPI)" in 1955.9514ms (afa2e885)
+2019-07-18T16:11:14.2539512+02:00 0HLOBH74SHBVS:00000001 [INF] Request finished in 2173.7126ms 400 application/json; charset=utf-8 (791a596a)
+2019-07-18T16:11:33.7464893+02:00 0HLOBH7BB2ADR:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-18T16:11:33.7872895+02:00 0HLOBH7BB2ADR:00000001 [INF] Request finished in 44.9371ms 200  (791a596a)
+2019-07-18T16:11:36.6187072+02:00 0HLOBH7BB2ADR:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/residuo/alta application/json 8735 (ca22a1cb)
+2019-07-18T16:11:36.7837152+02:00 0HLOBH7BB2ADR:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-18T16:11:37.0315826+02:00 0HLOBH7BB2ADR:00000002 [INF] Route matched with "{action = \"AltaResiduo\", controller = \"Residuo\"}". Executing action "WeeeTrackerAPI.Controllers.ResiduoController.AltaResiduo (WeeeTrackerAPI)" (a44c0341)
+2019-07-18T16:11:37.0486237+02:00 0HLOBH7BB2ADR:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-18T16:11:37.4215693+02:00 0HLOBH7BB2ADR:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.ResiduoController.AltaResiduo (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Residuo"]) - Validation state: Valid (4e3479ed)
+2019-07-18T16:11:38.7326887+02:00 0HLOBH7BB2ADR:00000002 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-18T16:11:41.0843801+02:00 0HLOBH7BB2ADR:00000002 [INF] Executed DbCommand ("33"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-18T16:11:41.3094520+02:00 0HLOBH7BB2ADR:00000002 [INF] Executed DbCommand ("25"ms) [Parameters=["@p0='?' (Size = 50), @p1='?' (DbType = Boolean), @p2='?' (Size = 15), @p3='?' (DbType = Int32), @p4='?', @p5='?', @p6='?', @p7='?' (DbType = Single), @p8='?', @p9='?' (Size = 50), @p10='?' (DbType = Int32), @p11='?' (DbType = Int32), @p12='?' (DbType = Int32), @p13='?' (DbType = Int32), @p14='?' (DbType = Int32), @p15='?' (DbType = Int32), @p16='?' (DbType = Int32), @p17='?' (DbType = Int32), @p18='?' (DbType = Int32), @p19='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [RAEEs] ([pidRAEE], [canibalizado], [codigoRefTercero], [destino], [DiasVida], [DistanciaHastaTratamiento], [DistanciaHastaTratamientoTramos], [pesoEstimado], [pesoReal], [serie], [sidCertificadoTratamiento], [sidEstadoRAEE], [sidFraccion], [sidMarca], [sidPaisCodigoRAEE], [sidResiduo], [sidResiduoEspecifico], [sidSIG], [sidTipoContenedor], [sidTipoEtiqueta])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19);
+SELECT [estado], [rowguid]
+FROM [RAEEs]
+WHERE @@ROWCOUNT = 1 AND [pidRAEE] = @p0;" (0723d8ff)
+2019-07-18T16:11:55.4261221+02:00 0HLOBH7BB2ADR:00000002 [INF] Executed DbCommand ("30"ms) [Parameters=["@p0='?' (Size = 100) (DbType = AnsiString), @p1='?' (DbType = DateTime), @p2='?' (DbType = Double), @p3='?' (DbType = Double), @p4='?', @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (Size = 50), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [WTK_CAMBIO_ESTADO] ([Albaran], [fecha], [gpsX], [gpsY], [gpsZ], [sidDireccionTercero], [sidEstado], [sidRAEE], [sidTercero], [sidUsuario])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9);
+SELECT [Id]
+FROM [WTK_CAMBIO_ESTADO]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2019-07-18T16:12:23.8655653+02:00 0HLOBH7BB2ADR:00000002 [INF] Executed DbCommand ("21"ms) [Parameters=["@p0='?' (Size = 255) (DbType = AnsiString), @p1='?' (Size = 4000), @p2='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [WTK_CAMBIO_ESTADO_FIRMA] ([firma], [Nombre], [sidCambioEstado])
+VALUES (@p0, @p1, @p2);
+SELECT [Id]
+FROM [WTK_CAMBIO_ESTADO_FIRMA]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)

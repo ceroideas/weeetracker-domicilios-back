@@ -1,0 +1,348 @@
+2019-07-08T08:16:31.1873963+02:00 0HLO3DF8Q4D9K:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-08T08:16:31.1872962+02:00 0HLO3DF8Q4D9J:00000001 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/users/login application/json 43 (ca22a1cb)
+2019-07-08T08:16:31.4126384+02:00 0HLO3DF8Q4D9K:00000001 [INF] Request finished in 233.3567ms 200  (791a596a)
+2019-07-08T08:16:33.0701067+02:00 0HLO3DF8Q4D9J:00000001 [INF] Route matched with "{action = \"Authenticate\", controller = \"Users\"}". Executing action "WeeeTrackerAPI.Controllers.UsersController.Authenticate (WeeeTrackerAPI)" (a44c0341)
+2019-07-08T08:16:34.0822587+02:00 0HLO3DF8Q4D9J:00000001 [INF] Executing action method "WeeeTrackerAPI.Controllers.UsersController.Authenticate (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.User"]) - Validation state: Valid (4e3479ed)
+2019-07-08T08:16:35.9503970+02:00 0HLO3DF8Q4D9J:00000001 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-08T08:16:36.0224730+02:00 0HLO3DF8Q4D9J:00000001 [WRN] The Include operation for navigation '"new WtkUsuario() {Id = [u].Id, Usuario = [u].Usuario, Password = [u].Password, SidTercero = [u].SidTercero, SidTipoTercero = [u].SidTipoTercero, Estado = [u].Estado, WtkUsuarioPerfiles = [u].WtkUsuarioPerfiles}.WtkUsuarioPerfiles"' is unnecessary and was ignored because the navigation is not reachable in the final query results. See https://go.microsoft.com/fwlink/?linkid=850303 for more information. (10efaee6)
+2019-07-08T08:16:36.8157802+02:00 0HLO3DF8Q4D9J:00000001 [INF] Executed DbCommand ("84"ms) [Parameters=["@__username_0='?' (Size = 50) (DbType = AnsiString), @__password_1='?' (Size = 50) (DbType = AnsiString)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [u].[Id], [u].[Usuario], [u].[Password], [u].[sidTercero], [u].[sidTipoTercero], [u].[Estado]
+FROM [WTK_USUARIO] AS [u]
+WHERE ([u].[Usuario] = @__username_0) AND ([u].[Password] = @__password_1)
+ORDER BY [u].[Id]" (0723d8ff)
+2019-07-08T08:16:36.9801004+02:00 0HLO3DF8Q4D9J:00000001 [INF] Executed DbCommand ("89"ms) [Parameters=["@__username_0='?' (Size = 50) (DbType = AnsiString), @__password_1='?' (Size = 50) (DbType = AnsiString)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [u.WtkUsuarioPerfiles].[sidUsuario], [u.WtkUsuarioPerfiles].[sidPerfil], [t].[Id]
+FROM [WTK_USUARIO_PERFILES] AS [u.WtkUsuarioPerfiles]
+INNER JOIN (
+    SELECT TOP(1) [u0].[Id]
+    FROM [WTK_USUARIO] AS [u0]
+    WHERE ([u0].[Usuario] = @__username_0) AND ([u0].[Password] = @__password_1)
+    ORDER BY [u0].[Id]
+) AS [t] ON [u.WtkUsuarioPerfiles].[sidUsuario] = [t].[Id]
+ORDER BY [t].[Id]" (0723d8ff)
+2019-07-08T08:16:37.1365183+02:00 0HLO3DF8Q4D9J:00000001 [INF] Executed DbCommand ("50"ms) [Parameters=["@__usuario_SidTercero_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [t.WtkTextoLopd].[Id], [t.WtkTextoLopd].[sidTercero], [t.WtkTextoLopd].[Texto], [t].[pidTercero], [t].[nombre]
+FROM [Terceros] AS [t]
+LEFT JOIN [WTK_TEXTO_LOPD] AS [t.WtkTextoLopd] ON [t].[pidTercero] = [t.WtkTextoLopd].[sidTercero]
+WHERE [t].[pidTercero] = @__usuario_SidTercero_0" (0723d8ff)
+2019-07-08T08:16:37.2440105+02:00 0HLO3DF8Q4D9J:00000001 [INF] Executed DbCommand ("31"ms) [Parameters=["@__usuario_Id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [d].[pidDireccionTercero], [d].[nombre]
+FROM [DireccionesTercero] AS [d]
+WHERE EXISTS (
+    SELECT 1
+    FROM [WTK_USUARIO_DIRECCIONES] AS [u]
+    WHERE ([u].[sidUsuario] = @__usuario_Id_0) AND ([d].[pidDireccionTercero] = [u].[sidDireccion]))
+ORDER BY [d].[nombre]" (0723d8ff)
+2019-07-08T08:16:37.3290139+02:00 0HLO3DF8Q4D9J:00000001 [INF] Executed DbCommand ("46"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [item].[Id], [item].[Nombre], [item].[Orden]
+FROM [WTK_RESIDUOESPECIFICO] AS [item]
+ORDER BY [item].[Orden]" (0723d8ff)
+2019-07-08T08:16:37.4222554+02:00 0HLO3DF8Q4D9J:00000001 [INF] Executed DbCommand ("64"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [item].[pidMarca], [item].[nombre]
+FROM [Marcas] AS [item]
+ORDER BY [item].[nombre]" (0723d8ff)
+2019-07-08T08:16:37.5250526+02:00 0HLO3DF8Q4D9J:00000001 [INF] Executed action method "WeeeTrackerAPI.Controllers.UsersController.Authenticate (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 3426.1123ms. (50a9e262)
+2019-07-08T08:16:37.5486172+02:00 0HLO3DF8Q4D9J:00000001 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType6`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-08T08:16:37.5929462+02:00 0HLO3DF8Q4D9J:00000001 [INF] Executed action "WeeeTrackerAPI.Controllers.UsersController.Authenticate (WeeeTrackerAPI)" in 4493.0143ms (afa2e885)
+2019-07-08T08:16:37.6315920+02:00 0HLO3DF8Q4D9J:00000001 [INF] Request finished in 6432.96ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-08T08:27:24.3443921+02:00 0HLO3DLBFQ05G:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-08T08:27:24.4230531+02:00 0HLO3DLBFQ05G:00000001 [INF] Request finished in 75.6782ms 200  (791a596a)
+2019-07-08T08:27:26.4937825+02:00 0HLO3DLBFQ05G:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/users/login application/json 43 (ca22a1cb)
+2019-07-08T08:27:26.8674961+02:00 0HLO3DLBFQ05G:00000002 [INF] Route matched with "{action = \"Authenticate\", controller = \"Users\"}". Executing action "WeeeTrackerAPI.Controllers.UsersController.Authenticate (WeeeTrackerAPI)" (a44c0341)
+2019-07-08T08:27:34.3919882+02:00 0HLO3DLBFQ05G:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.UsersController.Authenticate (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.User"]) - Validation state: Valid (4e3479ed)
+2019-07-08T08:27:35.7078130+02:00 0HLO3DLBFQ05G:00000002 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-08T08:27:35.7552140+02:00 0HLO3DLBFQ05G:00000002 [WRN] The Include operation for navigation '"new WtkUsuario() {Id = [u].Id, Usuario = [u].Usuario, Password = [u].Password, SidTercero = [u].SidTercero, SidTipoTercero = [u].SidTipoTercero, Estado = [u].Estado, WtkUsuarioPerfiles = [u].WtkUsuarioPerfiles}.WtkUsuarioPerfiles"' is unnecessary and was ignored because the navigation is not reachable in the final query results. See https://go.microsoft.com/fwlink/?linkid=850303 for more information. (10efaee6)
+2019-07-08T08:27:36.0162499+02:00 0HLO3DLBFQ05G:00000002 [INF] Executed DbCommand ("62"ms) [Parameters=["@__username_0='?' (Size = 50) (DbType = AnsiString), @__password_1='?' (Size = 50) (DbType = AnsiString)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [u].[Id], [u].[Usuario], [u].[Password], [u].[sidTercero], [u].[sidTipoTercero], [u].[Estado]
+FROM [WTK_USUARIO] AS [u]
+WHERE ([u].[Usuario] = @__username_0) AND ([u].[Password] = @__password_1)
+ORDER BY [u].[Id]" (0723d8ff)
+2019-07-08T08:27:36.0765362+02:00 0HLO3DLBFQ05G:00000002 [INF] Executed DbCommand ("38"ms) [Parameters=["@__username_0='?' (Size = 50) (DbType = AnsiString), @__password_1='?' (Size = 50) (DbType = AnsiString)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [u.WtkUsuarioPerfiles].[sidUsuario], [u.WtkUsuarioPerfiles].[sidPerfil], [t].[Id]
+FROM [WTK_USUARIO_PERFILES] AS [u.WtkUsuarioPerfiles]
+INNER JOIN (
+    SELECT TOP(1) [u0].[Id]
+    FROM [WTK_USUARIO] AS [u0]
+    WHERE ([u0].[Usuario] = @__username_0) AND ([u0].[Password] = @__password_1)
+    ORDER BY [u0].[Id]
+) AS [t] ON [u.WtkUsuarioPerfiles].[sidUsuario] = [t].[Id]
+ORDER BY [t].[Id]" (0723d8ff)
+2019-07-08T08:27:36.1708069+02:00 0HLO3DLBFQ05G:00000002 [INF] Executed DbCommand ("48"ms) [Parameters=["@__usuario_SidTercero_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [t.WtkTextoLopd].[Id], [t.WtkTextoLopd].[sidTercero], [t.WtkTextoLopd].[Texto], [t].[pidTercero], [t].[nombre]
+FROM [Terceros] AS [t]
+LEFT JOIN [WTK_TEXTO_LOPD] AS [t.WtkTextoLopd] ON [t].[pidTercero] = [t.WtkTextoLopd].[sidTercero]
+WHERE [t].[pidTercero] = @__usuario_SidTercero_0" (0723d8ff)
+2019-07-08T08:27:36.2446203+02:00 0HLO3DLBFQ05G:00000002 [INF] Executed DbCommand ("32"ms) [Parameters=["@__usuario_Id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [d].[pidDireccionTercero], [d].[nombre]
+FROM [DireccionesTercero] AS [d]
+WHERE EXISTS (
+    SELECT 1
+    FROM [WTK_USUARIO_DIRECCIONES] AS [u]
+    WHERE ([u].[sidUsuario] = @__usuario_Id_0) AND ([d].[pidDireccionTercero] = [u].[sidDireccion]))
+ORDER BY [d].[nombre]" (0723d8ff)
+2019-07-08T08:27:36.2904074+02:00 0HLO3DLBFQ05G:00000002 [INF] Executed DbCommand ("28"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [item].[Id], [item].[Nombre], [item].[Orden]
+FROM [WTK_RESIDUOESPECIFICO] AS [item]
+ORDER BY [item].[Orden]" (0723d8ff)
+2019-07-08T08:27:36.3308998+02:00 0HLO3DLBFQ05G:00000002 [INF] Executed DbCommand ("28"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [item].[pidMarca], [item].[nombre]
+FROM [Marcas] AS [item]
+ORDER BY [item].[nombre]" (0723d8ff)
+2019-07-08T08:27:36.3676722+02:00 0HLO3DLBFQ05G:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.UsersController.Authenticate (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1968.6792ms. (50a9e262)
+2019-07-08T08:27:36.3777660+02:00 0HLO3DLBFQ05G:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType6`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-08T08:27:36.3923473+02:00 0HLO3DLBFQ05G:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.UsersController.Authenticate (WeeeTrackerAPI)" in 9515.6345ms (afa2e885)
+2019-07-08T08:27:36.4010314+02:00 0HLO3DLBFQ05G:00000002 [INF] Request finished in 9907.4963ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-08T08:28:05.4002304+02:00 0HLO3DLBFQ05G:00000003 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/stock application/json 46 (ca22a1cb)
+2019-07-08T08:28:05.4166877+02:00 0HLO3DLBFQ05G:00000003 [INF] Successfully validated the token. (60169667)
+2019-07-08T08:28:05.4285360+02:00 0HLO3DLBFQ05G:00000003 [INF] Route matched with "{action = \"GetStock\", controller = \"Stock\"}". Executing action "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" (a44c0341)
+2019-07-08T08:28:05.4453655+02:00 0HLO3DLBFQ05G:00000003 [INF] Authorization was successful. (0d575a54)
+2019-07-08T08:28:14.6914005+02:00 0HLO3DLBFQ05G:00000003 [INF] Executing action method "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Stock"]) - Validation state: Valid (4e3479ed)
+2019-07-08T08:28:14.7572591+02:00 0HLO3DLBFQ05G:00000003 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-08T08:28:14.8495295+02:00 0HLO3DLBFQ05G:00000003 [INF] Executed DbCommand ("41"ms) [Parameters=["@__idTercero_0='?' (DbType = Int32), @__idCentro_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [item].[Id], [item].[Nombre], (
+    SELECT COUNT(*)
+    FROM [RAEEs] AS [r]
+    INNER JOIN [WTK_CAMBIO_ESTADO] AS [r.WtkCambioEstado] ON [r].[pidRAEE] = [r.WtkCambioEstado].[sidRAEE]
+    WHERE ((((((([r].[pidRAEE] = [r.WtkCambioEstado].[sidRAEE]) AND ([r].[sidEstadoRAEE] = [r].[sidEstadoRAEE])) AND ([r.WtkCambioEstado].[sidTercero] = @__idTercero_0)) AND ([r.WtkCambioEstado].[sidDireccionTercero] = @__idCentro_1)) AND ([r].[sidEstadoRAEE] = 14)) AND ([r.WtkCambioEstado].[sidEstado] = 14)) AND ([r.WtkCambioEstado].[sidEstado] <> 15)) AND ([item].[Id] = [r].[sidResiduoEspecifico])
+) AS [Cantidad]
+FROM [WTK_RESIDUOESPECIFICO] AS [item]" (0723d8ff)
+2019-07-08T08:28:14.8693462+02:00 0HLO3DLBFQ05G:00000003 [INF] Executed action method "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 170.1616ms. (50a9e262)
+2019-07-08T08:28:14.8743723+02:00 0HLO3DLBFQ05G:00000003 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType4`1[[WeeeTrackerAPI.Entities.Stock, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-07-08T08:28:14.8870932+02:00 0HLO3DLBFQ05G:00000003 [INF] Executed action "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" in 9451.7055ms (afa2e885)
+2019-07-08T08:28:14.8937448+02:00 0HLO3DLBFQ05G:00000003 [INF] Request finished in 9493.6998ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-08T08:28:59.5849516+02:00 0HLO3DM7SHQTK:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-08T08:28:59.6352169+02:00 0HLO3DM7SHQTK:00000001 [INF] Request finished in 46.6108ms 200  (791a596a)
+2019-07-08T08:29:02.3861111+02:00 0HLO3DM7SHQTK:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/stock application/json 46 (ca22a1cb)
+2019-07-08T08:29:02.5439586+02:00 0HLO3DM7SHQTK:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-08T08:29:02.8004503+02:00 0HLO3DM7SHQTK:00000002 [INF] Route matched with "{action = \"GetStock\", controller = \"Stock\"}". Executing action "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" (a44c0341)
+2019-07-08T08:29:02.8141491+02:00 0HLO3DM7SHQTK:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-08T08:29:03.1407258+02:00 0HLO3DM7SHQTK:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Stock"]) - Validation state: Valid (4e3479ed)
+2019-07-08T08:29:04.3680403+02:00 0HLO3DM7SHQTK:00000002 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-08T08:29:04.6083290+02:00 0HLO3DM7SHQTK:00000002 [INF] Executed DbCommand ("35"ms) [Parameters=["@__idTercero_0='?' (DbType = Int32), @__idCentro_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [item].[Id], [item].[Nombre], (
+    SELECT COUNT(*)
+    FROM [RAEEs] AS [r]
+    INNER JOIN [WTK_CAMBIO_ESTADO] AS [r.WtkCambioEstado] ON [r].[pidRAEE] = [r.WtkCambioEstado].[sidRAEE]
+    WHERE ((((((([r].[pidRAEE] = [r.WtkCambioEstado].[sidRAEE]) AND ([r].[sidEstadoRAEE] = [r].[sidEstadoRAEE])) AND ([r.WtkCambioEstado].[sidTercero] = @__idTercero_0)) AND ([r.WtkCambioEstado].[sidDireccionTercero] = @__idCentro_1)) AND ([r].[sidEstadoRAEE] = 14)) AND ([r.WtkCambioEstado].[sidEstado] = 14)) AND ([r.WtkCambioEstado].[sidEstado] <> 15)) AND ([item].[Id] = [r].[sidResiduoEspecifico])
+) AS [Cantidad]
+FROM [WTK_RESIDUOESPECIFICO] AS [item]" (0723d8ff)
+2019-07-08T08:29:04.6286212+02:00 0HLO3DM7SHQTK:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1481.6615ms. (50a9e262)
+2019-07-08T08:29:04.6395297+02:00 0HLO3DM7SHQTK:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType4`1[[WeeeTrackerAPI.Entities.Stock, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-07-08T08:29:04.6573547+02:00 0HLO3DM7SHQTK:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" in 1848.5417ms (afa2e885)
+2019-07-08T08:29:04.6662180+02:00 0HLO3DM7SHQTK:00000002 [INF] Request finished in 2281.9028ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-08T08:29:08.9204854+02:00 0HLO3DM7SHQTK:00000003 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/stock application/json 46 (ca22a1cb)
+2019-07-08T08:29:08.9307738+02:00 0HLO3DM7SHQTK:00000003 [INF] Successfully validated the token. (60169667)
+2019-07-08T08:29:08.9380567+02:00 0HLO3DM7SHQTK:00000003 [INF] Route matched with "{action = \"GetStock\", controller = \"Stock\"}". Executing action "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" (a44c0341)
+2019-07-08T08:29:08.9440664+02:00 0HLO3DM7SHQTK:00000003 [INF] Authorization was successful. (0d575a54)
+2019-07-08T08:29:08.9790622+02:00 0HLO3DM7SHQTK:00000003 [INF] Executing action method "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Stock"]) - Validation state: Valid (4e3479ed)
+2019-07-08T08:29:09.0113012+02:00 0HLO3DM7SHQTK:00000003 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-08T08:29:09.0437341+02:00 0HLO3DM7SHQTK:00000003 [INF] Executed DbCommand ("24"ms) [Parameters=["@__idTercero_0='?' (DbType = Int32), @__idCentro_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [item].[Id], [item].[Nombre], (
+    SELECT COUNT(*)
+    FROM [RAEEs] AS [r]
+    INNER JOIN [WTK_CAMBIO_ESTADO] AS [r.WtkCambioEstado] ON [r].[pidRAEE] = [r.WtkCambioEstado].[sidRAEE]
+    WHERE ((((((([r].[pidRAEE] = [r.WtkCambioEstado].[sidRAEE]) AND ([r].[sidEstadoRAEE] = [r].[sidEstadoRAEE])) AND ([r.WtkCambioEstado].[sidTercero] = @__idTercero_0)) AND ([r.WtkCambioEstado].[sidDireccionTercero] = @__idCentro_1)) AND ([r].[sidEstadoRAEE] = 14)) AND ([r.WtkCambioEstado].[sidEstado] = 14)) AND ([r.WtkCambioEstado].[sidEstado] <> 15)) AND ([item].[Id] = [r].[sidResiduoEspecifico])
+) AS [Cantidad]
+FROM [WTK_RESIDUOESPECIFICO] AS [item]" (0723d8ff)
+2019-07-08T08:29:09.0487791+02:00 0HLO3DM7SHQTK:00000003 [INF] Executed action method "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 64.9643ms. (50a9e262)
+2019-07-08T08:29:09.0553338+02:00 0HLO3DM7SHQTK:00000003 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType4`1[[WeeeTrackerAPI.Entities.Stock, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-07-08T08:29:09.0627617+02:00 0HLO3DM7SHQTK:00000003 [INF] Executed action "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" in 118.0581ms (afa2e885)
+2019-07-08T08:29:09.0699617+02:00 0HLO3DM7SHQTK:00000003 [INF] Request finished in 162.4634ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-08T08:29:10.5448818+02:00 0HLO3DM7SHQTK:00000004 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/stock application/json 46 (ca22a1cb)
+2019-07-08T08:29:10.5506908+02:00 0HLO3DM7SHQTK:00000004 [INF] Successfully validated the token. (60169667)
+2019-07-08T08:29:10.5564479+02:00 0HLO3DM7SHQTK:00000004 [INF] Route matched with "{action = \"GetStock\", controller = \"Stock\"}". Executing action "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" (a44c0341)
+2019-07-08T08:29:10.5609211+02:00 0HLO3DM7SHQTK:00000004 [INF] Authorization was successful. (0d575a54)
+2019-07-08T08:29:10.5877249+02:00 0HLO3DM7SHQTK:00000004 [INF] Executing action method "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Stock"]) - Validation state: Valid (4e3479ed)
+2019-07-08T08:29:10.5925924+02:00 0HLO3DM7SHQTK:00000004 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-08T08:29:10.6270329+02:00 0HLO3DM7SHQTK:00000004 [INF] Executed DbCommand ("27"ms) [Parameters=["@__idTercero_0='?' (DbType = Int32), @__idCentro_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [item].[Id], [item].[Nombre], (
+    SELECT COUNT(*)
+    FROM [RAEEs] AS [r]
+    INNER JOIN [WTK_CAMBIO_ESTADO] AS [r.WtkCambioEstado] ON [r].[pidRAEE] = [r.WtkCambioEstado].[sidRAEE]
+    WHERE ((((((([r].[pidRAEE] = [r.WtkCambioEstado].[sidRAEE]) AND ([r].[sidEstadoRAEE] = [r].[sidEstadoRAEE])) AND ([r.WtkCambioEstado].[sidTercero] = @__idTercero_0)) AND ([r.WtkCambioEstado].[sidDireccionTercero] = @__idCentro_1)) AND ([r].[sidEstadoRAEE] = 14)) AND ([r.WtkCambioEstado].[sidEstado] = 14)) AND ([r.WtkCambioEstado].[sidEstado] <> 15)) AND ([item].[Id] = [r].[sidResiduoEspecifico])
+) AS [Cantidad]
+FROM [WTK_RESIDUOESPECIFICO] AS [item]" (0723d8ff)
+2019-07-08T08:29:10.6316272+02:00 0HLO3DM7SHQTK:00000004 [INF] Executed action method "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 39.4985ms. (50a9e262)
+2019-07-08T08:29:10.6374891+02:00 0HLO3DM7SHQTK:00000004 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType4`1[[WeeeTrackerAPI.Entities.Stock, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-07-08T08:29:10.6440210+02:00 0HLO3DM7SHQTK:00000004 [INF] Executed action "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" in 81.6885ms (afa2e885)
+2019-07-08T08:29:10.6497230+02:00 0HLO3DM7SHQTK:00000004 [INF] Request finished in 104.7808ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-08T08:29:13.3391174+02:00 0HLO3DM7SHQTK:00000005 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/stock application/json 46 (ca22a1cb)
+2019-07-08T08:29:13.3454406+02:00 0HLO3DM7SHQTK:00000005 [INF] Successfully validated the token. (60169667)
+2019-07-08T08:29:13.3576564+02:00 0HLO3DM7SHQTK:00000005 [INF] Route matched with "{action = \"GetStock\", controller = \"Stock\"}". Executing action "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" (a44c0341)
+2019-07-08T08:29:13.3644723+02:00 0HLO3DM7SHQTK:00000005 [INF] Authorization was successful. (0d575a54)
+2019-07-08T08:29:13.3988690+02:00 0HLO3DM7SHQTK:00000005 [INF] Executing action method "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Stock"]) - Validation state: Valid (4e3479ed)
+2019-07-08T08:29:13.4077244+02:00 0HLO3DM7SHQTK:00000005 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-08T08:29:13.4458502+02:00 0HLO3DM7SHQTK:00000005 [INF] Executed DbCommand ("33"ms) [Parameters=["@__idTercero_0='?' (DbType = Int32), @__idCentro_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [item].[Id], [item].[Nombre], (
+    SELECT COUNT(*)
+    FROM [RAEEs] AS [r]
+    INNER JOIN [WTK_CAMBIO_ESTADO] AS [r.WtkCambioEstado] ON [r].[pidRAEE] = [r.WtkCambioEstado].[sidRAEE]
+    WHERE ((((((([r].[pidRAEE] = [r.WtkCambioEstado].[sidRAEE]) AND ([r].[sidEstadoRAEE] = [r].[sidEstadoRAEE])) AND ([r.WtkCambioEstado].[sidTercero] = @__idTercero_0)) AND ([r.WtkCambioEstado].[sidDireccionTercero] = @__idCentro_1)) AND ([r].[sidEstadoRAEE] = 14)) AND ([r.WtkCambioEstado].[sidEstado] = 14)) AND ([r.WtkCambioEstado].[sidEstado] <> 15)) AND ([item].[Id] = [r].[sidResiduoEspecifico])
+) AS [Cantidad]
+FROM [WTK_RESIDUOESPECIFICO] AS [item]" (0723d8ff)
+2019-07-08T08:29:13.4522735+02:00 0HLO3DM7SHQTK:00000005 [INF] Executed action method "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 47.1888ms. (50a9e262)
+2019-07-08T08:29:13.4601993+02:00 0HLO3DM7SHQTK:00000005 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType4`1[[WeeeTrackerAPI.Entities.Stock, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-07-08T08:29:13.4652231+02:00 0HLO3DM7SHQTK:00000005 [INF] Executed action "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" in 102.6794ms (afa2e885)
+2019-07-08T08:29:13.4742537+02:00 0HLO3DM7SHQTK:00000005 [INF] Request finished in 137.1029ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-08T08:29:17.5868289+02:00 0HLO3DM7SHQTK:00000006 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/stock application/json 46 (ca22a1cb)
+2019-07-08T08:29:17.5925201+02:00 0HLO3DM7SHQTK:00000006 [INF] Successfully validated the token. (60169667)
+2019-07-08T08:29:17.5982385+02:00 0HLO3DM7SHQTK:00000006 [INF] Route matched with "{action = \"GetStock\", controller = \"Stock\"}". Executing action "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" (a44c0341)
+2019-07-08T08:29:17.6054225+02:00 0HLO3DM7SHQTK:00000006 [INF] Authorization was successful. (0d575a54)
+2019-07-08T08:29:17.6393784+02:00 0HLO3DM7SHQTK:00000006 [INF] Executing action method "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Stock"]) - Validation state: Valid (4e3479ed)
+2019-07-08T08:29:17.6465162+02:00 0HLO3DM7SHQTK:00000006 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-08T08:29:17.6795022+02:00 0HLO3DM7SHQTK:00000006 [INF] Executed DbCommand ("27"ms) [Parameters=["@__idTercero_0='?' (DbType = Int32), @__idCentro_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [item].[Id], [item].[Nombre], (
+    SELECT COUNT(*)
+    FROM [RAEEs] AS [r]
+    INNER JOIN [WTK_CAMBIO_ESTADO] AS [r.WtkCambioEstado] ON [r].[pidRAEE] = [r.WtkCambioEstado].[sidRAEE]
+    WHERE ((((((([r].[pidRAEE] = [r.WtkCambioEstado].[sidRAEE]) AND ([r].[sidEstadoRAEE] = [r].[sidEstadoRAEE])) AND ([r.WtkCambioEstado].[sidTercero] = @__idTercero_0)) AND ([r.WtkCambioEstado].[sidDireccionTercero] = @__idCentro_1)) AND ([r].[sidEstadoRAEE] = 14)) AND ([r.WtkCambioEstado].[sidEstado] = 14)) AND ([r.WtkCambioEstado].[sidEstado] <> 15)) AND ([item].[Id] = [r].[sidResiduoEspecifico])
+) AS [Cantidad]
+FROM [WTK_RESIDUOESPECIFICO] AS [item]" (0723d8ff)
+2019-07-08T08:29:17.6861570+02:00 0HLO3DM7SHQTK:00000006 [INF] Executed action method "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 40.3279ms. (50a9e262)
+2019-07-08T08:29:17.6910256+02:00 0HLO3DM7SHQTK:00000006 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType4`1[[WeeeTrackerAPI.Entities.Stock, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-07-08T08:29:17.6968851+02:00 0HLO3DM7SHQTK:00000006 [INF] Executed action "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" in 92.9411ms (afa2e885)
+2019-07-08T08:29:17.7062365+02:00 0HLO3DM7SHQTK:00000006 [INF] Request finished in 116.5404ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-08T08:40:19.1791503+02:00 0HLO3DSIDQM9E:00000001 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/stock application/json 46 (ca22a1cb)
+2019-07-08T08:40:19.2602199+02:00 0HLO3DSIDQM9E:00000001 [INF] Successfully validated the token. (60169667)
+2019-07-08T08:40:19.3670311+02:00 0HLO3DSIDQM9E:00000001 [INF] Route matched with "{action = \"GetStock\", controller = \"Stock\"}". Executing action "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" (a44c0341)
+2019-07-08T08:40:19.3765236+02:00 0HLO3DSIDQM9E:00000001 [INF] Authorization was successful. (0d575a54)
+2019-07-08T08:40:19.5416039+02:00 0HLO3DSIDQM9E:00000001 [INF] Executing action method "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Stock"]) - Validation state: Valid (4e3479ed)
+2019-07-08T08:40:20.6886623+02:00 0HLO3DSIDQM9E:00000001 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-08T08:40:20.8522949+02:00 0HLO3DSIDQM9E:00000001 [INF] Executed DbCommand ("4"ms) [Parameters=["@__idTercero_0='?' (DbType = Int32), @__idCentro_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [item].[Id], [item].[Nombre], (
+    SELECT COUNT(*)
+    FROM [RAEEs] AS [r]
+    INNER JOIN [WTK_CAMBIO_ESTADO] AS [r.WtkCambioEstado] ON [r].[pidRAEE] = [r.WtkCambioEstado].[sidRAEE]
+    WHERE ((((((([r].[pidRAEE] = [r.WtkCambioEstado].[sidRAEE]) AND ([r].[sidEstadoRAEE] = [r].[sidEstadoRAEE])) AND ([r.WtkCambioEstado].[sidTercero] = @__idTercero_0)) AND ([r.WtkCambioEstado].[sidDireccionTercero] = @__idCentro_1)) AND ([r].[sidEstadoRAEE] = 14)) AND ([r.WtkCambioEstado].[sidEstado] = 14)) AND ([r.WtkCambioEstado].[sidEstado] <> 15)) AND ([item].[Id] = [r].[sidResiduoEspecifico])
+) AS [Cantidad]
+FROM [WTK_RESIDUOESPECIFICO] AS [item]" (0723d8ff)
+2019-07-08T08:40:20.8687545+02:00 0HLO3DSIDQM9E:00000001 [INF] Executed action method "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1324.445ms. (50a9e262)
+2019-07-08T08:40:20.8751904+02:00 0HLO3DSIDQM9E:00000001 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType4`1[[WeeeTrackerAPI.Entities.Stock, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-07-08T08:40:20.8895156+02:00 0HLO3DSIDQM9E:00000001 [INF] Executed action "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" in 1518.2485ms (afa2e885)
+2019-07-08T08:40:20.8939888+02:00 0HLO3DSIDQM9E:00000001 [INF] Request finished in 1720.0722ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-08T08:40:25.3623503+02:00 0HLO3DSIDQM9E:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/stock application/json 46 (ca22a1cb)
+2019-07-08T08:40:25.3640604+02:00 0HLO3DSIDQM9E:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-08T08:40:25.3651515+02:00 0HLO3DSIDQM9E:00000002 [INF] Route matched with "{action = \"GetStock\", controller = \"Stock\"}". Executing action "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" (a44c0341)
+2019-07-08T08:40:25.3661852+02:00 0HLO3DSIDQM9E:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-08T08:40:25.3698654+02:00 0HLO3DSIDQM9E:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Stock"]) - Validation state: Valid (4e3479ed)
+2019-07-08T08:40:25.3751742+02:00 0HLO3DSIDQM9E:00000002 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-08T08:40:25.3849500+02:00 0HLO3DSIDQM9E:00000002 [INF] Executed DbCommand ("6"ms) [Parameters=["@__idTercero_0='?' (DbType = Int32), @__idCentro_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [item].[Id], [item].[Nombre], (
+    SELECT COUNT(*)
+    FROM [RAEEs] AS [r]
+    INNER JOIN [WTK_CAMBIO_ESTADO] AS [r.WtkCambioEstado] ON [r].[pidRAEE] = [r.WtkCambioEstado].[sidRAEE]
+    WHERE ((((((([r].[pidRAEE] = [r.WtkCambioEstado].[sidRAEE]) AND ([r].[sidEstadoRAEE] = [r].[sidEstadoRAEE])) AND ([r.WtkCambioEstado].[sidTercero] = @__idTercero_0)) AND ([r.WtkCambioEstado].[sidDireccionTercero] = @__idCentro_1)) AND ([r].[sidEstadoRAEE] = 14)) AND ([r.WtkCambioEstado].[sidEstado] = 14)) AND ([r.WtkCambioEstado].[sidEstado] <> 15)) AND ([item].[Id] = [r].[sidResiduoEspecifico])
+) AS [Cantidad]
+FROM [WTK_RESIDUOESPECIFICO] AS [item]" (0723d8ff)
+2019-07-08T08:40:25.3853204+02:00 0HLO3DSIDQM9E:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 15.3332ms. (50a9e262)
+2019-07-08T08:40:25.3857544+02:00 0HLO3DSIDQM9E:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType4`1[[WeeeTrackerAPI.Entities.Stock, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-07-08T08:40:25.3862408+02:00 0HLO3DSIDQM9E:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" in 20.8799ms (afa2e885)
+2019-07-08T08:40:25.3865975+02:00 0HLO3DSIDQM9E:00000002 [INF] Request finished in 24.3052ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-08T08:40:27.1112568+02:00 0HLO3DSIDQM9E:00000003 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/stock application/json 46 (ca22a1cb)
+2019-07-08T08:40:27.1122000+02:00 0HLO3DSIDQM9E:00000003 [INF] Successfully validated the token. (60169667)
+2019-07-08T08:40:27.1127586+02:00 0HLO3DSIDQM9E:00000003 [INF] Route matched with "{action = \"GetStock\", controller = \"Stock\"}". Executing action "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" (a44c0341)
+2019-07-08T08:40:27.1128713+02:00 0HLO3DSIDQM9E:00000003 [INF] Authorization was successful. (0d575a54)
+2019-07-08T08:40:27.1135215+02:00 0HLO3DSIDQM9E:00000003 [INF] Executing action method "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Stock"]) - Validation state: Valid (4e3479ed)
+2019-07-08T08:40:27.1250085+02:00 0HLO3DSIDQM9E:00000003 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-08T08:40:27.1288155+02:00 0HLO3DSIDQM9E:00000003 [INF] Executed DbCommand ("3"ms) [Parameters=["@__idTercero_0='?' (DbType = Int32), @__idCentro_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [item].[Id], [item].[Nombre], (
+    SELECT COUNT(*)
+    FROM [RAEEs] AS [r]
+    INNER JOIN [WTK_CAMBIO_ESTADO] AS [r.WtkCambioEstado] ON [r].[pidRAEE] = [r.WtkCambioEstado].[sidRAEE]
+    WHERE ((((((([r].[pidRAEE] = [r.WtkCambioEstado].[sidRAEE]) AND ([r].[sidEstadoRAEE] = [r].[sidEstadoRAEE])) AND ([r.WtkCambioEstado].[sidTercero] = @__idTercero_0)) AND ([r.WtkCambioEstado].[sidDireccionTercero] = @__idCentro_1)) AND ([r].[sidEstadoRAEE] = 14)) AND ([r.WtkCambioEstado].[sidEstado] = 14)) AND ([r.WtkCambioEstado].[sidEstado] <> 15)) AND ([item].[Id] = [r].[sidResiduoEspecifico])
+) AS [Cantidad]
+FROM [WTK_RESIDUOESPECIFICO] AS [item]" (0723d8ff)
+2019-07-08T08:40:27.1290215+02:00 0HLO3DSIDQM9E:00000003 [INF] Executed action method "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 15.2758ms. (50a9e262)
+2019-07-08T08:40:27.1291210+02:00 0HLO3DSIDQM9E:00000003 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType4`1[[WeeeTrackerAPI.Entities.Stock, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-07-08T08:40:27.1293088+02:00 0HLO3DSIDQM9E:00000003 [INF] Executed action "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" in 16.4721ms (afa2e885)
+2019-07-08T08:40:27.1294191+02:00 0HLO3DSIDQM9E:00000003 [INF] Request finished in 18.2641ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-08T08:40:28.6234859+02:00 0HLO3DSIDQM9E:00000004 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/stock application/json 46 (ca22a1cb)
+2019-07-08T08:40:28.6242863+02:00 0HLO3DSIDQM9E:00000004 [INF] Successfully validated the token. (60169667)
+2019-07-08T08:40:28.6246998+02:00 0HLO3DSIDQM9E:00000004 [INF] Route matched with "{action = \"GetStock\", controller = \"Stock\"}". Executing action "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" (a44c0341)
+2019-07-08T08:40:28.6248028+02:00 0HLO3DSIDQM9E:00000004 [INF] Authorization was successful. (0d575a54)
+2019-07-08T08:40:28.6253472+02:00 0HLO3DSIDQM9E:00000004 [INF] Executing action method "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Stock"]) - Validation state: Valid (4e3479ed)
+2019-07-08T08:40:28.6258962+02:00 0HLO3DSIDQM9E:00000004 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-08T08:40:28.6309030+02:00 0HLO3DSIDQM9E:00000004 [INF] Executed DbCommand ("4"ms) [Parameters=["@__idTercero_0='?' (DbType = Int32), @__idCentro_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [item].[Id], [item].[Nombre], (
+    SELECT COUNT(*)
+    FROM [RAEEs] AS [r]
+    INNER JOIN [WTK_CAMBIO_ESTADO] AS [r.WtkCambioEstado] ON [r].[pidRAEE] = [r.WtkCambioEstado].[sidRAEE]
+    WHERE ((((((([r].[pidRAEE] = [r.WtkCambioEstado].[sidRAEE]) AND ([r].[sidEstadoRAEE] = [r].[sidEstadoRAEE])) AND ([r.WtkCambioEstado].[sidTercero] = @__idTercero_0)) AND ([r.WtkCambioEstado].[sidDireccionTercero] = @__idCentro_1)) AND ([r].[sidEstadoRAEE] = 14)) AND ([r.WtkCambioEstado].[sidEstado] = 14)) AND ([r.WtkCambioEstado].[sidEstado] <> 15)) AND ([item].[Id] = [r].[sidResiduoEspecifico])
+) AS [Cantidad]
+FROM [WTK_RESIDUOESPECIFICO] AS [item]" (0723d8ff)
+2019-07-08T08:40:28.6311397+02:00 0HLO3DSIDQM9E:00000004 [INF] Executed action method "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 5.7025ms. (50a9e262)
+2019-07-08T08:40:28.6312882+02:00 0HLO3DSIDQM9E:00000004 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType4`1[[WeeeTrackerAPI.Entities.Stock, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-07-08T08:40:28.6314787+02:00 0HLO3DSIDQM9E:00000004 [INF] Executed action "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" in 6.7208ms (afa2e885)
+2019-07-08T08:40:28.6315760+02:00 0HLO3DSIDQM9E:00000004 [INF] Request finished in 8.1794ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-08T08:40:29.4675276+02:00 0HLO3DSIDQM9E:00000005 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/stock application/json 46 (ca22a1cb)
+2019-07-08T08:40:29.4683656+02:00 0HLO3DSIDQM9E:00000005 [INF] Successfully validated the token. (60169667)
+2019-07-08T08:40:29.4685801+02:00 0HLO3DSIDQM9E:00000005 [INF] Route matched with "{action = \"GetStock\", controller = \"Stock\"}". Executing action "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" (a44c0341)
+2019-07-08T08:40:29.4687314+02:00 0HLO3DSIDQM9E:00000005 [INF] Authorization was successful. (0d575a54)
+2019-07-08T08:40:29.4695939+02:00 0HLO3DSIDQM9E:00000005 [INF] Executing action method "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Stock"]) - Validation state: Valid (4e3479ed)
+2019-07-08T08:40:29.4705121+02:00 0HLO3DSIDQM9E:00000005 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-08T08:40:29.4744539+02:00 0HLO3DSIDQM9E:00000005 [INF] Executed DbCommand ("3"ms) [Parameters=["@__idTercero_0='?' (DbType = Int32), @__idCentro_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [item].[Id], [item].[Nombre], (
+    SELECT COUNT(*)
+    FROM [RAEEs] AS [r]
+    INNER JOIN [WTK_CAMBIO_ESTADO] AS [r.WtkCambioEstado] ON [r].[pidRAEE] = [r.WtkCambioEstado].[sidRAEE]
+    WHERE ((((((([r].[pidRAEE] = [r.WtkCambioEstado].[sidRAEE]) AND ([r].[sidEstadoRAEE] = [r].[sidEstadoRAEE])) AND ([r.WtkCambioEstado].[sidTercero] = @__idTercero_0)) AND ([r.WtkCambioEstado].[sidDireccionTercero] = @__idCentro_1)) AND ([r].[sidEstadoRAEE] = 14)) AND ([r.WtkCambioEstado].[sidEstado] = 14)) AND ([r.WtkCambioEstado].[sidEstado] <> 15)) AND ([item].[Id] = [r].[sidResiduoEspecifico])
+) AS [Cantidad]
+FROM [WTK_RESIDUOESPECIFICO] AS [item]" (0723d8ff)
+2019-07-08T08:40:29.4746843+02:00 0HLO3DSIDQM9E:00000005 [INF] Executed action method "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 5.0147ms. (50a9e262)
+2019-07-08T08:40:29.4747782+02:00 0HLO3DSIDQM9E:00000005 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType4`1[[WeeeTrackerAPI.Entities.Stock, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-07-08T08:40:29.4749545+02:00 0HLO3DSIDQM9E:00000005 [INF] Executed action "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" in 6.3158ms (afa2e885)
+2019-07-08T08:40:29.4750672+02:00 0HLO3DSIDQM9E:00000005 [INF] Request finished in 7.5992ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-08T08:40:30.4045096+02:00 0HLO3DSIDQM9E:00000006 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/stock application/json 46 (ca22a1cb)
+2019-07-08T08:40:30.4078512+02:00 0HLO3DSIDQM9E:00000006 [INF] Successfully validated the token. (60169667)
+2019-07-08T08:40:30.4082710+02:00 0HLO3DSIDQM9E:00000006 [INF] Route matched with "{action = \"GetStock\", controller = \"Stock\"}". Executing action "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" (a44c0341)
+2019-07-08T08:40:30.4088223+02:00 0HLO3DSIDQM9E:00000006 [INF] Authorization was successful. (0d575a54)
+2019-07-08T08:40:30.4095061+02:00 0HLO3DSIDQM9E:00000006 [INF] Executing action method "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Stock"]) - Validation state: Valid (4e3479ed)
+2019-07-08T08:40:30.4106535+02:00 0HLO3DSIDQM9E:00000006 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-08T08:40:30.4145180+02:00 0HLO3DSIDQM9E:00000006 [INF] Executed DbCommand ("3"ms) [Parameters=["@__idTercero_0='?' (DbType = Int32), @__idCentro_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [item].[Id], [item].[Nombre], (
+    SELECT COUNT(*)
+    FROM [RAEEs] AS [r]
+    INNER JOIN [WTK_CAMBIO_ESTADO] AS [r.WtkCambioEstado] ON [r].[pidRAEE] = [r.WtkCambioEstado].[sidRAEE]
+    WHERE ((((((([r].[pidRAEE] = [r.WtkCambioEstado].[sidRAEE]) AND ([r].[sidEstadoRAEE] = [r].[sidEstadoRAEE])) AND ([r.WtkCambioEstado].[sidTercero] = @__idTercero_0)) AND ([r.WtkCambioEstado].[sidDireccionTercero] = @__idCentro_1)) AND ([r].[sidEstadoRAEE] = 14)) AND ([r.WtkCambioEstado].[sidEstado] = 14)) AND ([r.WtkCambioEstado].[sidEstado] <> 15)) AND ([item].[Id] = [r].[sidResiduoEspecifico])
+) AS [Cantidad]
+FROM [WTK_RESIDUOESPECIFICO] AS [item]" (0723d8ff)
+2019-07-08T08:40:30.4147183+02:00 0HLO3DSIDQM9E:00000006 [INF] Executed action method "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 5.141ms. (50a9e262)
+2019-07-08T08:40:30.4147996+02:00 0HLO3DSIDQM9E:00000006 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType4`1[[WeeeTrackerAPI.Entities.Stock, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-07-08T08:40:30.4149799+02:00 0HLO3DSIDQM9E:00000006 [INF] Executed action "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" in 6.6503ms (afa2e885)
+2019-07-08T08:40:30.4150675+02:00 0HLO3DSIDQM9E:00000006 [INF] Request finished in 14.3439ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-08T08:40:31.6003895+02:00 0HLO3DSIDQM9E:00000007 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/stock application/json 46 (ca22a1cb)
+2019-07-08T08:40:31.6010984+02:00 0HLO3DSIDQM9E:00000007 [INF] Successfully validated the token. (60169667)
+2019-07-08T08:40:31.6013436+02:00 0HLO3DSIDQM9E:00000007 [INF] Route matched with "{action = \"GetStock\", controller = \"Stock\"}". Executing action "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" (a44c0341)
+2019-07-08T08:40:31.6015751+02:00 0HLO3DSIDQM9E:00000007 [INF] Authorization was successful. (0d575a54)
+2019-07-08T08:40:31.6022402+02:00 0HLO3DSIDQM9E:00000007 [INF] Executing action method "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Stock"]) - Validation state: Valid (4e3479ed)
+2019-07-08T08:40:31.6028943+02:00 0HLO3DSIDQM9E:00000007 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-08T08:40:31.6073983+02:00 0HLO3DSIDQM9E:00000007 [INF] Executed DbCommand ("3"ms) [Parameters=["@__idTercero_0='?' (DbType = Int32), @__idCentro_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [item].[Id], [item].[Nombre], (
+    SELECT COUNT(*)
+    FROM [RAEEs] AS [r]
+    INNER JOIN [WTK_CAMBIO_ESTADO] AS [r.WtkCambioEstado] ON [r].[pidRAEE] = [r.WtkCambioEstado].[sidRAEE]
+    WHERE ((((((([r].[pidRAEE] = [r.WtkCambioEstado].[sidRAEE]) AND ([r].[sidEstadoRAEE] = [r].[sidEstadoRAEE])) AND ([r.WtkCambioEstado].[sidTercero] = @__idTercero_0)) AND ([r.WtkCambioEstado].[sidDireccionTercero] = @__idCentro_1)) AND ([r].[sidEstadoRAEE] = 14)) AND ([r.WtkCambioEstado].[sidEstado] = 14)) AND ([r.WtkCambioEstado].[sidEstado] <> 15)) AND ([item].[Id] = [r].[sidResiduoEspecifico])
+) AS [Cantidad]
+FROM [WTK_RESIDUOESPECIFICO] AS [item]" (0723d8ff)
+2019-07-08T08:40:31.6076071+02:00 0HLO3DSIDQM9E:00000007 [INF] Executed action method "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 5.2878ms. (50a9e262)
+2019-07-08T08:40:31.6077123+02:00 0HLO3DSIDQM9E:00000007 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType4`1[[WeeeTrackerAPI.Entities.Stock, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-07-08T08:40:31.6078659+02:00 0HLO3DSIDQM9E:00000007 [INF] Executed action "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" in 6.4682ms (afa2e885)
+2019-07-08T08:40:31.6080030+02:00 0HLO3DSIDQM9E:00000007 [INF] Request finished in 7.6874ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-08T08:42:54.4167395+02:00 0HLO3DSIDQM9F:00000001 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/stock application/json 46 (ca22a1cb)
+2019-07-08T08:42:54.4172675+02:00 0HLO3DSIDQM9F:00000001 [INF] Successfully validated the token. (60169667)
+2019-07-08T08:42:54.4174399+02:00 0HLO3DSIDQM9F:00000001 [INF] Route matched with "{action = \"GetStock\", controller = \"Stock\"}". Executing action "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" (a44c0341)
+2019-07-08T08:42:54.4175724+02:00 0HLO3DSIDQM9F:00000001 [INF] Authorization was successful. (0d575a54)
+2019-07-08T08:42:54.4185720+02:00 0HLO3DSIDQM9F:00000001 [INF] Executing action method "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.Stock"]) - Validation state: Valid (4e3479ed)
+2019-07-08T08:42:54.4193064+02:00 0HLO3DSIDQM9F:00000001 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-08T08:42:54.4234570+02:00 0HLO3DSIDQM9F:00000001 [INF] Executed DbCommand ("3"ms) [Parameters=["@__idTercero_0='?' (DbType = Int32), @__idCentro_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [item].[Id], [item].[Nombre], (
+    SELECT COUNT(*)
+    FROM [RAEEs] AS [r]
+    INNER JOIN [WTK_CAMBIO_ESTADO] AS [r.WtkCambioEstado] ON [r].[pidRAEE] = [r.WtkCambioEstado].[sidRAEE]
+    WHERE ((((((([r].[pidRAEE] = [r.WtkCambioEstado].[sidRAEE]) AND ([r].[sidEstadoRAEE] = [r].[sidEstadoRAEE])) AND ([r.WtkCambioEstado].[sidTercero] = @__idTercero_0)) AND ([r.WtkCambioEstado].[sidDireccionTercero] = @__idCentro_1)) AND ([r].[sidEstadoRAEE] = 14)) AND ([r.WtkCambioEstado].[sidEstado] = 14)) AND ([r.WtkCambioEstado].[sidEstado] <> 15)) AND ([item].[Id] = [r].[sidResiduoEspecifico])
+) AS [Cantidad]
+FROM [WTK_RESIDUOESPECIFICO] AS [item]" (0723d8ff)
+2019-07-08T08:42:54.4236288+02:00 0HLO3DSIDQM9F:00000001 [INF] Executed action method "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 4.9715ms. (50a9e262)
+2019-07-08T08:42:54.4237363+02:00 0HLO3DSIDQM9F:00000001 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType4`1[[WeeeTrackerAPI.Entities.Stock, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-07-08T08:42:54.4239422+02:00 0HLO3DSIDQM9F:00000001 [INF] Executed action "WeeeTrackerAPI.Controllers.StockController.GetStock (WeeeTrackerAPI)" in 6.4483ms (afa2e885)
+2019-07-08T08:42:54.4240389+02:00 0HLO3DSIDQM9F:00000001 [INF] Request finished in 7.3363ms 200 application/json; charset=utf-8 (791a596a)

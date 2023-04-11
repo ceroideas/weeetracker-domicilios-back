@@ -1,0 +1,101 @@
+2019-07-22T13:07:33.2940504+02:00 0HLOEIJ5R3MD7:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-22T13:07:33.3994506+02:00 0HLOEIJ5R3MD7:00000001 [INF] Request finished in 109.2567ms 200  (791a596a)
+2019-07-22T13:07:40.3006035+02:00 0HLOEIJ5R3MD7:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/users/login application/json 43 (ca22a1cb)
+2019-07-22T13:07:40.9040871+02:00 0HLOEIJ5R3MD7:00000002 [INF] Route matched with "{action = \"Authenticate\", controller = \"Users\"}". Executing action "WeeeTrackerAPI.Controllers.UsersController.Authenticate (WeeeTrackerAPI)" (a44c0341)
+2019-07-22T13:07:41.4316566+02:00 0HLOEIJ5R3MD7:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.UsersController.Authenticate (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.User"]) - Validation state: Valid (4e3479ed)
+2019-07-22T13:07:42.7158562+02:00 0HLOEIJ5R3MD7:00000002 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-22T13:07:42.7641542+02:00 0HLOEIJ5R3MD7:00000002 [WRN] The Include operation for navigation '"new WtkUsuario() {Id = [u].Id, Usuario = [u].Usuario, Password = [u].Password, SidTercero = [u].SidTercero, SidTipoTercero = [u].SidTipoTercero, Estado = [u].Estado, WtkUsuarioPerfiles = [u].WtkUsuarioPerfiles}.WtkUsuarioPerfiles"' is unnecessary and was ignored because the navigation is not reachable in the final query results. See https://go.microsoft.com/fwlink/?linkid=850303 for more information. (10efaee6)
+2019-07-22T13:07:43.0688235+02:00 0HLOEIJ5R3MD7:00000002 [INF] Executed DbCommand ("46"ms) [Parameters=["@__username_0='?' (Size = 50) (DbType = AnsiString), @__password_1='?' (Size = 50) (DbType = AnsiString)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [u].[Id], [u].[Usuario], [u].[Password], [u].[sidTercero], [u].[sidTipoTercero], [u].[Estado]
+FROM [WTK_USUARIO] AS [u]
+WHERE ([u].[Usuario] = @__username_0) AND ([u].[Password] = @__password_1)
+ORDER BY [u].[Id]" (0723d8ff)
+2019-07-22T13:07:43.1250541+02:00 0HLOEIJ5R3MD7:00000002 [INF] Executed DbCommand ("25"ms) [Parameters=["@__username_0='?' (Size = 50) (DbType = AnsiString), @__password_1='?' (Size = 50) (DbType = AnsiString)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [u.WtkUsuarioPerfiles].[sidUsuario], [u.WtkUsuarioPerfiles].[sidPerfil], [t].[Id]
+FROM [WTK_USUARIO_PERFILES] AS [u.WtkUsuarioPerfiles]
+INNER JOIN (
+    SELECT TOP(1) [u0].[Id]
+    FROM [WTK_USUARIO] AS [u0]
+    WHERE ([u0].[Usuario] = @__username_0) AND ([u0].[Password] = @__password_1)
+    ORDER BY [u0].[Id]
+) AS [t] ON [u.WtkUsuarioPerfiles].[sidUsuario] = [t].[Id]
+ORDER BY [t].[Id]" (0723d8ff)
+2019-07-22T13:07:43.1978526+02:00 0HLOEIJ5R3MD7:00000002 [INF] Executed DbCommand ("22"ms) [Parameters=["@__usuario_SidTercero_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [t.WtkTextoLopd].[Id], [t.WtkTextoLopd].[sidTercero], [t.WtkTextoLopd].[Texto], [t].[pidTercero], [t].[nombre]
+FROM [Terceros] AS [t]
+LEFT JOIN [WTK_TEXTO_LOPD] AS [t.WtkTextoLopd] ON [t].[pidTercero] = [t.WtkTextoLopd].[sidTercero]
+WHERE [t].[pidTercero] = @__usuario_SidTercero_0" (0723d8ff)
+2019-07-22T13:07:43.2619771+02:00 0HLOEIJ5R3MD7:00000002 [INF] Executed DbCommand ("22"ms) [Parameters=["@__usuario_Id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [d].[pidDireccionTercero], [d].[nombre]
+FROM [DireccionesTercero] AS [d]
+WHERE EXISTS (
+    SELECT 1
+    FROM [WTK_USUARIO_DIRECCIONES] AS [u]
+    WHERE ([u].[sidUsuario] = @__usuario_Id_0) AND ([d].[pidDireccionTercero] = [u].[sidDireccion]))
+ORDER BY [d].[nombre]" (0723d8ff)
+2019-07-22T13:07:43.3031663+02:00 0HLOEIJ5R3MD7:00000002 [INF] Executed DbCommand ("24"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [item].[Id], [item].[Nombre], [item].[Orden]
+FROM [WTK_RESIDUOESPECIFICO] AS [item]
+ORDER BY [item].[Orden]" (0723d8ff)
+2019-07-22T13:07:43.3353648+02:00 0HLOEIJ5R3MD7:00000002 [INF] Executed DbCommand ("21"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [item].[pidMarca], [item].[nombre]
+FROM [Marcas] AS [item]
+ORDER BY [item].[nombre]" (0723d8ff)
+2019-07-22T13:07:43.3729285+02:00 0HLOEIJ5R3MD7:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.UsersController.Authenticate (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1934.0043ms. (50a9e262)
+2019-07-22T13:07:43.3832288+02:00 0HLOEIJ5R3MD7:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType6`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2019-07-22T13:07:43.3976297+02:00 0HLOEIJ5R3MD7:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.UsersController.Authenticate (WeeeTrackerAPI)" in 2485.5957ms (afa2e885)
+2019-07-22T13:07:43.4071125+02:00 0HLOEIJ5R3MD7:00000002 [INF] Request finished in 3108.3351ms 200 application/json; charset=utf-8 (791a596a)
+2019-07-22T13:08:04.3257614+02:00 0HLOEIJ5R3MD7:00000003 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/alta application/json 191 (ca22a1cb)
+2019-07-22T13:08:04.3385955+02:00 0HLOEIJ5R3MD7:00000003 [INF] Successfully validated the token. (60169667)
+2019-07-22T13:08:04.3544647+02:00 0HLOEIJ5R3MD7:00000003 [INF] Route matched with "{action = \"AltaSolicitud\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.AltaSolicitud (WeeeTrackerAPI)" (a44c0341)
+2019-07-22T13:08:04.3721190+02:00 0HLOEIJ5R3MD7:00000003 [INF] Authorization was successful. (0d575a54)
+2019-07-22T13:08:04.6072604+02:00 0HLOEIJ5R3MD7:00000003 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.AltaSolicitud (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-22T13:08:04.6377426+02:00 0HLOEIJ5R3MD7:00000003 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-22T13:08:04.6839507+02:00 0HLOEIJ5R3MD7:00000003 [INF] Executed DbCommand ("34"ms) [Parameters=["@__idUsuario_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [u].[Id], [u].[Estado], [u].[Password], [u].[sidTercero], [u].[sidTipoTercero], [u].[Usuario]
+FROM [WTK_USUARIO] AS [u]
+WHERE [u].[Id] = @__idUsuario_0" (0723d8ff)
+2019-07-22T13:08:04.7435007+02:00 0HLOEIJ5R3MD7:00000003 [INF] Executed DbCommand ("22"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-22T13:10:12.1198727+02:00 0HLOEIKL645D0:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-22T13:10:12.2125896+02:00 0HLOEIKL645D0:00000001 [INF] Request finished in 49.347ms 200  (791a596a)
+2019-07-22T13:10:14.4917727+02:00 0HLOEIKL645D0:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/alta application/json 191 (ca22a1cb)
+2019-07-22T13:10:14.6352965+02:00 0HLOEIKL645D0:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-22T13:10:14.8598293+02:00 0HLOEIKL645D0:00000002 [INF] Route matched with "{action = \"AltaSolicitud\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.AltaSolicitud (WeeeTrackerAPI)" (a44c0341)
+2019-07-22T13:10:14.8748992+02:00 0HLOEIKL645D0:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-22T13:10:15.3085048+02:00 0HLOEIKL645D0:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.AltaSolicitud (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-22T13:10:16.5642349+02:00 0HLOEIKL645D0:00000002 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-22T13:10:17.0912685+02:00 0HLOEIKL645D0:00000002 [INF] Executed DbCommand ("98"ms) [Parameters=["@__idUsuario_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [u].[Id], [u].[Estado], [u].[Password], [u].[sidTercero], [u].[sidTipoTercero], [u].[Usuario]
+FROM [WTK_USUARIO] AS [u]
+WHERE [u].[Id] = @__idUsuario_0" (0723d8ff)
+2019-07-22T13:10:17.2308691+02:00 0HLOEIKL645D0:00000002 [INF] Executed DbCommand ("64"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-22T13:10:47.1062365+02:00 0HLOEIKVJROCT:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost/WeeeTrackerAPI  0 (ca22a1cb)
+2019-07-22T13:10:47.1467214+02:00 0HLOEIKVJROCT:00000001 [INF] Request finished in 44.4182ms 200  (791a596a)
+2019-07-22T13:11:03.4748938+02:00 0HLOEIKVJROCT:00000002 [INF] Request starting HTTP/1.1 POST http://localhost/WeeeTrackerAPI/solicitud/alta application/json 240 (ca22a1cb)
+2019-07-22T13:11:03.6068862+02:00 0HLOEIKVJROCT:00000002 [INF] Successfully validated the token. (60169667)
+2019-07-22T13:11:03.9576975+02:00 0HLOEIKVJROCT:00000002 [INF] Route matched with "{action = \"AltaSolicitud\", controller = \"Solicitud\"}". Executing action "WeeeTrackerAPI.Controllers.SolicitudController.AltaSolicitud (WeeeTrackerAPI)" (a44c0341)
+2019-07-22T13:11:03.9715579+02:00 0HLOEIKVJROCT:00000002 [INF] Authorization was successful. (0d575a54)
+2019-07-22T13:11:04.4013672+02:00 0HLOEIKVJROCT:00000002 [INF] Executing action method "WeeeTrackerAPI.Controllers.SolicitudController.AltaSolicitud (WeeeTrackerAPI)" with arguments (["WeeeTrackerAPI.Entities.SolicitudFiltros"]) - Validation state: Valid (4e3479ed)
+2019-07-22T13:11:05.6991252+02:00 0HLOEIKVJROCT:00000002 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GVRBD3Context"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2019-07-22T13:11:05.9140455+02:00 0HLOEIKVJROCT:00000002 [INF] Executed DbCommand ("45"ms) [Parameters=["@__idUsuario_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [u].[Id], [u].[Estado], [u].[Password], [u].[sidTercero], [u].[sidTipoTercero], [u].[Usuario]
+FROM [WTK_USUARIO] AS [u]
+WHERE [u].[Id] = @__idUsuario_0" (0723d8ff)
+2019-07-22T13:11:06.0101564+02:00 0HLOEIKVJROCT:00000002 [INF] Executed DbCommand ("26"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-22T13:11:06.0493892+02:00 0HLOEIKVJROCT:00000002 [INF] Executed DbCommand ("22"ms) [Parameters=["@__idResiduoEspecifico_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[pesoEstimado], [r].[nombre], [r].[estado], [r].[sidResiduo], [r].[sidFraccion]
+FROM [ResiduosEspecificos] AS [r]
+WHERE [r].[pidResiduoEspecifico] = @__idResiduoEspecifico_0" (0723d8ff)
+2019-07-22T13:11:44.1960839+02:00 0HLOEIKVJROCT:00000002 [INF] Executed action method "WeeeTrackerAPI.Controllers.SolicitudController.AltaSolicitud (WeeeTrackerAPI)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 39786.7402ms. (50a9e262)
+2019-07-22T13:11:44.2109836+02:00 0HLOEIKVJROCT:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType5`1[[ServiceEcoapp.XMLRecepcionSolicitudesResponse, WeeeTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2019-07-22T13:11:44.2424432+02:00 0HLOEIKVJROCT:00000002 [INF] Executed action "WeeeTrackerAPI.Controllers.SolicitudController.AltaSolicitud (WeeeTrackerAPI)" in 40273.765ms (afa2e885)
+2019-07-22T13:11:44.2580301+02:00 0HLOEIKVJROCT:00000002 [INF] Request finished in 40782.0184ms 200 application/json; charset=utf-8 (791a596a)
